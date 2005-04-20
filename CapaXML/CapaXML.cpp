@@ -9,7 +9,7 @@
 #include <xercesc/sax/HandlerBase.hpp>
 #include <xercesc/util/XMLString.hpp>
 #include <xercesc/util/PlatformUtils.hpp>
-
+//Otra cosa mas
 using namespace std;
 
 #ifdef XERCES_CPP_NAMESPACE_USE

@@ -1,0 +1,101 @@
+<sistema xmlns="http://www.w3schools.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3schools.com sistema.xsd">
+	
+	<!--Ejemplo sencillo de sensor pulsador-->
+	<pulsador>
+		<nombreelemento>Pulsador1</nombreelemento>
+		<!--Cuando a la entrada hay una presion 0 (no pulsado)...-->
+		<entrada>
+			0
+		</entrada>
+		<!--...la salida son 0 voltios... -->
+		<salida>
+			0
+		</salida>
+		<!--...pero cuando la entrada es una presion 1 (pulsado)... -->
+		<entrada>
+			1
+		</entrada>
+		<!--La salida son 9 Voltios-->
+		<salida>
+			9
+		</salida>
+	</pulsador>
+	
+	
+	<!--Ejemplo de sensor magnetico con logica invertida. Devuelve 4V cuando no detecta
+	magnetismo y 0V cuando detecta magnetismos-->
+	<reed>
+		<nombreelemento>reed2</nombreelemento>
+		<entrada>	0	</entrada>
+		<salida>	4	</salida>
+		<entrada>	1	</entrada>
+		<salida>	0	</salida>
+	</reed>
+	
+	<fotosensor>
+		<nombreelemento>fotosensor1</nombreelemento>
+		<entrada>	0	</entrada>
+		<salida>	9	</salida>
+		<entrada>	1	</entrada>
+		<salida>	9	</salida>
+	</fotosensor>
+	
+	<!--Una lampara que al introducir 9V devuelve luz-->
+	<lampara>
+		<nombreelemento>lampara3</nombreelemento>
+		<entrada>	9	</entrada>
+		<salida>	1	</salida>
+		<entrada>	0	</entrada>
+		<salida>	0	</salida>
+	</lampara>
+	
+	<!--Este electroiman activa (1) su magnetismo cuando a la salida se presenta
+	un voltaje de 9V y desactiva (0) cuando recibe 0V-->
+	<electroiman>
+		<nombreelemento>electroiman2</nombreelemento>
+		<entrada>	9	</entrada>
+		<salida>	1	</salida>
+		<entrada>	0	</entrada>
+		<salida>	0	</salida>
+	</electroiman>
+	
+	<!--Con 9V el motor gira en sentido horario, con 9 en sentido antihorario y con
+	0V se detiene-->
+	<motor>
+		<nombreelemento>
+			motor1
+		</nombreelemento>
+		<entradagiro1>	9	</entradagiro1>
+		<salida>		cw	</salida>
+		<entradagiro2>	-9	</entradagiro2>
+		<salida>		ccw	</salida>
+		<entradaparo>	0	</entradaparo>
+		<salida>		stop	</salida>
+	</motor>
+	
+	<relacion>
+	<primario>Sensor1</primario>
+	<secundario>Motor1</secundario>
+	</relacion>
+	
+	
+	<!--Ejemplo de un vector de motores. Tiene 10 motores que con un voltaje
+	de 9V giran en sentido antihorario, con un voltaje de -9V giran en sentido
+	horario y con 0V detienen su actividad-->
+	<vector>
+		<numelementos>10</numelementos>
+		<motor>
+			<nombreelemento>
+				vectormotores
+			</nombreelemento>
+			<entradagiro1>	9	</entradagiro1>
+			<salida>		ccw	</salida>
+			<entradagiro2>	-9	</entradagiro2>
+			<salida>		cw	</salida>
+			<entradaparo>	0	</entradaparo>
+			<salida>		stop	</salida>
+		</motor>
+	</vector>
+</sistema>

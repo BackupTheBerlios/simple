@@ -16,54 +16,44 @@ using namespace std;
 XERCES_CPP_NAMESPACE_USE
 #endif	
 
-//Mejorar esta funcion
-static int recorre(DOMNode *n, bool imprimir, int nivel)
+
+void crear_reed (DOMNode *nodo)
 {
-    DOMNode *hijo;
-    int count = 0;
-    //cout << endl << endl << "Estamos en el nivel " << nivel << endl;
-    if ( (nivel<=2) && (n!=NULL) ) {
-        if (n->getNodeType() == DOMNode::ELEMENT_NODE)
-		{
-            if(imprimir) {
-                char *nombre = XMLString::transcode(n->getNodeName());
-                XERCES_STD_QUALIFIER cout <<"----------------------------------------------------------"<<XERCES_STD_QUALIFIER endl;
-                XERCES_STD_QUALIFIER cout <<"Elemento (objeto a crear): "
-                                     << nombre << XERCES_STD_QUALIFIER endl;
-                
-                XMLString::release(&nombre);
-			
-                if(n->hasAttributes()) {
-                    // Sacar los atributos de un nodo
-                    DOMNamedNodeMap *pAttributes = n->getAttributes();
-                    int tam = pAttributes->getLength();
-                    XERCES_STD_QUALIFIER cout <<"\tAtributos" << XERCES_STD_QUALIFIER endl;
-                    XERCES_STD_QUALIFIER cout <<"\t----------" << XERCES_STD_QUALIFIER endl;
-                    for(int i=0;i<tam;++i) {
-                        DOMAttr *pAttributeNode = (DOMAttr*) pAttributes->item(i);
-                        // Sacar el nombre
-                        char *nombre = XMLString::transcode(pAttributeNode->getName());
-                        
-                        XERCES_STD_QUALIFIER cout << "\t" << nombre << "=";
-                        XMLString::release(&nombre);
-                        
-                        // Sacar el tipo del atributo
-                        nombre = XMLString::transcode(pAttributeNode->getValue());
-                        XERCES_STD_QUALIFIER cout << nombre << XERCES_STD_QUALIFIER endl;
-                        XMLString::release(&nombre);
-                    }
-                }
-            }
-			++count;
-		}
-        for (hijo = n->getFirstChild(); hijo != 0; hijo=hijo->getNextSibling())
-            count += recorre (hijo, imprimir, nivel+1);
-    }
-    return count;
+     printf ("Creando un reed\n");
 }
+void crear_elementos (DOMDocument *documento)
+{
+  int codigo_igualdad;
+  
+  //El TreeWalker me permite recorrer el arbol
+  DOMTreeWalker *arbol=documento->createTreeWalker ( (DOMNode*) documento, 
+                DOMNodeFilter::SHOW_ALL, NULL, true );
+                
+  //El primer hijo del documento es el elemento raiz
+  DOMNode *nodoactual=arbol->firstChild();
+  
+  //Y dentro del documento raiz es donde estan los elementos
+  //hijo que nos interesan
+  nodoactual=nodoactual->getFirstChild();
 
-
-
+  //Recorremos todos los elementos hijo creando elementos...
+  while (nodoactual)
+  {
+        if (nodoactual->getNodeType() == DOMNode::ELEMENT_NODE)
+        {
+           char* cad_codificada=XMLString::transcode (nodoactual->getNodeName());
+           cout << "Construyendo un " << cad_codificada << endl;
+           codigo_igualdad=strcmp(cad_codificada, "reed");
+           if (codigo_igualdad==0) 
+           {
+              crear_reed (nodoactual);
+           }
+           XMLString::release (&cad_codificada);
+        }
+        nodoactual=nodoactual->getNextSibling ();
+  } //Fin del recorrido
+    
+}
 int main(int argc, char* argv[])
 {
 
@@ -124,26 +114,7 @@ int main(int argc, char* argv[])
   //Dame el documento parseado
   DOMDocument *documento=parser->getDocument();
   
-  //El TreeWalker me permite recorrer el arbol
-  DOMTreeWalker *arbol=documento->createTreeWalker ( (DOMNode*) documento, 
-                DOMNodeFilter::SHOW_ALL, NULL, true );
-  DOMNode *nodoactual=arbol->firstChild();
-  
-  recorre (nodoactual,true,1);
-  nodoactual=nodoactual->getFirstChild();
-  //Recorrido del arbol
-  cout << endl << "Fase 3: Construccion de los objetos" << endl ;
-  while (nodoactual)
-  {
-        if (nodoactual->getNodeType() == DOMNode::ELEMENT_NODE)
-        {
-           char* cad_codificada=XMLString::transcode (nodoactual->getNodeName());
-           cout << "Construyendo un " << cad_codificada << endl;
-           XMLString::release (&cad_codificada);
-        }
-        nodoactual=nodoactual->getNextSibling ();
-  }
-
+  crear_elementos (documento);  
   delete parser;
   delete manejador;
 

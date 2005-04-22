@@ -24,27 +24,34 @@ void crear_reed (DOMNode *nodo)
      char *nombre_propiedad;
      char *valor_propiedad;
      DOMNode *hijo=nodo->getFirstChild ();
+     DOMNode *propiedad;
      printf ("Creando un reed\n");
+     
+     /*Recorremos las propiedades del reed*/
      while (hijo!=NULL)
      {
-           /*Recogemos datos...*/
-           nombre_propiedad=XMLString::transcode ( hijo->getNodeName()  );
-           valor_propiedad= XMLString::transcode ( hijo->getNodeValue() );
-           printf ("Propiedad %s: Valor %s\n", 
+           if (hijo->getNodeType()==DOMNode::ELEMENT_NODE){
+              /*Recogemos datos...*/
+              nombre_propiedad=XMLString::transcode ( hijo->getNodeName()  );
+              valor_propiedad= XMLString::transcode ( hijo->getTextContent() );
+              printf ("Propiedad %s: %s\n", 
                   nombre_propiedad, valor_propiedad);
+              /*Y pasamos al nodo XML hermano*/
+           }
            
-           /*Y pasamos al nodo XML hermano*/
+           /*Se pasa al siguiente nodo XML hermano*/
            hijo=hijo->getNextSibling();
-           
      }
 }
 void crear_elementos (DOMDocument *documento)
 {
   int codigo_igualdad;
   
-  //El TreeWalker me permite recorrer el arbol
+  /*El TreeWalker me permite recorrer el arbol pero
+   ¡¡ATENCION!!: Uso un filtro que solo me muestra elementos y 
+   NUNCA me muestra atributos*/
   DOMTreeWalker *arbol=documento->createTreeWalker ( (DOMNode*) documento, 
-                DOMNodeFilter::SHOW_ALL, NULL, true );
+                DOMNodeFilter::SHOW_ELEMENT, NULL, true );
                 
   //El primer hijo del documento es el elemento raiz
   DOMNode *nodoactual=arbol->firstChild();

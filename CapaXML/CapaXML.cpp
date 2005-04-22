@@ -36,7 +36,6 @@ void crear_reed (DOMNode *nodo)
               valor_propiedad= XMLString::transcode ( hijo->getTextContent() );
               printf ("Propiedad %s: %s\n", 
                   nombre_propiedad, valor_propiedad);
-              /*Y pasamos al nodo XML hermano*/
            }
            
            /*Se pasa al siguiente nodo XML hermano*/

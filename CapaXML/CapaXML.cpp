@@ -19,7 +19,24 @@ XERCES_CPP_NAMESPACE_USE
 
 void crear_reed (DOMNode *nodo)
 {
+     /*Aqui vamos almacenando los nombres y los valores de las propiedades
+       (que se escribieron en XML,del reed que encontremos en el fichero XML*/
+     char *nombre_propiedad;
+     char *valor_propiedad;
+     DOMNode *hijo=nodo->getFirstChild ();
      printf ("Creando un reed\n");
+     while (hijo!=NULL)
+     {
+           /*Recogemos datos...*/
+           nombre_propiedad=XMLString::transcode ( hijo->getNodeName()  );
+           valor_propiedad= XMLString::transcode ( hijo->getNodeValue() );
+           printf ("Propiedad %s: Valor %s\n", 
+                  nombre_propiedad, valor_propiedad);
+           
+           /*Y pasamos al nodo XML hermano*/
+           hijo=hijo->getNextSibling();
+           
+     }
 }
 void crear_elementos (DOMDocument *documento)
 {
@@ -46,6 +63,7 @@ void crear_elementos (DOMDocument *documento)
            codigo_igualdad=strcmp(cad_codificada, "reed");
            if (codigo_igualdad==0) 
            {
+              /*Procesamos el nodo actual en busca de un reed*/
               crear_reed (nodoactual);
            }
            XMLString::release (&cad_codificada);

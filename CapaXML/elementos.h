@@ -23,6 +23,53 @@ class reed {
                char* nombre ;
                /*Para un cierto magnetismo de entrada hay un voltaje
                 *de salida*/
-               float entrada1, salida1 ;       
-               float entrada2, salida2 ;
+               float entradainicial, salidainicial ;       
+               float entradafinal,   salidafinal   ;
+};
+
+class pulsador {
+      public:
+             pulsador (DOMNode *nodo);
+      private:
+              char* nombreelemento;
+              float entradainicial, salidainicial ;
+              float entradafinal,   salidafinal   ;
+};
+
+class fotosensor {
+	public:
+		fotosensor (DOMNode *nodo);
+	private:
+		char* nombreelemento;
+		float entradainicial, salidainicial ;
+		float entradafina,    salidafinal   ;	
+};
+
+
+class lampara {
+	public:
+		lampara (DOMNode* nodo);
+	private:
+		char* nombreelemento;
+		float entradainicial, salidainicial ;
+		float entradafinal,   salidafinal   ;	
+};
+
+class electroiman {
+	public:
+		electroiman (DOMNode* nodo) ;
+	private:
+		char *nombreelemento;
+		float entradainicial, salidainicial ;
+		float entradafinal,   salidafinal ;	
+};
+
+class motor {
+	public:
+		motor (DOMNode* nodo) ;
+	private:
+		char* nombreelemento;
+		float entradagiro1, salidagiro1 ; 
+		float entradagiro2, salidagiro2 ;
+		float entradaparo,  salidaparo  ;
 };

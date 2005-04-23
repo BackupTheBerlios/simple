@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include "elementos.h"
 
 //Evitar instanciación de plantillas
 #define XERCES_TMPLSINC
@@ -17,31 +18,7 @@ XERCES_CPP_NAMESPACE_USE
 #endif	
 
 
-void crear_reed (DOMNode *nodo)
-{
-     /*Aqui vamos almacenando los nombres y los valores de las propiedades
-       (que se escribieron en XML,del reed que encontremos en el fichero XML*/
-     char *nombre_propiedad;
-     char *valor_propiedad;
-     DOMNode *hijo=nodo->getFirstChild ();
-     DOMNode *propiedad;
-     printf ("Creando un reed\n");
-     
-     /*Recorremos las propiedades del reed*/
-     while (hijo!=NULL)
-     {
-           if (hijo->getNodeType()==DOMNode::ELEMENT_NODE){
-              /*Recogemos datos...*/
-              nombre_propiedad=XMLString::transcode ( hijo->getNodeName()  );
-              valor_propiedad= XMLString::transcode ( hijo->getTextContent() );
-              printf ("Propiedad %s: %s\n", 
-                  nombre_propiedad, valor_propiedad);
-           }
-           
-           /*Se pasa al siguiente nodo XML hermano*/
-           hijo=hijo->getNextSibling();
-     }
-}
+
 void crear_elementos (DOMDocument *documento)
 {
   int codigo_igualdad;
@@ -70,7 +47,7 @@ void crear_elementos (DOMDocument *documento)
            if (codigo_igualdad==0) 
            {
               /*Procesamos el nodo actual en busca de un reed*/
-              crear_reed (nodoactual);
+              reed *r=new reed(nodoactual);
            }
            XMLString::release (&cad_codificada);
         }

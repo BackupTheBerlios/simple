@@ -39,8 +39,8 @@ class elemento {
 		void eliminar_suscriptor (elemento *e)  ;
 		void notificar           ()             ;	
 	private:
-		elemento* lista_suscriptores [MAX_SUSCRIPTORES]
-		int total_suscriptores=0;
+		elemento* lista_suscriptores [MAX_SUSCRIPTORES];
+		int total_suscriptores;
 };
 
 
@@ -104,3 +104,10 @@ class motor: public elemento {
 		float entradagiro2, salidagiro2 ;
 		float entradaparo,  salidaparo  ;
 };
+
+class elemento_compuesto: public elemento {
+	public:
+		elemento_compuesto (DOMNode* nodo) ;
+	private:
+		char *nombreelemento;	
+}

@@ -1,5 +1,6 @@
 #include "elementos.h"
 #include <iostream>
+#include <cstring>
 
 /*En este fichero definimos las clases (objetos funcion) de los
  *distintos elementos*/
@@ -122,24 +123,55 @@ lampara::lampara (DOMNode* nodo) {
 }
 
 motor::motor (DOMNode* nodo) {
-		DOMNode *hijo=nodo->getFirstChild () ;
+	DOMNode *hijo=nodo->getFirstChild () ;
     DOMNode *propiedad ;
     char *nombre_propiedad ;
     char *valor_propiedad ;
+    int aux;
     printf ("Creando un fotosensor\n");
      
-    /*Recorremos las propiedades del reed*/
+    /*Recorremos las propiedades del reed...*/
     while (hijo!=NULL)
      {
            if (hijo->getNodeType()==DOMNode::ELEMENT_NODE){
               /*Recogemos datos...*/
               nombre_propiedad=XMLString::transcode ( hijo->getNodeName()  );
               valor_propiedad= XMLString::transcode ( hijo->getTextContent() );
-              printf ("Propiedad %s: %s\n", 
-                  nombre_propiedad, valor_propiedad);
+              
+              /*... y aqui e extraen los valores almacenados en el XML*/
+			  if ( ( (aux=strcmp (nombre_propiedad, "nombreelemento")) == 0 ) {
+					strcpy (this->nombreelemento, valor_propiedad);
+			  }
+			  
+			  if ( ( (aux=strcmp (nombre_propiedad, "entradagiro1")) == 0 ) {
+					sscanf (valor_propiedad, "%f", &entradagiro1);
+			  }
+			  
+			  if ( ( (aux=strcmp (nombre_propiedad, "salidagiro1")) == 0 ) {
+					sscanf (valor_propiedad, "%f", &salidagiro1);
+			  }
+			  
+			  if ( ( (aux=strcmp (nombre_propiedad, "entradagiro2")) == 0 ) {
+					sscanf (valor_propiedad, "%f", &entradagiro2);
+			  }
+			  
+			  if ( ( (aux=strcmp (nombre_propiedad, "salidagiro2")) == 0 ) {
+					sscanf (valor_propiedad, "%f", &entradagiro1);
+			  }
+			  
+			  if ( ((aux=strcmp (nombre_propiedad, "entradareposo")) == 0 ) {
+					sscanf (valor_propiedad, "%f", &entradareposo);
+			  }
+			  
+			  if ( ((aux=strcmp (nombre_propiedad, "salidareposo")) == 0 ) {
+					sscanf (valor_propiedad, "%f", &entradareposo);
+			  }
            }
            
            /*Se pasa al siguiente nodo XML hermano*/
            hijo=hijo->getNextSibling();
      }                   
+}
+
+elemento_compuesto::elemento_compuesto (DOMNode* nodo) {
 }

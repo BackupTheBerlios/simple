@@ -108,10 +108,10 @@ elementFormDefault="qualified">
 	una salida (también en voltaje)-->
 	<xs:group name="gruposensorpulsador">
 		<xs:sequence>
-			<xs:element name="entrada" type="tipopresion"/>
-			<xs:element name="salida" type="tipovoltaje"/>
-			<xs:element name="entrada" type="tipopresion"/>
-			<xs:element name="salida" type="tipovoltaje"/>
+			<xs:element name="entradareposo" type="tipopresion"/>
+			<xs:element name="salidareposo" type="tipovoltaje"/>
+			<xs:element name="entradaactivacion" type="tipopresion"/>
+			<xs:element name="salidaactivacion" type="tipovoltaje"/>
 		</xs:sequence>
 	</xs:group>
 	
@@ -131,10 +131,10 @@ elementFormDefault="qualified">
 	magnetico-->
 	<xs:group name="gruposensormagnetico">
 		<xs:sequence>
-			<xs:element name="entrada" type="tipomagnetismo"/>
-			<xs:element name="salida" type="tipovoltaje"/>
-			<xs:element name="entrada" type="tipomagnetismo"/>
-			<xs:element name="salida" type="tipovoltaje"/>
+			<xs:element name="entradareposo" type="tipomagnetismo"/>
+			<xs:element name="salidareposo" type="tipovoltaje"/>
+			<xs:element name="entradaactivacion" type="tipomagnetismo"/>
+			<xs:element name="salidaactivacion" type="tipovoltaje"/>
 		</xs:sequence>
 	</xs:group>
 	<!--Sensor magnetico. Actúa igual, con dos entradas y dos salidas-->
@@ -192,10 +192,10 @@ elementFormDefault="qualified">
 	
 	<xs:group name="grupofotosensor">
 		<xs:sequence>
-			<xs:element name="entrada" type="tipoluz"/>
-			<xs:element name="salida" type="tipovoltaje"/>
-			<xs:element name="entrada" type="tipoluz"/>
-			<xs:element name="salida" type="tipovoltaje"/>
+			<xs:element name="entradareposo" type="tipoluz"/>
+			<xs:element name="salidareposo" type="tipovoltaje"/>
+			<xs:element name="entradaactivacion" type="tipoluz"/>
+			<xs:element name="salidaactivacion" type="tipovoltaje"/>
 		</xs:sequence>
 	</xs:group>
 	
@@ -217,10 +217,10 @@ elementFormDefault="qualified">
 	<xs:group name="grupolampara">
 		<xs:sequence>
 			<xs:element name="color" type="tipocolor"/>
-			<xs:element name="entrada" type="tipovoltaje"/>
-			<xs:element name="salida" type="tipoluz"/>
-			<xs:element name="entrada" type="tipovoltaje"/>
-			<xs:element name="salida" type="tipoluz"/>
+			<xs:element name="entradareposo" type="tipovoltaje"/>
+			<xs:element name="salidareposo" type="tipoluz"/>
+			<xs:element name="entradaactivacion" type="tipovoltaje"/>
+			<xs:element name="salidaactivacion" type="tipoluz"/>
 		</xs:sequence>
 	</xs:group>
 	<!--¿Que es una lampara?. Pues una cosa que si le enchufas voltios te da luz y
@@ -236,10 +236,10 @@ elementFormDefault="qualified">
 	<!--Definicion de electroimanes-->
 	<xs:group name="grupoelectroiman">
 		<xs:sequence>
-			<xs:element name="entrada" type="tipovoltaje"/>
-			<xs:element name="salida" type="tipomagnetismo"/>
-			<xs:element name="entrada" type="tipovoltaje"/>
-			<xs:element name="salida" type="tipomagnetismo"/>
+			<xs:element name="entradareposo" type="tipovoltaje"/>
+			<xs:element name="salidareposo" type="tipomagnetismo"/>
+			<xs:element name="entradaactivacion" type="tipovoltaje"/>
+			<xs:element name="salidaactivacion" type="tipomagnetismo"/>
 		</xs:sequence>
 	</xs:group>
 	
@@ -254,10 +254,10 @@ elementFormDefault="qualified">
 	<!--Definicion de un zumbador-->
 	<xs:group name="grupozumbador">
 		<xs:sequence>
-			<xs:element name="entrada" type="tipovoltaje"/>
-			<xs:element name="salida" type="tipofrecuencia"/>
-			<xs:element name="entrada" type="tipovoltaje"/>
-			<xs:element name="salida" type="tipofrecuencia"/>
+			<xs:element name="entradareposo" type="tipovoltaje"/>
+			<xs:element name="salidareposo" type="tipofrecuencia"/>
+			<xs:element name="entradaactivacion" type="tipovoltaje"/>
+			<xs:element name="salidaactivacion" type="tipofrecuencia"/>
 		</xs:sequence>
 	</xs:group>
 	
@@ -273,11 +273,11 @@ elementFormDefault="qualified">
 	<xs:group name="grupomotor">
 		<xs:sequence>
 			<xs:element name="entradagiro1" type="tipovoltajepositivo"/>
-			<xs:element name="salida" type="tipomovimientomotor"/>
+			<xs:element name="salidagiro1" type="tipomovimientomotor"/>
 			<xs:element name="entradagiro2" type="tipovoltajenegativo"/>
-			<xs:element name="salida" type="tipomovimientomotor"/>
-			<xs:element name="entradaparo" type="tipovoltaje"/>
-			<xs:element name="salida" type="tipomovimientomotor"/>
+			<xs:element name="salidagiro2" type="tipomovimientomotor"/>
+			<xs:element name="entradareposo" type="tipovoltaje"/>
+			<xs:element name="salidareposo" type="tipomovimientomotor"/>
 		</xs:sequence>
 	</xs:group>
 	

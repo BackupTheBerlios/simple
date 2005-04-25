@@ -16,7 +16,38 @@
 XERCES_CPP_NAMESPACE_USE
 #endif	
 
-class reed {
+/*Como máximo un elemento puede tener 50 elementos a la escucha*/
+#define MAX_SUSCRIPTORES 50
+
+
+/*Consideraciones a tener en cuenta:
+	1.- Para la arquitectura de un sistema se utiliza un
+	 	patron COMPOSITE. El objeto general es la clase elemento
+	 	de la cual heredean los pulsadores, lamparas, etc...
+	2.- Cada elemento es a su vez parte de un patrón OBSERVER. Esto
+		permite que haya muchos elementos que conecten su entrada a la
+		salida de otros elementos de forma transparente
+	3.- En el mismo código SE MEZCLAN los dos patrones. Los elementos
+		concretos del patron COMPOSITE son SUSCRIPTORES y OBSERVADORES */
+
+/*Clase padre general de patron COMPOSITE
+	Observese que contiene los metodos propios de un OBSERVER*/
+class elemento {
+	public:
+		void cambiar_entrada     (float entrada);
+		void anadir_suscriptor   (elemento* e)  ;
+		void eliminar_suscriptor (elemento *e)  ;
+		void notificar           ()             ;	
+	private:
+		elemento* lista_suscriptores [MAX_SUSCRIPTORES]
+		int total_suscriptores=0;
+};
+
+
+/*Los elementos concretos se construyen a partir de un nodo DOM,
+  es decir, directamente de un "trozo" en XML*/
+  
+class reed : public elemento {
        public:
               reed(DOMNode *nodo);
        private:
@@ -27,7 +58,7 @@ class reed {
                float entradafinal,   salidafinal   ;
 };
 
-class pulsador {
+class pulsador: public elemento {
       public:
              pulsador (DOMNode *nodo);
       private:
@@ -36,7 +67,7 @@ class pulsador {
               float entradafinal,   salidafinal   ;
 };
 
-class fotosensor {
+class fotosensor: public elemento {
 	public:
 		fotosensor (DOMNode *nodo);
 	private:
@@ -46,7 +77,7 @@ class fotosensor {
 };
 
 
-class lampara {
+class lampara: public elemento {
 	public:
 		lampara (DOMNode* nodo);
 	private:
@@ -55,7 +86,7 @@ class lampara {
 		float entradafinal,   salidafinal   ;	
 };
 
-class electroiman {
+class electroiman: public elemento {
 	public:
 		electroiman (DOMNode* nodo) ;
 	private:
@@ -64,7 +95,7 @@ class electroiman {
 		float entradafinal,   salidafinal ;	
 };
 
-class motor {
+class motor: public elemento {
 	public:
 		motor (DOMNode* nodo) ;
 	private:

@@ -6,21 +6,21 @@
 	<pulsador>
 		<nombreelemento>Pulsador1</nombreelemento>
 		<!--Cuando a la entrada hay una presion 0 (no pulsado)...-->
-		<entrada>
+		<entradareposo>
 			0
-		</entrada>
+		</entradareposo>
 		<!--...la salida son 0 voltios... -->
-		<salida>
+		<salidareposo>
 			0
-		</salida>
+		</salidareposo>
 		<!--...pero cuando la entrada es una presion 1 (pulsado)... -->
-		<entrada>
+		<entradaactivacion>
 			1
-		</entrada>
+		</entradaactivacion>
 		<!--La salida son 9 Voltios-->
-		<salida>
+		<salidaactivacion>
 			9
-		</salida>
+		</salidaactivacion>
 	</pulsador>
 	
 	
@@ -28,37 +28,38 @@
 	magnetismo y 0V cuando detecta magnetismos-->
 	<reed>
 		<nombreelemento>reed2</nombreelemento>
-		<entrada>	0	</entrada>
-		<salida>	4	</salida>
-		<entrada>	1	</entrada>
-		<salida>	0	</salida>
+		<entradareposo>	0	</entradareposo>
+		<salidareposo>	4	</salidareposo>
+		<entradaactivacion>	1	</entradaactivacion>
+		<salidaactivacion>	0	</salidaactivacion>
 	</reed>
 	
 	<fotosensor>
 		<nombreelemento>fotosensor1</nombreelemento>
-		<entrada>	0	</entrada>
-		<salida>	9	</salida>
-		<entrada>	1	</entrada>
-		<salida>	9	</salida>
+		<entradareposo>	0	</entradareposo>
+		<salidareposo>	9	</salidareposo>
+		<entradaactivacion>	1	</entradaactivacion>
+		<salidaactivacion>	9	</salidaactivacion>
 	</fotosensor>
 	
 	<!--Una lampara que al introducir 9V devuelve luz-->
 	<lampara>
 		<nombreelemento>lampara3</nombreelemento>
-		<entrada>	9	</entrada>
-		<salida>	1	</salida>
-		<entrada>	0	</entrada>
-		<salida>	0	</salida>
+		<color> ffaadd </color>
+		<entradareposo>	9	</entradareposo>
+		<salidareposo>	1	</salidareposo>
+		<entradaactivacion>	0	</entradaactivacion>
+		<salidaactivacion>	0	</salidaactivacion>
 	</lampara>
 	
 	<!--Este electroiman activa (1) su magnetismo cuando a la salida se presenta
 	un voltaje de 9V y desactiva (0) cuando recibe 0V-->
 	<electroiman>
 		<nombreelemento>electroiman2</nombreelemento>
-		<entrada>	9	</entrada>
-		<salida>	1	</salida>
-		<entrada>	0	</entrada>
-		<salida>	0	</salida>
+		<entradareposo>	9	</entradareposo>
+		<salidareposo>	1	</salidareposo>
+		<entradaactivacion>	0	</entradaactivacion>
+		<salidaactivacion>	0	</salidaactivacion>
 	</electroiman>
 	
 	<!--Con 9V el motor gira en sentido horario, con 9 en sentido antihorario y con
@@ -68,11 +69,11 @@
 			motor1
 		</nombreelemento>
 		<entradagiro1>	9	</entradagiro1>
-		<salida>		cw	</salida>
+		<salidagiro1>		cw	</salidagiro1>
 		<entradagiro2>	-9	</entradagiro2>
-		<salida>		ccw	</salida>
-		<entradaparo>	0	</entradaparo>
-		<salida>		stop	</salida>
+		<salidagiro2>		ccw	</salidagiro2>
+		<entradareposo>	0	</entradareposo>
+		<salidareposo>		stop	</salidareposo>
 	</motor>
 	
 	<relacion>
@@ -91,11 +92,11 @@
 				vectormotores
 			</nombreelemento>
 			<entradagiro1>	9	</entradagiro1>
-			<salida>		ccw	</salida>
+			<salidagiro1>		ccw	</salidagiro1>
 			<entradagiro2>	-9	</entradagiro2>
-			<salida>		cw	</salida>
-			<entradaparo>	0	</entradaparo>
-			<salida>		stop	</salida>
+			<salidagiro2>		cw	</salidagiro2>
+			<entradareposo>	0	</entradareposo>
+			<salidareposo>		stop	</salidareposo>
 		</motor>
 	</vector>
 </sistema>

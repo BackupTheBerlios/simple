@@ -110,4 +110,4 @@ class elemento_compuesto: public elemento {
 		elemento_compuesto (DOMNode* nodo) ;
 	private:
 		char *nombreelemento;	
-}
+};

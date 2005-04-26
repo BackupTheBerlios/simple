@@ -13,13 +13,13 @@
 
 
 //Otra cosa mas
-using namespace std;
+
 
 #ifdef XERCES_CPP_NAMESPACE_USE
 XERCES_CPP_NAMESPACE_USE
 #endif	
 
-
+using namespace std;
 
 void crear_elementos (DOMNode *nodoactual)
 {

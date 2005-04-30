@@ -1,14 +1,9 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-targetNamespace="http://www.w3schools.com"
-xmlns="http://www.w3schools.com"
-elementFormDefault="qualified">
-
-<!--Magnitudes fundamentales-->
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
 	<!--Los elementos podran tener nombres de 1 a 20 letras o numeros pero
 	empezando por letras. Si se lee bien la expresion regular se puede ver que podria haber
-	un simbolo "colgado"-->
+	un simbolo colgado-->
 	<xs:simpleType name="tiponombre">
 		<xs:restriction base="xs:string">
 			<xs:pattern value="[a-zA-Z]([a-zA-Z0-9]{0,19})"/>
@@ -64,7 +59,7 @@ elementFormDefault="qualified">
 		</xs:restriction>
 	</xs:simpleType>
 
-	<!--La presión es de tipo digital-->
+	<!--La presion es de tipo digital-->
 	<xs:simpleType name="tipopresion">
 		<xs:restriction base="xs:integer">
 			<xs:minInclusive value="0"/>
@@ -72,7 +67,7 @@ elementFormDefault="qualified">
 		</xs:restriction>
 	</xs:simpleType>
 	
-	<!--El flujo magnético también es digital-->
+	<!--El flujo magnetico tambien es digital-->
 	<xs:simpleType name="tipomagnetismo">
 		<xs:restriction base="xs:integer">
 			<xs:minInclusive value="0"/>
@@ -104,7 +99,7 @@ elementFormDefault="qualified">
 	
 	
 	<!--Un sensor pulsador puede tener dos entradas y dos salidas. Para una entrada
-	pulsado (1) emitirá una salida (en Voltaje) y para una entrada no pulsado (0) emitirá
+	pulsado (1) emitira una salida (en Voltaje) y para una entrada no pulsado (0) emitira
 	una salida (también en voltaje)-->
 	<xs:group name="gruposensorpulsador">
 		<xs:sequence>
@@ -116,7 +111,7 @@ elementFormDefault="qualified">
 	</xs:group>
 	
 	
-	<!--Aquí se definen los tipos de verdad. ¿Por qué hacerlo de esta manera?
+	<!--Aqui se definen los tipos de verdad. Por qué hacerlo de esta manera?
 	Porque al separar características de esta manera podemos "heredarlas"
 	en los pulsadores simples, en los vectores de pulsadores y en otras construcciones
 	mas complejas-->
@@ -137,7 +132,7 @@ elementFormDefault="qualified">
 			<xs:element name="salidaactivacion" type="tipovoltaje"/>
 		</xs:sequence>
 	</xs:group>
-	<!--Sensor magnetico. Actúa igual, con dos entradas y dos salidas-->
+	<!--Sensor magnetico. Actua igual, con dos entradas y dos salidas-->
 	<xs:complexType name="tiposensormagnetico">
 		<xs:sequence>
 			<xs:element name="nombreelemento" type="tiponombre"/>
@@ -167,10 +162,10 @@ elementFormDefault="qualified">
 	</xs:complexType>
 	
 	
-	<!--Un contador actúa por flancos. Es necesario que se indique el voltaje inicial del flanco y el voltaje final 
+	<!--Un contador actua por flancos. Es necesario que se indique el voltaje inicial del flanco y el voltaje final 
 	(esto permitira construir contadores que actuen por flanco de subida y de bajada). Tras un numero determinado
-	de flancos (indicado por cuentamaxima) el voltaje de salida del contador cambiará. El reset del contador
-	también actúa por flanco-->
+	de flancos (indicado por cuentamaxima) el voltaje de salida del contador cambiara. El reset del contador
+	también actua por flanco-->
 	<xs:group name="grupocontador">
 		<xs:sequence>
 			<xs:element name="voltajeinicial" type="tipovoltaje"/>
@@ -223,8 +218,9 @@ elementFormDefault="qualified">
 			<xs:element name="salidaactivacion" type="tipoluz"/>
 		</xs:sequence>
 	</xs:group>
-	<!--¿Que es una lampara?. Pues una cosa que si le enchufas voltios te da luz y
+	<!--Que es una lampara?. Pues una cosa que si le enchufas voltios te da luz y
 	si no le enchufas voltios no te da luz-->
+	
 	<xs:complexType name="tipolampara">
 		<xs:sequence>
 			<xs:element name="nombreelemento" type="tiponombre"/>
@@ -309,7 +305,7 @@ elementFormDefault="qualified">
 	
 	
 	
-	<!--Definición de una relación entre dos componentes. Hay un elemento primario
+	<!--Definicion de una relación entre dos componentes. Hay un elemento primario
 	que conecta su salida a la entrada del siguiente (que llamamos secundario)-->
 	<xs:complexType name="tiporelacion">
 		<xs:sequence>
@@ -318,7 +314,7 @@ elementFormDefault="qualified">
 		</xs:sequence>
 	</xs:complexType>
 	
-	<!--DEFINICIÓN DEL ESQUEMA-->
+	<!--DEFINICION DEL ESQUEMA-->
 	<xs:element name="sistema" type="tiposistema"/>
 	
 	

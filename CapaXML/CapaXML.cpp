@@ -80,6 +80,7 @@ int main(int argc, char* argv[])
 
   try {
 		XMLPlatformUtils::Initialize();
+		
   }
   catch (const XMLException& tocatch) {
 		cout << "Error!" <<endl ;
@@ -90,7 +91,7 @@ int main(int argc, char* argv[])
 	const XMLCh* nombrefichero;
   
   //Creamos el parser
-  XercesDOMParser *parser= new XercesDOMParser();
+  XercesDOMParser *parser= new XercesDOMParser;
   //Queremos que sea un parser validador
   parser->setValidationScheme (XercesDOMParser::Val_Always);
   //Queremos ceñirnos al espacio de nombre
@@ -98,16 +99,16 @@ int main(int argc, char* argv[])
   //Activamos el soporta para XMLSchemas 
   
   //¡DA ERROR DE MOMENTO!
-  //parser->setDoSchema (true);
+  parser->setDoSchema (true);
   //Cargamos el esquema ¡es importante poner el espacio de
   //nombres y el fichero. En este caso el espacio viene
   //definido por http... y el fichero es sistema.xsd
-  parser->setExternalSchemaLocation("http://www.w3schools.com sistema.xsd");
+  //parser->setExternalNoNamespaceSchemaLocation("sistema.xsd");
   
-  ErrorHandler* manejador= (ErrorHandler *) new HandlerBase();
+  ErrorHandler* manejador= (ErrorHandler *) new HandlerBase;
   parser->setErrorHandler (manejador);
   
-  XMLCh *fichero=XMLString::transcode ("proyecto.xml");
+  XMLCh *fichero=XMLString::transcode ("proyecto2.xml");
   cout << "Comienza el baile";
   try{
 		cout<< "Parseando" ;

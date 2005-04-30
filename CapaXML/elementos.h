@@ -62,7 +62,7 @@ class pulsador: public elemento {
       public:
              pulsador (DOMNode *nodo);
       private:
-              char* nombreelemento;
+              XMLCh* nombreelemento;
               float entradainicial, salidainicial ;
               float entradafinal,   salidafinal   ;
 };
@@ -71,7 +71,7 @@ class fotosensor: public elemento {
 	public:
 		fotosensor (DOMNode *nodo);
 	private:
-		char* nombreelemento;
+		XMLCh* nombreelemento;
 		float entradainicial, salidainicial ;
 		float entradafina,    salidafinal   ;	
 };
@@ -81,7 +81,7 @@ class lampara: public elemento {
 	public:
 		lampara (DOMNode* nodo);
 	private:
-		char* nombreelemento;
+		XMLCh* nombreelemento;
 		float entradainicial, salidainicial ;
 		float entradafinal,   salidafinal   ;	
 };
@@ -90,7 +90,7 @@ class electroiman: public elemento {
 	public:
 		electroiman (DOMNode* nodo) ;
 	private:
-		char *nombreelemento;
+		XMLCh *nombreelemento;
 		float entradainicial, salidainicial ;
 		float entradafinal,   salidafinal ;	
 };
@@ -99,7 +99,7 @@ class motor: public elemento {
 	public:
 		motor (DOMNode* nodo) ;
 	private:
-		char* nombreelemento;
+		XMLCh* nombreelemento;
 		float entradagiro1, salidagiro1 ; 
 		float entradagiro2, salidagiro2 ;
 		float entradaparo,  salidaparo  ;
@@ -109,5 +109,5 @@ class elemento_compuesto: public elemento {
 	public:
 		elemento_compuesto (DOMNode* nodo) ;
 	private:
-		char *nombreelemento;	
+		XMLCh *nombreelemento;	
 };

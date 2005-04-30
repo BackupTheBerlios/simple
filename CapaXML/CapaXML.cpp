@@ -1,4 +1,3 @@
-#include <cstdlib>
 #include <iostream>
 #include "elementos.h"
 
@@ -14,12 +13,13 @@
 
 //Otra cosa mas
 
+using namespace std;
 
 #ifdef XERCES_CPP_NAMESPACE_USE
 XERCES_CPP_NAMESPACE_USE
 #endif	
 
-using namespace std;
+
 
 void crear_elementos (DOMNode *nodoactual)
 {
@@ -78,10 +78,16 @@ int main(int argc, char* argv[])
 
   // 
 
-  XMLPlatformUtils::Initialize();
+  try {
+		XMLPlatformUtils::Initialize();
+  }
+  catch (const XMLException& tocatch) {
+		cout << "Error!" <<endl ;
+  }
 
 
-  const XMLCh* nombrefichero;
+  {
+	const XMLCh* nombrefichero;
   
   //Creamos el parser
   XercesDOMParser *parser= new XercesDOMParser();
@@ -89,8 +95,10 @@ int main(int argc, char* argv[])
   parser->setValidationScheme (XercesDOMParser::Val_Always);
   //Queremos ceñirnos al espacio de nombre
   parser->setDoNamespaces (true);
-  //Activamos el soporta para XMLSchemas
-  parser->setDoSchema (true);
+  //Activamos el soporta para XMLSchemas 
+  
+  //¡DA ERROR DE MOMENTO!
+  //parser->setDoSchema (true);
   //Cargamos el esquema ¡es importante poner el espacio de
   //nombres y el fichero. En este caso el espacio viene
   //definido por http... y el fichero es sistema.xsd
@@ -99,10 +107,11 @@ int main(int argc, char* argv[])
   ErrorHandler* manejador= (ErrorHandler *) new HandlerBase();
   parser->setErrorHandler (manejador);
   
-  char *fichero="proyecto.xml";
-  
+  XMLCh *fichero=XMLString::transcode ("proyecto.xml");
+  cout << "Comienza el baile";
   try{
-      parser->parse(fichero);
+		cout<< "Parseando" ;
+	  parser->parse (fichero);
   }
   catch (XMLException &excepcion)
   {
@@ -148,7 +157,7 @@ int main(int argc, char* argv[])
 	}
   delete parser;
   delete manejador;
-
+}
   XMLPlatformUtils::Terminate();
   // Poner aqui el resto de delete's, cuando sean necesarios
   return 0;

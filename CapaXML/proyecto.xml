@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sistema
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xsi:noNamespaceSchemaLocation='sistema.xsd'>
-	
+<sistema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:noNamespaceSchemaLocation='sistema2.xsd'>	
 	<!--Ejemplo sencillo de sensor pulsador-->
 	<pulsador>
 		<nombreelemento>Pulsador1</nombreelemento>

@@ -1,3 +1,8 @@
+/*Fichero elementos.cpp
+	Contiene la implementación de los elementos que forman parte de un
+	sistema que se quiere simular
+*/
+
 #include "elementos.h"
 #include <iostream>
 

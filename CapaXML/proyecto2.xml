@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sistema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:noNamespaceSchemaLocation='sistema2.xsd'>
+	
+	
+	<fotosensor>
+		<nombreelemento>fotosensor1</nombreelemento>
+		<entradareposo>	0	</entradareposo>
+		<salidareposo>	9	</salidareposo>
+		<entradaactivacion>	1	</entradaactivacion>
+		<salidaactivacion>	9	</salidaactivacion>
+	</fotosensor>
+	
+	
+</sistema>

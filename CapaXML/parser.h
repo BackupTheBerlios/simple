@@ -5,6 +5,7 @@
 	un sistema a simular
 */
 
+#include <iostream>
 
 //Evitar instanciación de plantillas
 #define XERCES_TMPLSINC
@@ -19,15 +20,18 @@
 XERCES_CPP_NAMESPACE_USE
 #endif 
 
+using namespace std;
 
 
 class parser {
 	public:
-		parser ();
-		
+		parser (const XMLCh* fichero);
+		~parser();
 		/*Este metodo nos comprueba si un determinado fichero en XML
 		 *es válido o no*/
 		bool esValido ();
 	private:
-		XercesDOMParser* elParser;
+		XercesDOMParser* 	elParser;
+		DOMDocument* 		documento;
+		ErrorHandler* 		manejador;
 };

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "elementos.h"
+#include "parser.h"
 
 //Evitar instanciación de plantillas
 #define XERCES_TMPLSINC
@@ -24,13 +25,12 @@ XERCES_CPP_NAMESPACE_USE
 
 int main(int argc, char* argv[])
 {
-
-  
-  
-  
- 
-
-
+	char* nombre_fichero="proyecto.xml";
+	
+	Parser* elParser= new Parser ();
+	
+	if (elParser->esValido (nombre_fichero) ) 
+		cout << "El fichero es XML valido" << endl;
   // Poner aqui el resto de delete's, cuando sean necesarios
   return 0;
 }

@@ -15,6 +15,7 @@
 #include <xercesc/sax/HandlerBase.hpp>
 #include <xercesc/util/XMLString.hpp>
 #include <xercesc/util/PlatformUtils.hpp>
+#include <xercesc/framework/LocalFileInputSource.hpp>
 
 #ifdef XERCES_CPP_NAMESPACE_USE
 XERCES_CPP_NAMESPACE_USE
@@ -23,13 +24,13 @@ XERCES_CPP_NAMESPACE_USE
 using namespace std;
 
 
-class parser {
+class Parser {
 	public:
-		parser (const XMLCh* fichero);
-		~parser();
+		Parser ();
+		~Parser();
 		/*Este metodo nos comprueba si un determinado fichero en XML
 		 *es válido o no*/
-		bool esValido ();
+		bool esValido (const char* fichero);
 	private:
 		XercesDOMParser* 	elParser;
 		DOMDocument* 		documento;

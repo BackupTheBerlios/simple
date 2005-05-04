@@ -33,6 +33,7 @@ class Parser {
 		bool esValido (const char* fichero);
 	private:
 		XercesDOMParser* 	elParser;
+		DOMBuilder* 		parser;
 		DOMDocument* 		documento;
 		ErrorHandler* 		manejador;
 };

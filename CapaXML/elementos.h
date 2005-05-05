@@ -19,6 +19,8 @@ XERCES_CPP_NAMESPACE_USE
 /*Como máximo un elemento puede tener 50 elementos a la escucha*/
 #define MAX_SUSCRIPTORES 50
 
+/*El nombre de un elemento no puede tener mas de 64 caracteres*/
+#define MAX_LONGITUD_NOMBRE 64
 
 /*Consideraciones a tener en cuenta:
 	1.- Para la arquitectura de un sistema se utiliza un
@@ -41,9 +43,14 @@ class elemento {
 		void anadir_suscriptor   (elemento* e)  ;
 		void eliminar_suscriptor (elemento *e)  ;
 		void notificar           ()             ;	
-	private:
-		elemento* lista_suscriptores [MAX_SUSCRIPTORES];
-		int total_suscriptores;
+		//Este metodo puede re-implementarse (y de hecho se hará)
+		//en las clases hija
+		virtual void construir 	 (DOMNode *nodo)=0;
+	protected:
+		void inicializar();
+		XMLCh* 		nombre_elemento;
+		elemento* 	lista_suscriptores [MAX_SUSCRIPTORES];
+		int 		total_suscriptores;
 };
 
 
@@ -52,9 +59,9 @@ class elemento {
   
 class reed : public elemento {
        public:
-              reed(DOMNode *nodo);
+              reed();
+              void construir (DOMNode* nodo);
        private:
-               char* nombre ;
                /*Para un cierto magnetismo de entrada hay un voltaje
                 *de salida*/
                float entradainicial, salidainicial ;       
@@ -63,46 +70,46 @@ class reed : public elemento {
 
 class pulsador: public elemento {
       public:
-             pulsador (DOMNode *nodo);
+             pulsador ();
+             void construir (DOMNode* nodo);
       private:
-              XMLCh* nombreelemento;
               float entradainicial, salidainicial ;
               float entradafinal,   salidafinal   ;
 };
 
 class fotosensor: public elemento {
 	public:
-		fotosensor (DOMNode *nodo);
+		fotosensor ();
+		void construir (DOMNode* nodo);
 	private:
-		XMLCh* nombreelemento;
 		float entradainicial, salidainicial ;
-		float entradafina,    salidafinal   ;	
+		float entradafinal,    salidafinal   ;	
 };
 
 
 class lampara: public elemento {
 	public:
-		lampara (DOMNode* nodo);
+		lampara ();
+		void construir (DOMNode* nodo);
 	private:
-		XMLCh* nombreelemento;
 		float entradainicial, salidainicial ;
 		float entradafinal,   salidafinal   ;	
 };
 
 class electroiman: public elemento {
 	public:
-		electroiman (DOMNode* nodo) ;
+		electroiman () ;
+		void construir (DOMNode* nodo);
 	private:
-		XMLCh *nombreelemento;
 		float entradainicial, salidainicial ;
 		float entradafinal,   salidafinal ;	
 };
 
 class motor: public elemento {
 	public:
-		motor (DOMNode* nodo) ;
+		motor () ;
+		void construir (DOMNode* nodo);
 	private:
-		XMLCh* nombreelemento;
 		float entradagiro1, salidagiro1 ; 
 		float entradagiro2, salidagiro2 ;
 		float entradaparo,  salidaparo  ;
@@ -111,8 +118,6 @@ class motor: public elemento {
 class elemento_compuesto: public elemento {
 	public:
 		elemento_compuesto (DOMNode* nodo) ;
-	private:
-		XMLCh *nombreelemento;	
 };
 
 #endif

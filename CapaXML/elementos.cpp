@@ -11,6 +11,15 @@
 XERCES_CPP_NAMESPACE_USE
 #endif	
 
+
+/*	Este es el valor inicial que por defecto adoptan
+	todas las constantes. Usado para depurar, por lo que a
+	si te lo encuentras en la depuración y ningún fichero XML
+	lo contiene es porque algún objeto no se ha inicializado a partir
+	del XML*/
+#define VALOR_INICIAL -7.65
+
+
 /*En este fichero definimos las clases (objetos funcion) de los
  *distintos elementos*/
 
@@ -26,7 +35,31 @@ bool iguales (const XMLCh* cad1, const XMLCh* cad2)
 }
 
 
-reed::reed(DOMNode *nodo){
+/*	Inicializador generico para todos los elementos
+	Cualquier clase hija puede modificarlo*/
+	
+void elemento::inicializar ()
+{
+	nombre_elemento=new XMLCh[MAX_LONGITUD_NOMBRE];
+	for (int i=0;i<MAX_SUSCRIPTORES;i++)
+		lista_suscriptores[i]=NULL;
+	total_suscriptores=-1;
+	nombre_elemento=NULL;
+}
+//El constructor solo inicializa*/
+reed::reed ()
+{
+	/*Se llama al inicializador generico*/
+	inicializar ();
+	
+	/*Y se inicializan el resto de miembros*/
+	entradainicial	=	entradafinal	=	VALOR_INICIAL;
+	salidainicial	=	salidafinal		=	VALOR_INICIAL;
+	
+	
+}
+
+void reed::construir (DOMNode *nodo){
 	DOMNode *hijo=nodo->getFirstChild () ;
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
@@ -49,7 +82,15 @@ reed::reed(DOMNode *nodo){
      }
 }
 
-pulsador::pulsador (DOMNode *nodo) {
+
+pulsador::pulsador()
+{
+	inicializar();
+	entradainicial	=	entradafinal	=	VALOR_INICIAL;
+	salidainicial	=	salidafinal		=	VALOR_INICIAL;
+}
+
+void pulsador::construir (DOMNode *nodo) {
     DOMNode *hijo=nodo->getFirstChild () ;
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
@@ -72,7 +113,15 @@ pulsador::pulsador (DOMNode *nodo) {
      }                   
 }
 
-fotosensor::fotosensor (DOMNode* nodo) {
+
+fotosensor::fotosensor()
+{
+	inicializar();
+	entradainicial	=	entradafinal	=	VALOR_INICIAL;
+	salidainicial	=	salidafinal		=	VALOR_INICIAL;
+}
+
+void fotosensor::construir (DOMNode* nodo) {
 	DOMNode *hijo=nodo->getFirstChild () ;
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
@@ -95,7 +144,12 @@ fotosensor::fotosensor (DOMNode* nodo) {
      }                   
 }
 
-electroiman::electroiman (DOMNode* nodo) {
+electroiman::electroiman (){
+	inicializar();
+	entradainicial	=	entradafinal	=	VALOR_INICIAL;
+	salidainicial	=	salidafinal		=	VALOR_INICIAL;
+}
+void electroiman::construir (DOMNode* nodo) {
 	DOMNode *hijo=nodo->getFirstChild () ;
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
@@ -118,7 +172,15 @@ electroiman::electroiman (DOMNode* nodo) {
      }                   	
 }
 
-lampara::lampara (DOMNode* nodo) {
+
+lampara::lampara()
+{
+	inicializar();
+	entradainicial	=	entradafinal	=	VALOR_INICIAL;
+	salidainicial	=	salidafinal		=	VALOR_INICIAL;
+}
+
+void lampara::construir (DOMNode* nodo) {
 	    DOMNode *hijo=nodo->getFirstChild () ;
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
@@ -141,14 +203,23 @@ lampara::lampara (DOMNode* nodo) {
      } 
 }
 
-motor::motor (DOMNode* nodo) {
+
+motor::motor()
+{
+	inicializar();
+	entradagiro1	=	entradagiro2	=	VALOR_INICIAL;
+	salidagiro1		=	salidagiro2		=	VALOR_INICIAL;
+	entradaparo		=	salidaparo		=	VALOR_INICIAL;
+}
+
+void motor::construir (DOMNode* nodo) {
 	DOMNode *hijo=nodo->getFirstChild () ;
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
     const XMLCh *valor_propiedad ;
     const XMLCh* elementoXMLabuscar;
     int aux;
-    printf ("Creando un fotosensor\n");
+    printf ("Creando un motor\n");
      
     /*Recorremos las propiedades del reed...*/
     while (hijo!=NULL)
@@ -160,7 +231,7 @@ motor::motor (DOMNode* nodo) {
               elementoXMLabuscar=XMLString::transcode ("nombreelemento");
               /*... y aqui e extraen los valores almacenados en el XML*/
 			  if (  iguales (nombre_propiedad, elementoXMLabuscar ) ){
-					XMLString::copyString (nombreelemento, valor_propiedad);
+					XMLString::copyString (nombre_elemento, valor_propiedad);
 			  }
 			  
 			  elementoXMLabuscar=XMLString::transcode ("entradagiro1");

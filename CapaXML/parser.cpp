@@ -14,7 +14,7 @@ Parser::Parser ()
 	
 	//Observese que en gLS hay la cadena "LS\0" (null al final)
 	//La cadena se tiene que fabricar asi porque Xerces usa 
-	//caracteres de Ancho largo (XMLCH's)
+	//caracteres de ancho largo (XMLCh's)
 	
 	//La cadena LS significa Load and Save, y permite obtener un 
 	//DOMParser que pueda leer y salvar XML's
@@ -39,7 +39,7 @@ Parser::Parser ()
     
     //Se va a usar la validación exhaustiva de Schemas
     //Estas comprobaciones extras pueden consumir mucha memoria
-    //o recursos pero solo hacemos una vez (merece la pena)
+    //o recursos pero solo lo hacemos una vez (merece la pena)
     parser->setFeature(XMLUni::fgXercesSchemaFullChecking, true);
 }
 bool Parser::esValido(const char* fichero){
@@ -66,9 +66,39 @@ bool Parser::esValido(const char* fichero){
 	return true;
 }
 
-vector <elemento> extraerElementos ()
+vector <elemento*> Parser::extraerElementos ()
 {
-	
+	vector<elemento*> vector_elementos (50);
+	/*	Cuando se llama a este método ya se dispone de un objeto DOMDocument
+		almacenado en "documento", por lo que podemos acceder a los elementos
+		XML almacenados*/
+		
+		/*Obtenemos el nodo raiz que contiene a todos los demas*/
+		DOMNode*	raiz; 
+		raiz=(DOMNode*) documento->getDocumentElement();
+		
+		/*Vamos al primer hijo...*/
+		DOMNode*	primer_elemento;
+		primer_elemento= raiz->getFirstChild();
+		
+		/*...y recorremos todos los hijos*/
+		DOMNode*	elemento_siguiente=primer_elemento;
+		while (elemento_siguiente!=NULL)
+		{
+			if (elemento_siguiente->getNodeType()==DOMNode::ELEMENT_NODE)
+			{
+				char* nombre=XMLString::transcode
+					(elemento_siguiente->getNodeName());
+				if (XMLString::equals (nombre, "motor"))
+				{
+					motor *m=new motor();
+					m->construir (elemento_siguiente);
+					vector_elementos.push_back(m);
+				}
+			}
+			
+			elemento_siguiente=elemento_siguiente->getNextSibling();
+		}
 }
 
 

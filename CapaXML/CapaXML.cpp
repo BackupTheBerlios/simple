@@ -27,10 +27,15 @@ int main(int argc, char* argv[])
 {
 	char* nombre_fichero="proyecto.xml";
 	
+	vector<elemento*> v;
+	
 	Parser* elParser= new Parser ();
 	
 	if (elParser->esValido (nombre_fichero) ) 
 		cout << "El fichero es XML valido" << endl;
+	v=elParser->extraerElementos();
+	
+	cout << "El vector contiene " << v.capacity() << endl;
   // Poner aqui el resto de delete's, cuando sean necesarios
   return 0;
 }

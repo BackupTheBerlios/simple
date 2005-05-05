@@ -31,9 +31,15 @@ Parser::Parser ()
 	//Tambien experimental
 	parser = 
 		((DOMImplementationLS*)impl)->createDOMBuilder(DOMImplementationLS::MODE_SYNCHRONOUS, 0);
-
+	
+	//Puede que necesitemos usar los espacios de nombres	
 	parser->setFeature(XMLUni::fgDOMNamespaces, true);
+	//Se va a usar validacion mediante Schemas
     parser->setFeature(XMLUni::fgXercesSchema, true);
+    
+    //Se va a usar la validación exhaustiva de Schemas
+    //Estas comprobaciones extras pueden consumir mucha memoria
+    //o recursos pero solo hacemos una vez (merece la pena)
     parser->setFeature(XMLUni::fgXercesSchemaFullChecking, true);
 }
 bool Parser::esValido(const char* fichero){
@@ -41,7 +47,11 @@ bool Parser::esValido(const char* fichero){
 	
 	nombrefichero=XMLString::transcode (fichero);
 	try {
-		parser->parseURI (nombrefichero);
+		
+		//Se analiza un fichero y se recupera el objeto
+		//DOMDocument que representa los elementos
+		//XML que hay en el fichero
+		documento=parser->parseURI (nombrefichero);
 	}
 	catch (const XMLException& toCatch)
         {
@@ -55,6 +65,12 @@ bool Parser::esValido(const char* fichero){
         }
 	return true;
 }
+
+vector <elemento> extraerElementos ()
+{
+	
+}
+
 
 Parser::~Parser()
 {

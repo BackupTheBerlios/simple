@@ -32,6 +32,9 @@ XERCES_CPP_NAMESPACE_USE
 
 /*Clase padre general de patron COMPOSITE
 	Observese que contiene los metodos propios de un OBSERVER*/
+
+#ifndef _elementos_
+#define _elementos_
 class elemento {
 	public:
 		void cambiar_entrada     (float entrada);
@@ -111,3 +114,5 @@ class elemento_compuesto: public elemento {
 	private:
 		XMLCh *nombreelemento;	
 };
+
+#endif

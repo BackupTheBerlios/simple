@@ -6,6 +6,8 @@
 */
 
 #include <iostream>
+#include <vector>
+#include "elementos.h"
 
 //Evitar instanciación de plantillas
 #define XERCES_TMPLSINC
@@ -23,7 +25,8 @@ XERCES_CPP_NAMESPACE_USE
 
 using namespace std;
 
-
+#ifndef _parser_
+#define _parser_
 class Parser {
 	public:
 		Parser ();
@@ -31,9 +34,15 @@ class Parser {
 		/*Este metodo nos comprueba si un determinado fichero en XML
 		 *es válido o no*/
 		bool esValido (const char* fichero);
+		
+		/*Este metodo extrae del fichero XML los elementos
+		 *del sistema que queremos simular*/
+		vector <elemento> extraerElementos ();
+		
 	private:
 		XercesDOMParser* 	elParser;
 		DOMBuilder* 		parser;
 		DOMDocument* 		documento;
 		ErrorHandler* 		manejador;
 };
+#endif

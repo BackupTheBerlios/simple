@@ -99,6 +99,7 @@ vector <elemento*> Parser::extraerElementos ()
 			
 			elemento_siguiente=elemento_siguiente->getNextSibling();
 		}
+		return vector_elementos;
 }
 
 

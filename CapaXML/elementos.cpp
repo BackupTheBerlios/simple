@@ -40,7 +40,7 @@ bool iguales (const XMLCh* cad1, const XMLCh* cad2)
 	
 void elemento::inicializar ()
 {
-	nombre_elemento=new XMLCh[MAX_LONGITUD_NOMBRE];
+	nombre_elemento=NULL;
 	for (int i=0;i<MAX_SUSCRIPTORES;i++)
 		lista_suscriptores[i]=NULL;
 	total_suscriptores=-1;
@@ -231,7 +231,7 @@ void motor::construir (DOMNode* nodo) {
               elementoXMLabuscar=XMLString::transcode ("nombreelemento");
               /*... y aqui e extraen los valores almacenados en el XML*/
 			  if (  iguales (nombre_propiedad, elementoXMLabuscar ) ){
-					XMLString::copyString (nombre_elemento, valor_propiedad);
+					nombre_elemento= XMLString::replicate (valor_propiedad);
 			  }
 			  
 			  elementoXMLabuscar=XMLString::transcode ("entradagiro1");
@@ -246,5 +246,7 @@ void motor::construir (DOMNode* nodo) {
      }                   
 }
 
+//Falta el destructor de motor
+//Tiene que XMLString::release (nombre_elemento);
 elemento_compuesto::elemento_compuesto (DOMNode* nodo) {
 }

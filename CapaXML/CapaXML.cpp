@@ -34,8 +34,8 @@ int main(int argc, char* argv[])
 	if (elParser->esValido (nombre_fichero) ) 
 		cout << "El fichero es XML valido" << endl;
 	v=elParser->extraerElementos();
-	
-	cout << "El vector contiene " << v.capacity() << endl;
+	long i=v.capacity();
+	cout << "El vector contiene " << i << endl;
   // Poner aqui el resto de delete's, cuando sean necesarios
   return 0;
 }

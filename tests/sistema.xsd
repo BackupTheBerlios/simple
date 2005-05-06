@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<!--Los elementos podran tener nombres de 1 a 20 letras o numeros pero
+	empezando por letras. Si se lee bien la expresion regular se puede ver que podria haber
+	un simbolo colgado-->
+	<xs:simpleType name="tiponombre">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z]([a-zA-Z0-9]{0,19})"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!--Voltaje: Los voltajes usados oscilan en torno a los 9V-->
+	<xs:simpleType name="tipovoltaje">
+		<xs:restriction base="xs:integer">
+		<xs:minInclusive value="-9"/>
+		<xs:maxInclusive value="+9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!--Voltaje positivo: Se utiliza para distinguir voltajes en la definicion de motor-->
+	<xs:simpleType name="tipovoltajepositivo">
+		<xs:restriction base="xs:integer">
+		<xs:minInclusive value="1"/>
+		<xs:maxInclusive value="+9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!--Voltaje negativo-->
+	<xs:simpleType name="tipovoltajenegativo">
+		<xs:restriction base="xs:integer">
+		<xs:minInclusive value="-9"/>
+		<xs:maxInclusive value="-1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!--Color de las lamparas expresado en RGB-->
+	<xs:simpleType name="tipocolor">
+		<xs:restriction base="xs:string">
+		<xs:pattern value="[0-9a-fA-F]{6}"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+	<!--Movimiento rotatorio de un motor-->
+	<!--ATENCION: No se permiten espacios antes o despues de cw, ccw, o stop en
+	los elementos de tipomovimientomotor. Es para acotar bien los movimientos posibles-->
+	<xs:simpleType name="tipomovimientomotor">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ccw"/>
+			<xs:enumeration value="cw"/>
+			<xs:enumeration value="stop"/>
+			<xs:enumeration value="sh"/>
+			<xs:enumeration value="sa"/>
+			<xs:enumeration value="parar"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!--La presion es de tipo digital-->
+	<xs:simpleType name="tipopresion">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!--El flujo magnetico tambien es digital-->
+	<xs:simpleType name="tipomagnetismo">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!--Modelado de la luz. Tambien digital-->
+	<xs:simpleType name="tipoluz">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!--Frecuencia de emision de un zumbador-->
+	<xs:simpleType name="tipofrecuencia">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="30000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!--El tiempo es una magnitud positiva. Es usado por los temporizadores-->
+	<xs:simpleType name="tipotiempo">
+		<xs:restriction base="xs:decimal">
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+	<!--Un sensor pulsador puede tener dos entradas y dos salidas. Para una entrada
+	pulsado (1) emitira una salida (en Voltaje) y para una entrada no pulsado (0) emitira
+	una salida (también en voltaje)-->
+	<xs:group name="gruposensorpulsador">
+		<xs:sequence>
+			<xs:element name="entradareposo" type="tipopresion"/>
+			<xs:element name="salidareposo" type="tipovoltaje"/>
+			<xs:element name="entradaactivacion" type="tipopresion"/>
+			<xs:element name="salidaactivacion" type="tipovoltaje"/>
+		</xs:sequence>
+	</xs:group>
+	
+	
+	<!--Aqui se definen los tipos de verdad. Por qué hacerlo de esta manera?
+	Porque al separar características de esta manera podemos "heredarlas"
+	en los pulsadores simples, en los vectores de pulsadores y en otras construcciones
+	mas complejas-->
+	<xs:complexType name="tiposensorpulsador">
+		<xs:sequence>
+			<xs:element name="nombreelemento"/>
+			<xs:group ref="gruposensorpulsador"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!--Agrupamiento de las caracteristicas necesarias para el modelado de un sensor
+	magnetico-->
+	<xs:group name="gruposensormagnetico">
+		<xs:sequence>
+			<xs:element name="entradareposo" type="tipomagnetismo"/>
+			<xs:element name="salidareposo" type="tipovoltaje"/>
+			<xs:element name="entradaactivacion" type="tipomagnetismo"/>
+			<xs:element name="salidaactivacion" type="tipovoltaje"/>
+		</xs:sequence>
+	</xs:group>
+	<!--Sensor magnetico. Actua igual, con dos entradas y dos salidas-->
+	<xs:complexType name="tiposensormagnetico">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="gruposensormagnetico"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!--Un temporizador tiene un voltaje de salida inicial (por ejemplo 0V). Cuando recibe un flanco
+	en su entrada (por ejemplo el voltajeinicial de 0V alcanza un voltaje de activacion de 5V (por ejemplo)
+	el temporizador inicia su cuenta, activando un voltaje de salida determinado tras un cierto tiempo 
+	(en segundos)-->
+	<xs:group name="grupotemporizador">
+		<xs:sequence>
+			<xs:element name="voltajeinicial" type="tipovoltaje"/>
+			<xs:element name="voltajeactivacion" type="tipovoltaje"/>
+			<xs:element name="tiempo" type="tipotiempo"/>
+			<xs:element name="voltajesalidainicial" type="tipovoltaje"/>
+			<xs:element name="voltajesalidaentemporizacion" type="tipovoltaje"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="tipotemporizador">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupotemporizador"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<!--Un contador actua por flancos. Es necesario que se indique el voltaje inicial del flanco y el voltaje final 
+	(esto permitira construir contadores que actuen por flanco de subida y de bajada). Tras un numero determinado
+	de flancos (indicado por cuentamaxima) el voltaje de salida del contador cambiara. El reset del contador
+	también actua por flanco-->
+	<xs:group name="grupocontador">
+		<xs:sequence>
+			<xs:element name="voltajeinicial" type="tipovoltaje"/>
+			<xs:element name="voltajefinal" type="tipovoltaje"/>
+			<xs:element name="cuentamaxima" type="xs:positiveInteger"/>
+			<xs:element name="voltajeinicialreset" type="tipovoltaje"/>
+			<xs:element name="voltajefinalreset" type="tipovoltaje"/>
+			<xs:element name="voltajeinicialsalida" type="tipovoltaje"/>
+			<xs:element name="voltajefinalsalida" type="tipovoltaje"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="tipocontador">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupocontador"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:group name="grupofotosensor">
+		<xs:sequence>
+			<xs:element name="entradareposo" type="tipoluz"/>
+			<xs:element name="salidareposo" type="tipovoltaje"/>
+			<xs:element name="entradaactivacion" type="tipoluz"/>
+			<xs:element name="salidaactivacion" type="tipovoltaje"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<!--Fotosensor: Para una entrada LUZ devuelve un VOLTAJE. Hay dos posibles entradas
+	y por tanto dos posibles VOLTAJES-->
+	<xs:complexType name="tipofotosensor">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupofotosensor"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	
+	
+	
+	<!--ACTUADORES-->
+	
+	<xs:group name="grupolampara">
+		<xs:sequence>
+			<xs:element name="color" type="tipocolor"/>
+			<xs:element name="entradareposo" type="tipovoltaje"/>
+			<xs:element name="salidareposo" type="tipoluz"/>
+			<xs:element name="entradaactivacion" type="tipovoltaje"/>
+			<xs:element name="salidaactivacion" type="tipoluz"/>
+		</xs:sequence>
+	</xs:group>
+	<!--Que es una lampara?. Pues una cosa que si le enchufas voltios te da luz y
+	si no le enchufas voltios no te da luz-->
+	
+	<xs:complexType name="tipolampara">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupolampara"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<!--Definicion de electroimanes-->
+	<xs:group name="grupoelectroiman">
+		<xs:sequence>
+			<xs:element name="entradareposo" type="tipovoltaje"/>
+			<xs:element name="salidareposo" type="tipomagnetismo"/>
+			<xs:element name="entradaactivacion" type="tipovoltaje"/>
+			<xs:element name="salidaactivacion" type="tipomagnetismo"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="tipoelectroiman">
+	<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupoelectroiman"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<!--Definicion de un zumbador-->
+	<xs:group name="grupozumbador">
+		<xs:sequence>
+			<xs:element name="entradareposo" type="tipovoltaje"/>
+			<xs:element name="salidareposo" type="tipofrecuencia"/>
+			<xs:element name="entradaactivacion" type="tipovoltaje"/>
+			<xs:element name="salidaactivacion" type="tipofrecuencia"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="tipozumbador">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupozumbador"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!--Motor: Caso especial: Puede girar en sentido horario (cw) o antihorario (ccw)
+	dependiendo de si recibe un voltaje u otro-->
+	<xs:group name="grupomotor">
+		<xs:sequence>
+			<xs:element name="entradagiro1" type="tipovoltajepositivo"/>
+			<xs:element name="salidagiro1" type="tipomovimientomotor"/>
+			<xs:element name="entradagiro2" type="tipovoltajenegativo"/>
+			<xs:element name="salidagiro2" type="tipomovimientomotor"/>
+			<xs:element name="entradareposo" type="tipovoltaje"/>
+			<xs:element name="salidareposo" type="tipomovimientomotor"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="tipomotor">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupomotor"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	
+	<!--Un vector es una secuencia de n elementos cualesquiera-->
+	<xs:complexType name="tipovector">
+		<xs:sequence>
+			<xs:element name="numelementos" type="xs:positiveInteger"/>
+			<xs:choice>
+				<xs:element name="pulsador" type="tiposensorpulsador"/>
+				<xs:element name="reed" type="tiposensormagnetico"/>
+				<xs:element name="fotosensor" type="tipofotosensor"/>
+				<xs:element name="lampara" type="tipolampara"/>
+				<xs:element name="electroiman" type="tipoelectroiman"/>
+				<xs:element name="motor" type="tipomotor"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!--DEFINICION DE RELACIONES ENTRE ELEMENTOS-->
+	
+	
+	
+	<!--Definicion de una relación entre dos componentes. Hay un elemento primario
+	que conecta su salida a la entrada del siguiente (que llamamos secundario)-->
+	<xs:complexType name="tiporelacion">
+		<xs:sequence>
+			<xs:element name="primario" type="tiponombre"/>
+			<xs:element name="secundario" type="tiponombre"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!--DEFINICION DEL ESQUEMA-->
+	<xs:element name="sistema" type="tiposistema"/>
+	
+	
+	<xs:group name="elemento">
+		<xs:choice>
+			<xs:element name="pulsador" type="tiposensorpulsador"/>
+			<xs:element name="reed" type="tiposensormagnetico"/>
+			<xs:element name="fotosensor" type="tipofotosensor"/>
+			<xs:element name="lampara" type="tipolampara"/>
+			<xs:element name="electroiman" type="tipoelectroiman"/>
+			<xs:element name="motor" type="tipomotor"/>
+			<xs:element name="relacion" type="tiporelacion"/>
+			<xs:element name="vector" type="tipovector"/>
+			<xs:element name="temporizador" type="tipotemporizador"/>
+			<xs:element name="contador" type="tipocontador"/>
+			
+			<!--Observese que con esto permitirmos la recursividad de sistemas-->
+			<xs:element name="sistema" type="tiposistema"/>
+		</xs:choice>
+	</xs:group>
+	
+	
+	<xs:complexType name="tiposistema">
+		<xs:group ref="elemento" minOccurs="1" maxOccurs="65536"/>
+	</xs:complexType>
+	
+	
+</xs:schema>

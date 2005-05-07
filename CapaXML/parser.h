@@ -37,7 +37,7 @@ class Parser {
 		
 		/*Este metodo extrae del fichero XML los elementos
 		 *del sistema que queremos simular*/
-		vector <elemento*> extraerElementos ();
+		vector <Elemento*> extraerElementos ();
 		
 	private:
 		XercesDOMParser* 	elParser;

@@ -66,9 +66,9 @@ bool Parser::esValido(const char* fichero){
 	return true;
 }
 
-vector <elemento*> Parser::extraerElementos ()
+vector <Elemento*> Parser::extraerElementos ()
 {
-	vector<elemento*> vector_elementos (50);
+	vector<Elemento*> vector_elementos;
 	/*	Cuando se llama a este método ya se dispone de un objeto DOMDocument
 		almacenado en "documento", por lo que podemos acceder a los elementos
 		XML almacenados*/
@@ -91,7 +91,7 @@ vector <elemento*> Parser::extraerElementos ()
 					(elemento_siguiente->getNodeName());
 				if (XMLString::equals (nombre, "motor"))
 				{
-					motor *m=new motor();
+					Motor *m=new Motor();
 					m->construir (elemento_siguiente);
 					vector_elementos.push_back(m);
 				}

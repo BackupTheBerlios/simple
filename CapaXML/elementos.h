@@ -37,87 +37,99 @@ XERCES_CPP_NAMESPACE_USE
 
 #ifndef _elementos_
 #define _elementos_
-class elemento {
+class Elemento {
 	public:
-		void cambiar_entrada     (float entrada);
-		void anadir_suscriptor   (elemento* e)  ;
-		void eliminar_suscriptor (elemento *e)  ;
-		void notificar           ()             ;	
+		XMLCh*	getNombreElemento	()				;
+		void 	anadirSuscriptor   (Elemento* e)  	;
+		void 	eliminarSuscriptor (Elemento *e)  	;
+		void 	notificar           ()             	;	
 		//Este metodo puede re-implementarse (y de hecho se hará)
 		//en las clases hija
 		virtual void construir 	 (DOMNode *nodo)=0;
 	protected:
-		void inicializar();
-		XMLCh* 		nombre_elemento;
-		elemento* 	lista_suscriptores [MAX_SUSCRIPTORES];
-		int 		total_suscriptores;
+		void 	inicializar();
+		
+		XMLCh* 		nombreElemento;
+		Elemento* 	listaSuscriptores [MAX_SUSCRIPTORES];
+		int 		totalSuscriptores;
 };
 
 
 /*Los elementos concretos se construyen a partir de un nodo DOM,
   es decir, directamente de un "trozo" en XML*/
   
-class reed : public elemento {
+class Reed : public Elemento {
        public:
-              reed();
+              Reed();
               void construir (DOMNode* nodo);
        private:
                /*Para un cierto magnetismo de entrada hay un voltaje
                 *de salida*/
-               float entradainicial, salidainicial ;       
-               float entradafinal,   salidafinal   ;
+               float entradaInicial, salidaInicial ;       
+               float entradaFinal,   salidaFinal   ;
 };
 
-class pulsador: public elemento {
+class Pulsador: public Elemento {
       public:
-             pulsador ();
+             Pulsador ();
              void construir (DOMNode* nodo);
       private:
-              float entradainicial, salidainicial ;
-              float entradafinal,   salidafinal   ;
+              float entradaInicial, salidaInicial ;
+              float entradaFinal,   salidaFinal   ;
 };
 
-class fotosensor: public elemento {
+class FotoSensor: public Elemento {
 	public:
-		fotosensor ();
+		FotoSensor ();
 		void construir (DOMNode* nodo);
 	private:
-		float entradainicial, salidainicial ;
-		float entradafinal,    salidafinal   ;	
+		float entradaInicial, salidaInicial ;
+		float entradaFinal,    salidaFinal   ;	
 };
 
 
-class lampara: public elemento {
+class Lampara: public Elemento {
 	public:
-		lampara ();
+		Lampara ();
 		void construir (DOMNode* nodo);
 	private:
-		float entradainicial, salidainicial ;
-		float entradafinal,   salidafinal   ;	
+		float entradaInicial, salidaInicial ;
+		float entradaFinal,   salidaFinal   ;	
 };
 
-class electroiman: public elemento {
+class Electroiman: public Elemento {
 	public:
-		electroiman () ;
+		Electroiman () ;
 		void construir (DOMNode* nodo);
 	private:
-		float entradainicial, salidainicial ;
-		float entradafinal,   salidafinal ;	
+		float entradaInicial, salidaInicial ;
+		float entradaFinal,   salidaFinal ;	
 };
 
-class motor: public elemento {
+class Motor: public Elemento {
 	public:
-		motor () ;
-		void construir (DOMNode* nodo);
+		Motor 	();
+		~Motor 	();
+		void 	construir (DOMNode* nodo);
+		float	getEntradaGiro1	() const;						
+		float	getEntradaGiro2	() const;
+		float	getEntradaReposo() const;
+		XMLCh*	getSalidaGiro1	() const;
+		XMLCh*	getSalidaGiro2	() const;
+		XMLCh*	getSalidaReposo	() const;
+		
 	private:
-		float entradagiro1, salidagiro1 ; 
-		float entradagiro2, salidagiro2 ;
-		float entradaparo,  salidaparo  ;
+		float 	entradaGiro1	;
+		XMLCh*	salidaGiro1 	; 
+		float 	entradaGiro2	;
+		XMLCh*	salidaGiro2 	;
+		float 	entradaReposo	;
+		XMLCh*	salidaReposo  	;
 };
 
-class elemento_compuesto: public elemento {
+class ElementoCompuesto: public Elemento {
 	public:
-		elemento_compuesto (DOMNode* nodo) ;
+		ElementoCompuesto (DOMNode* nodo) ;
 };
 
 #endif

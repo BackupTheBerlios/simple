@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
 {
 	char* nombre_fichero="proyecto.xml";
 	
-	vector<elemento*> v;
+	vector<Elemento*> v;
 	
 	Parser* elParser= new Parser ();
 	

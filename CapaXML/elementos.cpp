@@ -38,35 +38,40 @@ bool iguales (const XMLCh* cad1, const XMLCh* cad2)
 /*	Inicializador generico para todos los elementos
 	Cualquier clase hija puede modificarlo*/
 	
-void elemento::inicializar ()
+void Elemento::inicializar ()
 {
-	nombre_elemento=NULL;
+	nombreElemento=NULL;
 	for (int i=0;i<MAX_SUSCRIPTORES;i++)
-		lista_suscriptores[i]=NULL;
-	total_suscriptores=-1;
-	nombre_elemento=NULL;
+		listaSuscriptores[i]=NULL;
+	totalSuscriptores=-1;
+	nombreElemento=NULL;
+}
+
+XMLCh* Elemento::getNombreElemento ()
+{
+	return nombreElemento;
 }
 //El constructor solo inicializa*/
-reed::reed ()
+Reed::Reed ()
 {
 	/*Se llama al inicializador generico*/
 	inicializar ();
 	
 	/*Y se inicializan el resto de miembros*/
-	entradainicial	=	entradafinal	=	VALOR_INICIAL;
-	salidainicial	=	salidafinal		=	VALOR_INICIAL;
+	entradaInicial	=	entradaFinal	=	VALOR_INICIAL;
+	salidaInicial	=	salidaFinal		=	VALOR_INICIAL;
 	
 	
 }
 
-void reed::construir (DOMNode *nodo){
+void Reed::construir (DOMNode *nodo){
 	DOMNode *hijo=nodo->getFirstChild () ;
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
     const XMLCh *valor_propiedad ;
-    printf ("Creando un reed\n");
+    printf ("Creando un Reed\n");
      
-    /*Recorremos las propiedades del reed*/
+    /*Recorremos las propiedades del Reed*/
     while (hijo!=NULL)
      {
            if (hijo->getNodeType()==DOMNode::ELEMENT_NODE){
@@ -83,21 +88,21 @@ void reed::construir (DOMNode *nodo){
 }
 
 
-pulsador::pulsador()
+Pulsador::Pulsador()
 {
 	inicializar();
-	entradainicial	=	entradafinal	=	VALOR_INICIAL;
-	salidainicial	=	salidafinal		=	VALOR_INICIAL;
+	entradaInicial	=	entradaFinal	=	VALOR_INICIAL;
+	salidaInicial	=	salidaFinal		=	VALOR_INICIAL;
 }
 
-void pulsador::construir (DOMNode *nodo) {
+void Pulsador::construir (DOMNode *nodo) {
     DOMNode *hijo=nodo->getFirstChild () ;
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
     const XMLCh *valor_propiedad ;
-    printf ("Creando un pulsador\n");
+    printf ("Creando un Pulsador\n");
      
-    /*Recorremos las propiedades del reed*/
+    /*Recorremos las propiedades del Reed*/
     while (hijo!=NULL)
      {
            if (hijo->getNodeType()==DOMNode::ELEMENT_NODE){
@@ -114,21 +119,21 @@ void pulsador::construir (DOMNode *nodo) {
 }
 
 
-fotosensor::fotosensor()
+FotoSensor::FotoSensor()
 {
 	inicializar();
-	entradainicial	=	entradafinal	=	VALOR_INICIAL;
-	salidainicial	=	salidafinal		=	VALOR_INICIAL;
+	entradaInicial	=	entradaFinal	=	VALOR_INICIAL;
+	salidaInicial	=	salidaFinal		=	VALOR_INICIAL;
 }
 
-void fotosensor::construir (DOMNode* nodo) {
+void FotoSensor::construir (DOMNode* nodo) {
 	DOMNode *hijo=nodo->getFirstChild () ;
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
     const XMLCh *valor_propiedad ;
-    printf ("Creando un fotosensor\n");
+    printf ("Creando un FotoSensor\n");
      
-    /*Recorremos las propiedades del reed*/
+    /*Recorremos las propiedades del Reed*/
     while (hijo!=NULL)
      {
            if (hijo->getNodeType()==DOMNode::ELEMENT_NODE){
@@ -144,19 +149,19 @@ void fotosensor::construir (DOMNode* nodo) {
      }                   
 }
 
-electroiman::electroiman (){
+Electroiman::Electroiman (){
 	inicializar();
-	entradainicial	=	entradafinal	=	VALOR_INICIAL;
-	salidainicial	=	salidafinal		=	VALOR_INICIAL;
+	entradaInicial	=	entradaFinal	=	VALOR_INICIAL;
+	salidaInicial	=	salidaFinal		=	VALOR_INICIAL;
 }
-void electroiman::construir (DOMNode* nodo) {
+void Electroiman::construir (DOMNode* nodo) {
 	DOMNode *hijo=nodo->getFirstChild () ;
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
     const XMLCh *valor_propiedad ;
-    printf ("Creando un fotosensor\n");
+    printf ("Creando un FotoSensor\n");
      
-    /*Recorremos las propiedades del reed*/
+    /*Recorremos las propiedades del Reed*/
     while (hijo!=NULL)
      {
            if (hijo->getNodeType()==DOMNode::ELEMENT_NODE){
@@ -173,21 +178,21 @@ void electroiman::construir (DOMNode* nodo) {
 }
 
 
-lampara::lampara()
+Lampara::Lampara()
 {
 	inicializar();
-	entradainicial	=	entradafinal	=	VALOR_INICIAL;
-	salidainicial	=	salidafinal		=	VALOR_INICIAL;
+	entradaInicial	=	entradaFinal	=	VALOR_INICIAL;
+	salidaInicial	=	salidaFinal		=	VALOR_INICIAL;
 }
 
-void lampara::construir (DOMNode* nodo) {
+void Lampara::construir (DOMNode* nodo) {
 	    DOMNode *hijo=nodo->getFirstChild () ;
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
     const XMLCh *valor_propiedad ;
-    printf ("Creando lampara\n");
+    printf ("Creando Lampara\n");
      
-    /*Recorremos las propiedades del reed*/
+    /*Recorremos las propiedades del Reed*/
     while (hijo!=NULL)
      {
            if (hijo->getNodeType()==DOMNode::ELEMENT_NODE){
@@ -204,24 +209,31 @@ void lampara::construir (DOMNode* nodo) {
 }
 
 
-motor::motor()
+Motor::Motor()
 {
 	inicializar();
-	entradagiro1	=	entradagiro2	=	VALOR_INICIAL;
-	salidagiro1		=	salidagiro2		=	VALOR_INICIAL;
-	entradaparo		=	salidaparo		=	VALOR_INICIAL;
+	entradaGiro1	=	entradaGiro2	=	entradaReposo	=	VALOR_INICIAL;
+	salidaGiro1		=	salidaGiro2		=	salidaReposo	=	NULL;
 }
 
-void motor::construir (DOMNode* nodo) {
+/*	El destructor de la clase Motor debe liberar
+	las cadenas que fueron asignadas directamente por Xerces*/
+Motor::~Motor()
+{
+	XMLString::release	(&salidaGiro1);
+	XMLString::release	(&salidaGiro2);
+	XMLString::release	(&salidaReposo);
+}
+void Motor::construir (DOMNode* nodo) {
 	DOMNode *hijo=nodo->getFirstChild () ;
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
     const XMLCh *valor_propiedad ;
     const XMLCh* elementoXMLabuscar;
     int aux;
-    printf ("Creando un motor\n");
+    printf ("Creando un Motor\n");
      
-    /*Recorremos las propiedades del reed...*/
+    /*Recorremos las propiedades del Reed...*/
     while (hijo!=NULL)
      {
            if (hijo->getNodeType()==DOMNode::ELEMENT_NODE){
@@ -231,14 +243,38 @@ void motor::construir (DOMNode* nodo) {
               elementoXMLabuscar=XMLString::transcode ("nombreelemento");
               /*... y aqui e extraen los valores almacenados en el XML*/
 			  if (  iguales (nombre_propiedad, elementoXMLabuscar ) ){
-					nombre_elemento= XMLString::replicate (valor_propiedad);
+					nombreElemento= XMLString::replicate (valor_propiedad);
 			  }
 			  
 			  elementoXMLabuscar=XMLString::transcode ("entradagiro1");
 			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
-					entradagiro1=XMLString::parseInt (valor_propiedad);
+					entradaGiro1=XMLString::parseInt (valor_propiedad);
 			  }
 			  
+			  elementoXMLabuscar=XMLString::transcode ("salidagiro1");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					salidaGiro1=XMLString::replicate (valor_propiedad);
+			  }
+			  
+			  elementoXMLabuscar=XMLString::transcode ("entradagiro2");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					entradaGiro2=XMLString::parseInt (valor_propiedad);
+			  }
+			  
+			  elementoXMLabuscar=XMLString::transcode ("salidagiro2");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					salidaGiro2=XMLString::replicate (valor_propiedad);
+			  }
+			  
+			  elementoXMLabuscar=XMLString::transcode ("entradareposo");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					entradaReposo=XMLString::parseInt (valor_propiedad);
+			  }
+			  
+			  elementoXMLabuscar=XMLString::transcode ("salidareposo");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					salidaReposo=XMLString::replicate (valor_propiedad);
+			  }
            }
            
            /*Se pasa al siguiente nodo XML hermano*/
@@ -246,7 +282,32 @@ void motor::construir (DOMNode* nodo) {
      }                   
 }
 
-//Falta el destructor de motor
-//Tiene que XMLString::release (nombre_elemento);
-elemento_compuesto::elemento_compuesto (DOMNode* nodo) {
+float Motor::getEntradaGiro1 () const 
+{
+	return entradaGiro1;	
+}
+float Motor::getEntradaGiro2 () const 
+{
+	return entradaGiro2;	
+}
+float Motor::getEntradaReposo () const 
+{
+	return entradaReposo;	
+}
+
+XMLCh* Motor::getSalidaGiro1 () const
+{
+	return salidaGiro1;
+}
+XMLCh* Motor::getSalidaGiro2 () const
+{
+	return salidaGiro2;
+}
+XMLCh* Motor::getSalidaReposo() const
+{
+	return salidaReposo;
+}
+//Falta el destructor de Motor
+//Tiene que XMLString::release (nombreElemento);
+ElementoCompuesto::ElementoCompuesto (DOMNode* nodo) {
 }

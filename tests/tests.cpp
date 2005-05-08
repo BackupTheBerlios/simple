@@ -36,32 +36,36 @@ namespace {
 		{
 			XMLCh* 	cadena;
 			vector<Elemento*>::iterator i;
-			Motor* m;
 			float 	entradaGiro1,	entradaGiro2, 	entradaReposo;
 			XMLCh*	salidaGiro1;
 			XMLCh* 	salidaGiro2;
 			XMLCh*	salidaReposo;
+			/*Codificamos los valores esperados*/
 			cadena=			XMLString::transcode ("motor1");
 			salidaGiro1=	XMLString::transcode ("cw");
 			salidaGiro2=	XMLString::transcode ("ccw");
 			salidaReposo=	XMLString::transcode ("stop");
-			for (i=v.begin();i<v.end();i++)
-			{
-				Elemento *e=*i;
-				if (XMLString::equals(cadena,e->getNombreElemento() )){
-					Motor* m=(Motor*) e;
-					entradaGiro1	=	m->getEntradaGiro1();
-					entradaGiro2	=	m->getEntradaGiro2();
-					entradaReposo	=	m->getEntradaReposo();
-				}
-			} //Fin del for
-			XMLString::release (&cadena);
-			/*assert_eq ("Entradagiro1",9 , entradaGiro1 );
+
+			//Recuperamos los valores leidos
+			Motor* m=(Motor*) v.at(0);
+			entradaGiro1	=	m->getEntradaGiro1();
+			entradaGiro2	=	m->getEntradaGiro2();
+			entradaReposo	=	m->getEntradaReposo();
+
+			/*Y comparamos los valores leidos con los esperados*/
+			assert_eq ("Entradagiro1",9 , entradaGiro1 );
 			assert_eq ("Entradagiro2",-9 , entradaGiro2 );
-			assert_eq ("Entradagiro1",0 , entradaReposo );*/
-			assert_eq ("Salidagiro1",salidaGiro1, m->getSalidaGiro1());
-			assert_eq ("Salidagiro2", salidaGiro2, m->getSalidaGiro2());
-			assert_eq ("Salidareposo", salidaReposo,m->getSalidaReposo());
+			assert_eq ("Entradagiro1",0 , entradaReposo );
+			/*Hay que comparar si es true la comparacion de cadenas
+			  y no comprobar la igualdad de punteros (nunca serán iguales)*/
+			assert_eq ("Salidagiro1",true, 
+				XMLString::equals(salidaGiro1, m->getSalidaGiro1()) );
+			assert_eq ("Salidagiro2", true, 
+				XMLString::equals (salidaGiro2, m->getSalidaGiro2()) );
+			assert_eq ("Salidareposo", true, 
+				XMLString::equals (salidaReposo,m->getSalidaReposo()) );
+			
+			XMLString::release (&cadena);
 		}
 		
 	public:

@@ -254,6 +254,7 @@ void Motor::construir (DOMNode* nodo) {
 			  elementoXMLabuscar=XMLString::transcode ("salidagiro1");
 			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
 					salidaGiro1=XMLString::replicate (valor_propiedad);
+					XMLString::removeWS(salidaGiro1);
 			  }
 			  
 			  elementoXMLabuscar=XMLString::transcode ("entradagiro2");
@@ -264,6 +265,7 @@ void Motor::construir (DOMNode* nodo) {
 			  elementoXMLabuscar=XMLString::transcode ("salidagiro2");
 			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
 					salidaGiro2=XMLString::replicate (valor_propiedad);
+					XMLString::removeWS(salidaGiro2);
 			  }
 			  
 			  elementoXMLabuscar=XMLString::transcode ("entradareposo");
@@ -274,6 +276,7 @@ void Motor::construir (DOMNode* nodo) {
 			  elementoXMLabuscar=XMLString::transcode ("salidareposo");
 			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
 					salidaReposo=XMLString::replicate (valor_propiedad);
+					XMLString::removeWS (salidaReposo);
 			  }
            }
            

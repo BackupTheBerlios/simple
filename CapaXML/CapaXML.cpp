@@ -36,6 +36,10 @@ int main(int argc, char* argv[])
 	v=elParser->extraerElementos();
 	long i=v.capacity();
 	cout << "El vector contiene " << i << endl;
+	
+	Motor* m;
+	m=(Motor*) v.at(0);
+	cout << m->getEntradaGiro1();
   // Poner aqui el resto de delete's, cuando sean necesarios
   return 0;
 }

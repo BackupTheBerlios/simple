@@ -75,12 +75,33 @@ namespace {
 			float	entradaReposo, 		salidaReposo;
 			
 			Lampara* l= (Lampara*) v.at(3);
+			color=XMLString::transcode ("ffaadd");
 			
 			assert_eq ("Entradaactivacion",	0,l->getEntradaActivacion());
 			assert_eq ("Entradareposo",		9,l->getEntradaReposo());
 			assert_eq ("Salidaactivacion",	0,l->getSalidaActivacion());
 			assert_eq ("Salidareposo",		1,l->getSalidaReposo());
+			assert_eq ("Color ffaadd",		true,
+				XMLString::equals (color, l->getColor()));
 			
+		}
+		
+		void pruebaReed()
+		{
+			float 	entradaInicial, 	salidaInicial;
+			float 	entradaFinal,		salidaFinal;
+			XMLCh*	nombre;
+			
+			Reed* r=(Reed*) v.at (1);
+			
+			nombre=XMLString::transcode ("reed2");
+			
+			assert_eq ("Entradareposo",		0,r->getEntradaReposo		()	);
+			assert_eq ("Salidareposo",		4,r->getSalidaReposo		()	);
+			assert_eq ("Entradaactivacion",	1,r->getEntradaActivacion	()	);
+			assert_eq ("Salidaactivacion",	0,r->getSalidaActivacion	()	);
+			assert_eq ("Nombre",			true,
+				XMLString::equals (nombre,r->getNombreElemento()));
 		}
 		
 	public:
@@ -96,6 +117,8 @@ namespace {
 				(this, "Motor1", &pruebaParser::pruebaMotor));
 			add ("Comprobacion de lampara1", testcase
 				(this, "Lampara1", &pruebaParser::pruebaLampara));
+			add ("Comprobacion de reed2", testcase
+				(this, "Reed2", &pruebaParser::pruebaReed));
 			suite::main().add ("pruebaFicheroTest", this);
 				
 		}

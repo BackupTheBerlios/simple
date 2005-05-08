@@ -58,8 +58,8 @@ Reed::Reed ()
 	inicializar ();
 	
 	/*Y se inicializan el resto de miembros*/
-	entradaInicial	=	entradaFinal	=	VALOR_INICIAL;
-	salidaInicial	=	salidaFinal		=	VALOR_INICIAL;
+	entradaReposo		=	salidaReposo		=	VALOR_INICIAL;
+	entradaActivacion	=	salidaActivacion	=	VALOR_INICIAL;
 	
 	
 }
@@ -69,8 +69,7 @@ void Reed::construir (DOMNode *nodo){
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
     const XMLCh *valor_propiedad ;
-    printf ("Creando un Reed\n");
-     
+    XMLCh* elementoXMLabuscar;
     /*Recorremos las propiedades del Reed*/
     while (hijo!=NULL)
      {
@@ -78,8 +77,32 @@ void Reed::construir (DOMNode *nodo){
               /*Recogemos datos...*/
               nombre_propiedad= hijo->getNodeName();
               valor_propiedad=  hijo->getTextContent() ;
-              printf ("Propiedad %s: %s\n", 
-                  nombre_propiedad, valor_propiedad);
+              
+              /*.. y a extraer propiedades*/
+              elementoXMLabuscar=XMLString::transcode ("nombreelemento");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					nombreElemento=XMLString::replicate (valor_propiedad);
+					XMLString::removeWS(nombreElemento);
+			  }
+              
+              elementoXMLabuscar=XMLString::transcode ("entradareposo");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					entradaReposo=XMLString::parseInt (valor_propiedad);
+			  }
+			  
+			  elementoXMLabuscar=XMLString::transcode ("salidareposo");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					salidaReposo=XMLString::parseInt (valor_propiedad);
+			  }
+			  
+			  elementoXMLabuscar=XMLString::transcode ("entradaactivacion");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					entradaActivacion=XMLString::parseInt (valor_propiedad);
+			  }
+			  elementoXMLabuscar=XMLString::transcode ("salidaactivacion");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					salidaActivacion=XMLString::parseInt (valor_propiedad);
+			  }
            }
            
            /*Se pasa al siguiente nodo XML hermano*/
@@ -87,6 +110,23 @@ void Reed::construir (DOMNode *nodo){
      }
 }
 
+/*Metodos getter del Reed*/
+float Reed::getEntradaReposo()
+{
+	return entradaReposo;
+}
+float Reed::getSalidaReposo()
+{
+	return salidaReposo;
+}
+float Reed::getEntradaActivacion()
+{
+	return entradaActivacion;
+}
+float Reed::getSalidaActivacion()
+{
+	return salidaActivacion;
+}
 
 Pulsador::Pulsador()
 {
@@ -100,7 +140,6 @@ void Pulsador::construir (DOMNode *nodo) {
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
     const XMLCh *valor_propiedad ;
-    printf ("Creando un Pulsador\n");
      
     /*Recorremos las propiedades del Reed*/
     while (hijo!=NULL)
@@ -109,8 +148,6 @@ void Pulsador::construir (DOMNode *nodo) {
               /*Recogemos datos...*/
               nombre_propiedad= hijo->getNodeName() ;
               valor_propiedad=  hijo->getTextContent() ;
-              printf ("Propiedad %s: %s\n", 
-                  nombre_propiedad, valor_propiedad);
            }
            
            /*Se pasa al siguiente nodo XML hermano*/
@@ -131,7 +168,6 @@ void FotoSensor::construir (DOMNode* nodo) {
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
     const XMLCh *valor_propiedad ;
-    printf ("Creando un FotoSensor\n");
      
     /*Recorremos las propiedades del Reed*/
     while (hijo!=NULL)
@@ -140,8 +176,6 @@ void FotoSensor::construir (DOMNode* nodo) {
               /*Recogemos datos...*/
               nombre_propiedad=hijo->getNodeName()  ;
               valor_propiedad= hijo->getTextContent();
-              printf ("Propiedad %s: %s\n", 
-                  nombre_propiedad, valor_propiedad);
            }
            
            /*Se pasa al siguiente nodo XML hermano*/
@@ -159,7 +193,6 @@ void Electroiman::construir (DOMNode* nodo) {
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
     const XMLCh *valor_propiedad ;
-    printf ("Creando un FotoSensor\n");
      
     /*Recorremos las propiedades del Reed*/
     while (hijo!=NULL)
@@ -168,8 +201,6 @@ void Electroiman::construir (DOMNode* nodo) {
               /*Recogemos datos...*/
               nombre_propiedad= hijo->getNodeName();
               valor_propiedad= hijo->getTextContent() ;
-              printf ("Propiedad %s: %s\n", 
-                  nombre_propiedad, valor_propiedad);
            }
            
            /*Se pasa al siguiente nodo XML hermano*/
@@ -253,7 +284,10 @@ float Lampara::getSalidaActivacion()
 {
 	return salidaActivacion;
 }
-
+XMLCh* Lampara::getColor()
+{
+	return color;
+}
 
 Motor::Motor()
 {

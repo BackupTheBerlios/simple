@@ -61,12 +61,16 @@ class Elemento {
 class Reed : public Elemento {
        public:
               Reed();
-              void construir (DOMNode* nodo);
+              void 	construir (DOMNode* nodo);
+              float	getEntradaReposo		();
+              float getSalidaReposo			();
+              float	getEntradaActivacion	();
+              float	getSalidaActivacion		();
        private:
                /*Para un cierto magnetismo de entrada hay un voltaje
                 *de salida*/
-               float entradaInicial, salidaInicial ;       
-               float entradaFinal,   salidaFinal   ;
+               float entradaReposo,			salidaReposo 	;
+			   float entradaActivacion, 	salidaActivacion;
 };
 
 class Pulsador: public Elemento {
@@ -91,11 +95,12 @@ class FotoSensor: public Elemento {
 class Lampara: public Elemento {
 	public:
 		Lampara ();
-		void 	construir (DOMNode* nodo);
-		float	getEntradaReposo();
-		float	getSalidaReposo();
-		float 	getEntradaActivacion();
-		float	getSalidaActivacion();
+		void 	construir 				(DOMNode* nodo);
+		float	getEntradaReposo		();
+		float	getSalidaReposo			();
+		float 	getEntradaActivacion	();
+		float	getSalidaActivacion		();
+		XMLCh*	getColor				();
 	private:
 		float entradaReposo, 		salidaReposo 		;
 		float entradaActivacion,  	salidaActivacion   	;	

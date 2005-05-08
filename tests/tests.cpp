@@ -47,7 +47,7 @@ namespace {
 			salidaReposo=	XMLString::transcode ("stop");
 
 			//Recuperamos los valores leidos
-			Motor* m=(Motor*) v.at(0);
+			Motor* m=(Motor*) v.at(5);
 			entradaGiro1	=	m->getEntradaGiro1();
 			entradaGiro2	=	m->getEntradaGiro2();
 			entradaReposo	=	m->getEntradaReposo();
@@ -68,6 +68,21 @@ namespace {
 			XMLString::release (&cadena);
 		}
 		
+		void pruebaLampara()
+		{
+			XMLCh*	color;
+			float	entradaActivacion, 	salidaActivacion;
+			float	entradaReposo, 		salidaReposo;
+			
+			Lampara* l= (Lampara*) v.at(3);
+			
+			assert_eq ("Entradaactivacion",	0,l->getEntradaActivacion());
+			assert_eq ("Entradareposo",		9,l->getEntradaReposo());
+			assert_eq ("Salidaactivacion",	0,l->getSalidaActivacion());
+			assert_eq ("Salidareposo",		1,l->getSalidaReposo());
+			
+		}
+		
 	public:
 		pruebaParser() : suite ("Prueba de clase parser")
 		{
@@ -79,6 +94,8 @@ namespace {
 				(this, "Recuperando elementos", &pruebaParser::pruebaRecuperaElementos));
 			add ("Comprobacion de motor1", testcase 
 				(this, "Motor1", &pruebaParser::pruebaMotor));
+			add ("Comprobacion de lampara1", testcase
+				(this, "Lampara1", &pruebaParser::pruebaLampara));
 			suite::main().add ("pruebaFicheroTest", this);
 				
 		}

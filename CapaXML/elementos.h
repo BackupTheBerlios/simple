@@ -91,10 +91,15 @@ class FotoSensor: public Elemento {
 class Lampara: public Elemento {
 	public:
 		Lampara ();
-		void construir (DOMNode* nodo);
+		void 	construir (DOMNode* nodo);
+		float	getEntradaReposo();
+		float	getSalidaReposo();
+		float 	getEntradaActivacion();
+		float	getSalidaActivacion();
 	private:
-		float entradaInicial, salidaInicial ;
-		float entradaFinal,   salidaFinal   ;	
+		float entradaReposo, 		salidaReposo 		;
+		float entradaActivacion,  	salidaActivacion   	;	
+		XMLCh* color;	
 };
 
 class Electroiman: public Elemento {

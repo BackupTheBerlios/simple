@@ -89,11 +89,42 @@ vector <Elemento*> Parser::extraerElementos ()
 			{
 				char* nombre=XMLString::transcode
 					(elemento_siguiente->getNodeName());
+				
 				if (XMLString::equals (nombre, "motor"))
 				{
 					Motor *m=new Motor();
 					m->construir (elemento_siguiente);
 					vector_elementos.push_back(m);
+				}
+				if (XMLString::equals (nombre,"lampara"))
+				{
+					Lampara* l=new Lampara();
+					l->construir (elemento_siguiente);
+					vector_elementos.push_back(l);
+				}
+				if (XMLString::equals (nombre, "reed"))
+				{
+					Reed* r=new Reed();
+					r->construir (elemento_siguiente);
+					vector_elementos.push_back(r);
+				}
+				if (XMLString::equals (nombre, "fotosensor"))
+				{
+					FotoSensor *f=new FotoSensor();
+					f->construir (elemento_siguiente);
+					vector_elementos.push_back (f);
+				}
+				if (XMLString::equals (nombre, "pulsador"))
+				{
+					Pulsador* p=new Pulsador();
+					p->construir (elemento_siguiente);
+					vector_elementos.push_back(p);
+				}
+				if (XMLString::equals (nombre, "electroiman"))
+				{
+					Electroiman* e=new Electroiman();
+					e->construir (elemento_siguiente);
+					vector_elementos.push_back(e);
 				}
 			}
 			

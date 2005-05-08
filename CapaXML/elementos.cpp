@@ -181,31 +181,77 @@ void Electroiman::construir (DOMNode* nodo) {
 Lampara::Lampara()
 {
 	inicializar();
-	entradaInicial	=	entradaFinal	=	VALOR_INICIAL;
-	salidaInicial	=	salidaFinal		=	VALOR_INICIAL;
+	entradaReposo	=	entradaActivacion	=	VALOR_INICIAL;
+	salidaReposo	=	salidaActivacion	=	VALOR_INICIAL;
 }
 
 void Lampara::construir (DOMNode* nodo) {
-	    DOMNode *hijo=nodo->getFirstChild () ;
-    DOMNode *propiedad ;
-    const XMLCh *nombre_propiedad ;
-    const XMLCh *valor_propiedad ;
-    printf ("Creando Lampara\n");
-     
+    DOMNode*		propiedad ;
+    const XMLCh*	nombre_propiedad ;
+    const XMLCh*	valor_propiedad ;
+    const XMLCh*	elementoXMLabuscar;
     /*Recorremos las propiedades del Reed*/
+    
+    DOMNode* hijo=nodo->getFirstChild () ;
     while (hijo!=NULL)
      {
            if (hijo->getNodeType()==DOMNode::ELEMENT_NODE){
               /*Recogemos datos...*/
               nombre_propiedad=hijo->getNodeName()  ;
               valor_propiedad= hijo->getTextContent();
-              printf ("Propiedad %s: %s\n", 
-                  nombre_propiedad, valor_propiedad);
-           }
-           
+			  elementoXMLabuscar=XMLString::transcode ("nombreelemento");
+
+			  /*... y aqui se extraen los valores almacenados en el XML*/
+			  if (  iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					nombreElemento= XMLString::replicate (valor_propiedad);
+			  }
+			  
+			  elementoXMLabuscar=XMLString::transcode ("color");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					color=XMLString::replicate (valor_propiedad);
+					XMLString::removeWS(color);
+			  }
+			  elementoXMLabuscar=XMLString::transcode ("entradaactivacion");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					entradaActivacion=XMLString::parseInt (valor_propiedad);
+			  }
+			  
+			  elementoXMLabuscar=XMLString::transcode ("entradareposo");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					entradaReposo=XMLString::parseInt (valor_propiedad);
+			  }
+			  
+			  elementoXMLabuscar=XMLString::transcode ("salidareposo");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					salidaReposo=XMLString::parseInt (valor_propiedad);
+			  }
+			  
+			  elementoXMLabuscar=XMLString::transcode ("salidaactivacion");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					salidaActivacion=XMLString::parseInt (valor_propiedad);
+			  }
+			}
            /*Se pasa al siguiente nodo XML hermano*/
            hijo=hijo->getNextSibling();
      } 
+}
+
+/*Metodos getter de Lampara*/
+float Lampara::getEntradaReposo()
+{
+	return entradaReposo;
+}
+float Lampara::getEntradaActivacion()
+{
+	return entradaActivacion;
+}
+float Lampara::getSalidaReposo()
+{
+	return salidaReposo;
+}
+float Lampara::getSalidaActivacion()
+{
+	return salidaActivacion;
 }
 
 
@@ -230,8 +276,6 @@ void Motor::construir (DOMNode* nodo) {
     const XMLCh *nombre_propiedad ;
     const XMLCh *valor_propiedad ;
     const XMLCh* elementoXMLabuscar;
-    int aux;
-    printf ("Creando un Motor\n");
      
     /*Recorremos las propiedades del Reed...*/
     while (hijo!=NULL)
@@ -310,7 +354,5 @@ XMLCh* Motor::getSalidaReposo() const
 {
 	return salidaReposo;
 }
-//Falta el destructor de Motor
-//Tiene que XMLString::release (nombreElemento);
 ElementoCompuesto::ElementoCompuesto (DOMNode* nodo) {
 }

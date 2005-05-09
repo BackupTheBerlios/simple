@@ -33,7 +33,6 @@ namespace {
 		void pruebaMotor()
 		{
 			XMLCh* 	cadena;
-			vector<Elemento*>::iterator i;
 			float 	entradaGiro1,	entradaGiro2, 	entradaReposo;
 			XMLCh*	salidaGiro1;
 			XMLCh* 	salidaGiro2;
@@ -69,8 +68,6 @@ namespace {
 		void pruebaLampara()
 		{
 			XMLCh*	color;
-			float	entradaActivacion, 	salidaActivacion;
-			float	entradaReposo, 		salidaReposo;
 			
 			Lampara* l= (Lampara*) v.at(3);
 			color=XMLString::transcode ("ffaadd");
@@ -86,8 +83,6 @@ namespace {
 		
 		void pruebaReed()
 		{
-			float 	entradaInicial, 	salidaInicial;
-			float 	entradaFinal,		salidaFinal;
 			XMLCh*	nombre;
 			
 			Reed* r=(Reed*) v.at (1);
@@ -103,8 +98,6 @@ namespace {
 		}
 		void pruebaPulsador()
 		{
-			float 	entradaInicial, 	salidaInicial;
-			float 	entradaFinal,		salidaFinal;
 			XMLCh*	nombre;
 			
 			Pulsador* p=(Pulsador*) v.at (0);
@@ -134,6 +127,30 @@ namespace {
 			assert_eq ("Nombre",			true,
 				XMLString::equals (nombre,e->getNombreElemento()));
 		}
+		
+		void pruebaFotoSensor()
+		{
+			XMLCh*	nombre;
+			
+			FotoSensor* f=(FotoSensor*) v.at (2);
+			
+			nombre=XMLString::transcode ("fotosensor1");
+			
+			assert_eq ("Entradareposo",		0,f->getEntradaReposo		()	);
+			assert_eq ("Salidareposo",		9,f->getSalidaReposo		()	);
+			assert_eq ("Entradaactivacion",	1,f->getEntradaActivacion	()	);
+			assert_eq ("Salidaactivacion",	9,f->getSalidaActivacion	()	);
+			assert_eq ("Nombre",			true,
+				XMLString::equals (nombre,f->getNombreElemento()));
+		}
+		void pruebaRelacion ()
+		{
+			vector <Relacion*> v;
+			v=p->extraerRelaciones();
+			/*	El vector no puede estar vacío. En el fichero de test hay
+				exactamente una relacion*/
+			assert_eq ("Vector de relaciones", false, v.empty());
+		}
 	public:
 		pruebaParser() : suite ("Prueba de clase parser")
 		{
@@ -153,6 +170,10 @@ namespace {
 				(this, "Pulsador1", &pruebaParser::pruebaPulsador));
 			add ("Comprobacion de Electroiman", testcase
 				(this, "Electroiman", &pruebaParser::pruebaElectroiman));
+			add ("Comprobacion de FotoSensor", testcase
+				(this, "FotoSensor1", &pruebaParser::pruebaFotoSensor));
+			add ("Comprobacion de la extraccion de relaciones", testcase
+				(this, "Relacion 1", &pruebaParser::pruebaRelacion));
 			suite::main().add ("pruebaFicheroTest", this);
 				
 		}

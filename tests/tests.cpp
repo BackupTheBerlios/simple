@@ -2,9 +2,7 @@
 #include <iostream>
 #include <string>
 
-#include "elementos.h"
 #include "parser.h"
-#include "elementos.h"
 #include <unit++.h>	
 
 using namespace std;
@@ -103,7 +101,39 @@ namespace {
 			assert_eq ("Nombre",			true,
 				XMLString::equals (nombre,r->getNombreElemento()));
 		}
+		void pruebaPulsador()
+		{
+			float 	entradaInicial, 	salidaInicial;
+			float 	entradaFinal,		salidaFinal;
+			XMLCh*	nombre;
+			
+			Pulsador* p=(Pulsador*) v.at (0);
+			
+			nombre=XMLString::transcode ("Pulsador1");
+			
+			assert_eq ("Entradareposo",		0,p->getEntradaReposo		()	);
+			assert_eq ("Salidareposo",		0,p->getSalidaReposo		()	);
+			assert_eq ("Entradaactivacion",	1,p->getEntradaActivacion	()	);
+			assert_eq ("Salidaactivacion",	9,p->getSalidaActivacion	()	);
+			assert_eq ("Nombre",			true,
+				XMLString::equals (nombre,p->getNombreElemento()));
+		}
 		
+		void pruebaElectroiman()
+		{
+			XMLCh*	nombre;
+			
+			Electroiman* e=(Electroiman*) v.at (4);
+			
+			nombre=XMLString::transcode ("electroiman2");
+			
+			assert_eq ("Entradareposo",		9,e->getEntradaReposo		()	);
+			assert_eq ("Salidareposo",		1,e->getSalidaReposo		()	);
+			assert_eq ("Entradaactivacion",	0,e->getEntradaActivacion	()	);
+			assert_eq ("Salidaactivacion",	0,e->getSalidaActivacion	()	);
+			assert_eq ("Nombre",			true,
+				XMLString::equals (nombre,e->getNombreElemento()));
+		}
 	public:
 		pruebaParser() : suite ("Prueba de clase parser")
 		{
@@ -119,6 +149,10 @@ namespace {
 				(this, "Lampara1", &pruebaParser::pruebaLampara));
 			add ("Comprobacion de reed2", testcase
 				(this, "Reed2", &pruebaParser::pruebaReed));
+			add ("Comprobacion de Pulsador1", testcase
+				(this, "Pulsador1", &pruebaParser::pruebaPulsador));
+			add ("Comprobacion de Electroiman", testcase
+				(this, "Electroiman", &pruebaParser::pruebaElectroiman));
 			suite::main().add ("pruebaFicheroTest", this);
 				
 		}

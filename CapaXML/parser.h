@@ -33,12 +33,12 @@ class Parser {
 		~Parser();
 		/*Este metodo nos comprueba si un determinado fichero en XML
 		 *es válido o no*/
-		bool esValido (const char* fichero);
+		bool 				esValido 			(const char* fichero);
 		
 		/*Este metodo extrae del fichero XML los elementos
 		 *del sistema que queremos simular*/
-		vector <Elemento*> extraerElementos ();
-		
+		vector <Elemento*> 	extraerElementos 	();
+		vector <Relacion*> 	extraerRelaciones	();
 	private:
 		XercesDOMParser* 	elParser;
 		DOMBuilder* 		parser;

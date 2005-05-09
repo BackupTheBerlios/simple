@@ -43,7 +43,7 @@ void Elemento::inicializar ()
 	nombreElemento=NULL;
 	for (int i=0;i<MAX_SUSCRIPTORES;i++)
 		listaSuscriptores[i]=NULL;
-	totalSuscriptores=-1;
+	totalSuscriptores=0;
 	nombreElemento=NULL;
 }
 
@@ -206,8 +206,8 @@ void Pulsador::construir (DOMNode *nodo) {
 FotoSensor::FotoSensor()
 {
 	inicializar();
-	entradaInicial	=	entradaFinal	=	VALOR_INICIAL;
-	salidaInicial	=	salidaFinal		=	VALOR_INICIAL;
+	entradaReposo		=	entradaActivacion	=	VALOR_INICIAL;
+	salidaReposo		=	salidaActivacion	=	VALOR_INICIAL;
 }
 
 void FotoSensor::construir (DOMNode* nodo) {
@@ -215,7 +215,7 @@ void FotoSensor::construir (DOMNode* nodo) {
     DOMNode *propiedad ;
     const XMLCh *nombre_propiedad ;
     const XMLCh *valor_propiedad ;
-     
+    XMLCh* elementoXMLabuscar;
     /*Recorremos las propiedades del Reed*/
     while (hijo!=NULL)
      {
@@ -223,11 +223,56 @@ void FotoSensor::construir (DOMNode* nodo) {
               /*Recogemos datos...*/
               nombre_propiedad=hijo->getNodeName()  ;
               valor_propiedad= hijo->getTextContent();
+              elementoXMLabuscar=XMLString::transcode ("nombreelemento");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					nombreElemento=XMLString::replicate (valor_propiedad);
+					XMLString::removeWS(nombreElemento);
+			  }
+              
+              elementoXMLabuscar=XMLString::transcode ("entradaactivacion");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					entradaActivacion=XMLString::parseInt (valor_propiedad);
+			  }
+			  
+			  elementoXMLabuscar=XMLString::transcode ("entradareposo");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					entradaReposo=XMLString::parseInt (valor_propiedad);
+			  }
+			  
+			  elementoXMLabuscar=XMLString::transcode ("salidareposo");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					salidaReposo=XMLString::parseInt (valor_propiedad);
+			  }
+			  
+			  elementoXMLabuscar=XMLString::transcode ("salidaactivacion");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					salidaActivacion=XMLString::parseInt (valor_propiedad);
+			  }
            }
            
            /*Se pasa al siguiente nodo XML hermano*/
            hijo=hijo->getNextSibling();
      }                   
+}
+
+float FotoSensor::getEntradaReposo()
+{
+	return entradaReposo;
+}
+
+float FotoSensor::getSalidaReposo()
+{
+	return salidaReposo;
+}
+
+float FotoSensor::getEntradaActivacion()
+{
+	return entradaActivacion;
+}
+
+float FotoSensor::getSalidaActivacion()
+{
+	return salidaActivacion;
 }
 
 Electroiman::Electroiman (){
@@ -479,4 +524,53 @@ XMLCh* Motor::getSalidaReposo() const
 	return salidaReposo;
 }
 ElementoCompuesto::ElementoCompuesto (DOMNode* nodo) {
+}
+
+/*	Desarrollamos las relaciones */
+Relacion::Relacion()
+{
+	nombrePrimario		=	NULL;
+	nombreSecundario	=	NULL;
+}
+void Relacion::construir (DOMNode* nodo)
+{
+	DOMNode *hijo=nodo->getFirstChild () ;
+    DOMNode *propiedad ;
+    const XMLCh *nombre_propiedad ;
+    const XMLCh *valor_propiedad ;
+    const XMLCh* elementoXMLabuscar;
+     
+    /*Recorremos las propiedades del Reed...*/
+    while (hijo!=NULL)
+     {
+           if (hijo->getNodeType()==DOMNode::ELEMENT_NODE){
+              /*Recogemos datos...*/
+              nombre_propiedad= hijo->getNodeName()  ;
+              valor_propiedad=  hijo->getTextContent() ;
+              elementoXMLabuscar=XMLString::transcode ("primario");
+              /*... y aqui e extraen los valores almacenados en el XML*/
+			  if (  iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					nombrePrimario= XMLString::replicate (valor_propiedad);
+					XMLString::removeWS(nombrePrimario);
+			  }
+			  
+			  elementoXMLabuscar=XMLString::transcode ("secundario");
+			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
+					nombreSecundario=XMLString::replicate (valor_propiedad);
+					XMLString::removeWS(nombreSecundario);
+			  }
+			}
+			
+           /*Se pasa al siguiente nodo XML hermano*/
+           hijo=hijo->getNextSibling();
+     }
+}
+XMLCh*	Relacion::getNombrePrimario()
+{
+	return nombrePrimario;
+}
+
+XMLCh*	Relacion::getNombreSecundario()
+{
+	return nombreSecundario;
 }

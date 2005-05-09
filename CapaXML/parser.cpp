@@ -126,6 +126,7 @@ vector <Elemento*> Parser::extraerElementos ()
 					e->construir (elemento_siguiente);
 					vector_elementos.push_back(e);
 				}
+				
 			}
 			
 			elemento_siguiente=elemento_siguiente->getNextSibling();
@@ -133,6 +134,44 @@ vector <Elemento*> Parser::extraerElementos ()
 		return vector_elementos;
 }
 
+
+vector <Relacion*> Parser::extraerRelaciones ()
+{
+	vector<Relacion*> vector_relaciones;
+	/*	Cuando se llama a este método ya se dispone de un objeto DOMDocument
+		almacenado en "documento", por lo que podemos acceder a los elementos
+		XML almacenados*/
+		
+		/*Obtenemos el nodo raiz que contiene a todos los demas*/
+		DOMNode*	raiz; 
+		raiz=(DOMNode*) documento->getDocumentElement();
+		
+		/*Vamos al primer hijo...*/
+		DOMNode*	primer_elemento;
+		primer_elemento= raiz->getFirstChild();
+		
+		/*...y recorremos todos los hijos*/
+		DOMNode*	elemento_siguiente=primer_elemento;
+		while (elemento_siguiente!=NULL)
+		{
+			if (elemento_siguiente->getNodeType()==DOMNode::ELEMENT_NODE)
+			{
+				char* nombre=XMLString::transcode
+					(elemento_siguiente->getNodeName());
+				
+				if (XMLString::equals (nombre, "relacion"))
+				{
+					Relacion* r=new Relacion();
+					r->construir (elemento_siguiente);
+					vector_relaciones.push_back(r);
+				}
+				
+			}
+			
+			elemento_siguiente=elemento_siguiente->getNextSibling();
+		}
+		return vector_relaciones;
+}
 
 Parser::~Parser()
 {

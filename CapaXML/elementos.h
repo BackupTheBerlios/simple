@@ -89,10 +89,14 @@ class Pulsador: public Elemento {
 class FotoSensor: public Elemento {
 	public:
 		FotoSensor ();
-		void construir (DOMNode* nodo);
+		void 	construir (DOMNode* nodo);
+		float	getEntradaReposo		();
+        float 	getSalidaReposo			();
+        float	getEntradaActivacion	();
+        float	getSalidaActivacion		();
 	private:
-		float entradaInicial, salidaInicial ;
-		float entradaFinal,    salidaFinal   ;	
+		float entradaReposo, 		salidaReposo 		;
+        float entradaActivacion, 	salidaActivacion	;
 };
 
 
@@ -150,4 +154,20 @@ class ElementoCompuesto: public Elemento {
 		ElementoCompuesto (DOMNode* nodo) ;
 };
 
+
+/*	Esta clase representa la relacion entre un elemento llamado
+	primario y otro llamado secundario. La salida del primario
+	irá conectada a la entrada del secundario, haciendo que el
+	secundario sea un observador del primario (es decir, que el
+	secundario estará en la lista de suscripciones del primario) */
+class Relacion {
+	/*Nombres de los elementos que la componen*/
+	XMLCh*		nombrePrimario;
+	XMLCh*		nombreSecundario;
+	public:
+				Relacion			();
+		void	construir 			(DOMNode*	nodo);
+		XMLCh*	getNombrePrimario	();
+		XMLCh*	getNombreSecundario	();	
+};
 #endif

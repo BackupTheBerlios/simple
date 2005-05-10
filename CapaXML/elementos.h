@@ -11,6 +11,7 @@
 #include <xercesc/sax/HandlerBase.hpp>
 #include <xercesc/util/XMLString.hpp>
 #include <xercesc/util/PlatformUtils.hpp>
+#include <vector>
 
 #ifdef XERCES_CPP_NAMESPACE_USE
 XERCES_CPP_NAMESPACE_USE
@@ -148,10 +149,13 @@ class Motor: public Elemento {
 		float 	entradaReposo	;
 		XMLCh*	salidaReposo  	;
 };
+class Elemento;
 
-class ElementoCompuesto: public Elemento {
+class Sistema: public Elemento {
 	public:
-		ElementoCompuesto (DOMNode* nodo) ;
+		int		insertarComponente (Elemento* componente);
+		Sistema 	(DOMNode* nodo) ;
+	private:
 };
 
 

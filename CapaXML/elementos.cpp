@@ -523,9 +523,15 @@ XMLCh* Motor::getSalidaReposo() const
 {
 	return salidaReposo;
 }
-ElementoCompuesto::ElementoCompuesto (DOMNode* nodo) {
+
+/*	Definicion de un sistema */
+Sistema::Sistema (DOMNode* nodo) 
+{
 }
 
+int Sistema::insertarComponente(Elemento* componente)
+{
+}
 /*	Desarrollamos las relaciones */
 Relacion::Relacion()
 {

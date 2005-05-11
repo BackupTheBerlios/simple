@@ -149,13 +149,26 @@ class Motor: public Elemento {
 		float 	entradaReposo	;
 		XMLCh*	salidaReposo  	;
 };
-class Elemento;
+
+class Relacion; /*Relacion está mas adelante*/
+
+/*	El número máximo de componentes o relaciones es este*/
+#define MAX_TAM_VECTOR 128
 
 class Sistema: public Elemento {
 	public:
-		int		insertarComponente (Elemento* componente);
-		Sistema 	(DOMNode* nodo) ;
+		Sistema 	() ;
+		void		construir 			(DOMNode* nodo);
+		int 		anadirRelacion 		(Relacion* r);
+		int 		anadirComponente	(Elemento* e);
+		int			getComponentes 		(Elemento* vectorElementos[]);
+		int			getRelaciones		(Relacion* vectorRelaciones[]);	
+		int			getNumComponentes	();
+		int			getNumRelaciones	();
 	private:
+		Elemento* 	listaComponentes[MAX_TAM_VECTOR];
+		Relacion*	listaRelaciones [MAX_TAM_VECTOR];
+		int			numComponentes, numRelaciones;
 };
 
 

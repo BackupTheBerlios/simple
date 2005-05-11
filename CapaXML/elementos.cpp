@@ -46,7 +46,13 @@ void Elemento::inicializar ()
 	totalSuscriptores=0;
 	nombreElemento=NULL;
 }
+void Elemento::anadirSuscriptor (Elemento* e)
+{
+}
 
+void Elemento::eliminarSuscriptor (Elemento* e)
+{
+}
 XMLCh* Elemento::getNombreElemento ()
 {
 	return nombreElemento;
@@ -457,6 +463,7 @@ void Motor::construir (DOMNode* nodo) {
               /*... y aqui e extraen los valores almacenados en el XML*/
 			  if (  iguales (nombre_propiedad, elementoXMLabuscar ) ){
 					nombreElemento= XMLString::replicate (valor_propiedad);
+					XMLString::removeWS(nombreElemento);
 			  }
 			  
 			  elementoXMLabuscar=XMLString::transcode ("entradagiro1");
@@ -525,12 +532,110 @@ XMLCh* Motor::getSalidaReposo() const
 }
 
 /*	Definicion de un sistema */
-Sistema::Sistema (DOMNode* nodo) 
+Sistema::Sistema () 
+{
+	for (int i=0;i<MAX_TAM_VECTOR;i++)
+	{
+		listaComponentes[i]=NULL;
+		listaRelaciones[i]=NULL;
+	}
+	numComponentes=numRelaciones=0;
+}
+
+/*	Si se puede insertar un componente, se hace y se
+	devuelve un 0, y si no se puede añadir se devuelve -1*/
+int Sistema::anadirRelacion(Relacion* relacion)
+{
+	Elemento* 	primario;
+	Elemento* 	secundario;
+	XMLCh*		nombrePrimario;
+	XMLCh*		nombreSecundario;
+	XMLCh*		nombreElementoActual;
+	
+	primario=secundario=NULL;
+	nombrePrimario=nombreSecundario=nombreElementoActual=NULL;
+	if (numRelaciones<MAX_TAM_VECTOR)
+	{
+		/*	Despues de insertar la relacion en el sistema
+			tenemos que hacer que el elemento secundario
+			de la relacion sea un observador del primario*/
+		
+		/*	Para ello buscamos los elementos...*/
+		nombrePrimario	=relacion->getNombrePrimario();
+		nombreSecundario=relacion->getNombreSecundario();
+		for (int i=0;i<numComponentes;i++)
+		{
+			nombreElementoActual=listaComponentes[i]->getNombreElemento();
+			if (XMLString::equals(nombrePrimario, nombreElementoActual))
+			{
+				cout << "Encontrado el primario" << endl;
+				primario=listaComponentes[i];
+			}
+			
+			if (XMLString::equals(nombreSecundario, nombreElementoActual))
+			{
+				cout << "encontrado el secundario" << endl;
+				secundario=listaComponentes[i];
+			}
+		}
+		/*	... y si los dos elementos existen se "encadenan"*/
+		if ( (primario!=NULL) && (secundario!=NULL) )
+		{
+			cout << "Anadiendo suscriptor" << endl;
+			primario->anadirSuscriptor(secundario);
+			cout << "Suscriptor anadido"<< endl;
+			listaRelaciones[numRelaciones++]=relacion;
+			cout << "Relacion anadida" << endl;
+			return 0;
+		}
+	} /*Fin del if global*/
+	
+	/*Si algo ha fallado...*/
+	return -1;
+}
+
+int Sistema::anadirComponente(Elemento* componente)
+{
+	if (numComponentes<MAX_TAM_VECTOR)
+	{
+		listaComponentes[numComponentes++]=componente;
+		char* nombre=XMLString::transcode (componente->getNombreElemento());
+		cout << "Anadiendo " << nombre << endl;
+		XMLString::release (&nombre);
+		return 0;
+	}
+	return -1;
+}
+void Sistema::construir (DOMNode* nodo)
 {
 }
 
-int Sistema::insertarComponente(Elemento* componente)
+int	Sistema::getComponentes (Elemento* vectorElementos[])
 {
+	for (int i=0;i<numComponentes;i++)
+	{
+		vectorElementos[i]=listaComponentes[i];
+	}
+	return numComponentes;
+}
+
+int Sistema::getRelaciones (Relacion* vectorRelaciones[])
+{
+	for (int i=0;i<numRelaciones;i++)
+	{
+		vectorRelaciones[i]=listaRelaciones[i];
+	}
+	return numRelaciones;
+}
+
+int Sistema::getNumComponentes()
+{
+	return numComponentes;
+}
+
+int Sistema::getNumRelaciones()
+{
+	return numRelaciones;
 }
 /*	Desarrollamos las relaciones */
 Relacion::Relacion()

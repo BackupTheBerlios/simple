@@ -15,11 +15,13 @@ namespace {
 	{
 		Parser* p;
 		vector <Elemento*> v;
-		
+		vector <Relacion*> r;
+		Sistema* s;
 		//En general se tienen que hacer las pruebas en este orden
 		void pruebaFicheroTest()
 		{
 			p=new Parser();
+			s=new Sistema();
 			//El fichero test.xml está "diseñado" para ser valido
 			//Cualquier error de parser tiene que saltar aqui
 			assert_eq ("Fichero de test", true, p->esValido("test.xml") );
@@ -29,6 +31,7 @@ namespace {
 		{
 			v=p->extraerElementos();
 			assert_eq ("Vector vacio?", false, v.empty() );
+			assert_eq ("Tamano 6?", 6, v.size() );
 		}
 		void pruebaMotor()
 		{
@@ -145,11 +148,45 @@ namespace {
 		}
 		void pruebaRelacion ()
 		{
-			vector <Relacion*> v;
-			v=p->extraerRelaciones();
+			r=p->extraerRelaciones();
 			/*	El vector no puede estar vacío. En el fichero de test hay
 				exactamente una relacion*/
-			assert_eq ("Vector de relaciones", false, v.empty());
+			assert_eq ("Vector de relaciones", false, r.empty());
+		}
+		void pruebaInsertaRelaciones()
+		{
+			assert_eq ("Relaciones inexistentes", 1, r.size());
+			for (int i=0;i<r.size();i++)
+			{
+				assert_eq ("Insercion de r", 
+					0, s->anadirRelacion( (Relacion*) r.at(i)) );
+			}
+		}
+		
+		void pruebaInsertaComponentes()
+		{
+			for (int i=0;i<6;i++)
+			{
+				assert_eq ("Insercion de v",
+					0, s->anadirComponente ( (Elemento*) v.at(i) ));
+			}			
+		}
+		void pruebaListaComponentes()
+		{
+			Elemento* vectorComponentes[20];
+			int numComponentes;
+			cout << "Obteniendo componentes" << endl;
+			numComponentes=s->getComponentes(vectorComponentes);
+			assert_eq ("numComponentes", 6, numComponentes);
+		}
+		
+		void pruebaListaRelaciones()
+		{
+			Relacion* vectorRelaciones[40];
+			int numRelaciones;
+			cout << "Obteniendo relaciones" << endl;
+			numRelaciones=s->getRelaciones (vectorRelaciones);
+			assert_eq ("numRelaciones", 1, numRelaciones);
 		}
 	public:
 		pruebaParser() : suite ("Prueba de clase parser")
@@ -174,6 +211,14 @@ namespace {
 				(this, "FotoSensor1", &pruebaParser::pruebaFotoSensor));
 			add ("Comprobacion de la extraccion de relaciones", testcase
 				(this, "Relacion 1", &pruebaParser::pruebaRelacion));
+			add ("Prueba insercion componentes", testcase
+				(this, "Vector componentes", &pruebaParser::pruebaInsertaComponentes));
+			add ("Prueba insercion relaciones", testcase
+				(this, "Vector relaciones", &pruebaParser::pruebaInsertaRelaciones));
+			add ("getListaComponentes", testcase
+				(this, "Vector componentes", &pruebaParser::pruebaListaComponentes));
+			add ("getListaRelaciones", testcase
+				(this, "listaRelaciones", &pruebaParser::pruebaListaRelaciones));
 			suite::main().add ("pruebaFicheroTest", this);
 				
 		}

@@ -76,8 +76,8 @@
 	</motor>
 	
 	<relacion>
-	<primario>Sensor1</primario>
-	<secundario>Motor1</secundario>
+        <primario>Pulsador1</primario>
+        <secundario>lampara3</secundario>
 	</relacion>
 	
 	

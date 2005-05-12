@@ -188,6 +188,36 @@ namespace {
 			numRelaciones=s->getRelaciones (vectorRelaciones);
 			assert_eq ("numRelaciones", 1, numRelaciones);
 		}
+		
+		void pruebaRefElemento ()
+		{
+			Elemento *e,*f;
+			bool esNulo;
+			e=s->getRefElemento("asdasdasd");
+			f=NULL;
+			assert_eq ("getRefElemento NULL", f,e );
+			
+			e=s->getRefElemento ("Pulsador1");
+			esNulo=(e==NULL);
+			assert_eq ("getRefElemento valido", false, esNulo );
+		}
+		void pruebaRelacionConNotificacion()
+		{
+			Pulsador *p;
+			Lampara *l;
+			p=(Pulsador*) s->getRefElemento("Pulsador1");
+			l=(Lampara*)  s->getRefElemento("lampara3");
+			
+			assert_eq ("Pulsador no nulo", 	false, 	(p==NULL) );
+			assert_eq ("Lampara no nula", 	false, 	(l==NULL) );
+			
+			/*	Al activar el pulsador se APAGA la lampara
+				Así es como está definido en el fichero*/
+			p->setEntrada(1);
+			
+			assert_eq ("Salida de la lampara", 0, l->getSalida() );
+			
+		}
 	public:
 		pruebaParser() : suite ("Prueba de clase parser")
 		{
@@ -219,6 +249,10 @@ namespace {
 				(this, "Vector componentes", &pruebaParser::pruebaListaComponentes));
 			add ("getListaRelaciones", testcase
 				(this, "listaRelaciones", &pruebaParser::pruebaListaRelaciones));
+			add ("getRefElemento", testcase
+				(this, "Referencias a elementos", &pruebaParser::pruebaRefElemento));	
+			add ("RelacionConNotificacion", testcase
+				(this, "Notificador pulsador->lampara", &pruebaParser::pruebaRelacionConNotificacion));	
 			suite::main().add ("pruebaFicheroTest", this);
 				
 		}

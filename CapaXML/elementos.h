@@ -41,17 +41,19 @@ XERCES_CPP_NAMESPACE_USE
 class Elemento {
 	public:
 		XMLCh*	getNombreElemento	()				;
-		void 	anadirSuscriptor   (Elemento* e)  	;
-		void 	eliminarSuscriptor (Elemento *e)  	;
+		void 	anadirSuscriptor   	(Elemento* e)  	;
+		void 	eliminarSuscriptor 	(Elemento *e)  	;
 		void 	notificar           ()             	;	
+        float 	getSalida			();
 		//Este metodo puede re-implementarse (y de hecho se hará)
 		//en las clases hija
 		virtual void construir 	 (DOMNode *nodo)=0;
+		virtual	void setEntrada	 (float entrada)	;
 	protected:
-		void 	inicializar();
-		
+		void 		inicializar();
+		float		entradaActual,	salidaActual;		
 		XMLCh* 		nombreElemento;
-		Elemento* 	listaSuscriptores [MAX_SUSCRIPTORES];
+		Elemento* 	listaSuscriptores[MAX_SUSCRIPTORES];
 		int 		totalSuscriptores;
 };
 
@@ -82,6 +84,7 @@ class Pulsador: public Elemento {
              float getSalidaReposo		();
              float getEntradaActivacion	();
              float getSalidaActivacion	();
+             void  setEntrada(float entrada);
       private:
               float entradaReposo, 		salidaReposo 		;
               float entradaActivacion, 	salidaActivacion	;
@@ -165,6 +168,12 @@ class Sistema: public Elemento {
 		int			getRelaciones		(Relacion* vectorRelaciones[]);	
 		int			getNumComponentes	();
 		int			getNumRelaciones	();
+		
+		/*	Estas funciones nos devuelven una referencia al
+			elemento cuyo nombre sea uno de los parámetros
+			o NULL en caso contrario */
+		Elemento*	getRefElemento		(char* nombre);
+		Elemento*	getRefElemento		(XMLCh* nombre);
 	private:
 		Elemento* 	listaComponentes[MAX_TAM_VECTOR];
 		Relacion*	listaRelaciones [MAX_TAM_VECTOR];

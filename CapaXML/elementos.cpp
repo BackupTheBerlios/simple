@@ -41,21 +41,61 @@ bool iguales (const XMLCh* cad1, const XMLCh* cad2)
 void Elemento::inicializar ()
 {
 	nombreElemento=NULL;
+	
 	for (int i=0;i<MAX_SUSCRIPTORES;i++)
 		listaSuscriptores[i]=NULL;
 	totalSuscriptores=0;
 	nombreElemento=NULL;
+	entradaActual=salidaActual=0;
 }
 void Elemento::anadirSuscriptor (Elemento* e)
 {
+	listaSuscriptores[totalSuscriptores++]=e;
 }
 
 void Elemento::eliminarSuscriptor (Elemento* e)
 {
+	int posicionParaEliminar=-1;
+	
+	/*	Buscamos la posicion del elemento a eliminar*/
+	for (int i=0;i<totalSuscriptores;i++)
+	{
+		if (listaSuscriptores[i]==e) posicionParaEliminar=i;
+	}
+	
+	/*	Si hemos encontrado el elemento que se desea eliminar
+		se desplaza todo el resto de la lista hacia la izquiera
+		borrando así el elemento concreto */
+	if (posicionParaEliminar!=-1)
+	{
+		for (int i=posicionParaEliminar+1;i<totalSuscriptores;i++)
+		{
+			listaSuscriptores[i]=listaSuscriptores[i+1];
+		}
+	}
 }
 XMLCh* Elemento::getNombreElemento ()
 {
 	return nombreElemento;
+}
+void Elemento::notificar()
+{
+	for (int i=0;i<totalSuscriptores;i++)
+	{
+		listaSuscriptores[i]->setEntrada(salidaActual);
+	}
+}
+
+/*	Cuando alguien modifica la entrada hay que tomar nota de 
+	la entrada actual. Si la entrada corresponde a la entrada
+	de activacion hay que notificar a todos los observadores*/
+void Elemento::setEntrada(float entrada)
+{
+	entradaActual=entrada;
+}
+float Elemento::getSalida()
+{
+	return salidaActual;
 }
 //El constructor solo inicializa*/
 Reed::Reed ()
@@ -207,8 +247,19 @@ void Pulsador::construir (DOMNode *nodo) {
            hijo=hijo->getNextSibling();
      }                   
 }
-
-
+void Pulsador::setEntrada(float entrada)
+{
+	Elemento::setEntrada(entrada);
+	if (entradaActual==entradaReposo)
+	{
+		notificar();
+	}
+	if (entradaActual==entradaActivacion)
+	{
+		notificar();
+	}
+}
+/*Definicion de la implementacion de FotoSensor*/
 FotoSensor::FotoSensor()
 {
 	inicializar();
@@ -636,6 +687,29 @@ int Sistema::getNumComponentes()
 int Sistema::getNumRelaciones()
 {
 	return numRelaciones;
+}
+
+Elemento* Sistema::getRefElemento (XMLCh* nombre)
+{
+	for (int i=0;i<numComponentes;i++)
+	{
+		if (XMLString::equals 
+			(nombre, listaComponentes[i]->getNombreElemento()) )
+		{
+			return listaComponentes[i];
+		} 
+	} //Fin del for
+	
+	/*Si el elemento no ha aparecido...*/
+	return NULL;
+}
+
+
+Elemento* Sistema::getRefElemento (char* nombre)
+{
+	XMLCh* nombreAux;
+	nombreAux=XMLString::transcode (nombre);
+	return (getRefElemento(nombreAux));
 }
 /*	Desarrollamos las relaciones */
 Relacion::Relacion()

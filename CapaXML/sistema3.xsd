@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+
+	<xs:simpleType name="tiponombre">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z]([a-zA-Z0-9]{0,19})"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="tipovoltaje">
+		<xs:restriction base="xs:integer">
+		<xs:minInclusive value="-9"/>
+		<xs:maxInclusive value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="tipovoltajepositivo">
+		<xs:restriction base="xs:integer">
+		<xs:minInclusive value="1"/>
+		<xs:maxInclusive value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="tipovoltajenegativo">
+		<xs:restriction base="xs:integer">
+		<xs:minInclusive value="-9"/>
+		<xs:maxInclusive value="-1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="tipocolor">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9a-fA-F]{6}"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction> 
+	</xs:simpleType>
+	
+	
+	<xs:simpleType name="tipomovimientomotor">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ccw"/>
+			<xs:enumeration value="cw"/>
+			<xs:enumeration value="stop"/>
+			<xs:enumeration value="sh"/>
+			<xs:enumeration value="sa"/>
+			<xs:enumeration value="parar"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="tipopresion">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="tipomagnetismo">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="tipoluz">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="tipofrecuencia">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="30000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="tipotiempo">
+		<xs:restriction base="xs:integer">
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+	<xs:group name="gruposensorpulsador">
+		<xs:sequence>
+			<xs:element name="entradareposo" type="tipopresion"/>
+			<xs:element name="salidareposo" type="tipovoltaje"/>
+			<xs:element name="entradaactivacion" type="tipopresion"/>
+			<xs:element name="salidaactivacion" type="tipovoltaje"/>
+		</xs:sequence>
+	</xs:group>
+	
+	
+	<xs:complexType name="tiposensorpulsador">
+		<xs:sequence>
+			<xs:element name="nombreelemento"/>
+			<xs:group ref="gruposensorpulsador"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:group name="gruposensormagnetico">
+		<xs:sequence>
+			<xs:element name="entradareposo" type="tipomagnetismo"/>
+			<xs:element name="salidareposo" type="tipovoltaje"/>
+			<xs:element name="entradaactivacion" type="tipomagnetismo"/>
+			<xs:element name="salidaactivacion" type="tipovoltaje"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="tiposensormagnetico">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="gruposensormagnetico"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:group name="grupotemporizador">
+		<xs:sequence>
+			<xs:element name="voltajeinicial" type="tipovoltaje"/>
+			<xs:element name="voltajeactivacion" type="tipovoltaje"/>
+			<xs:element name="tiempo" type="tipotiempo"/>
+			<xs:element name="voltajesalidainicial" type="tipovoltaje"/>
+			<xs:element name="voltajesalidaentemporizacion" type="tipovoltaje"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="tipotemporizador">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupotemporizador"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:group name="grupocontador">
+		<xs:sequence>
+			<xs:element name="voltajeinicial" type="tipovoltaje"/>
+			<xs:element name="voltajefinal" type="tipovoltaje"/>
+			<xs:element name="cuentamaxima" type="xs:positiveInteger"/>
+			<xs:element name="voltajeinicialreset" type="tipovoltaje"/>
+			<xs:element name="voltajefinalreset" type="tipovoltaje"/>
+			<xs:element name="voltajeinicialsalida" type="tipovoltaje"/>
+			<xs:element name="voltajefinalsalida" type="tipovoltaje"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="tipocontador">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupocontador"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:group name="grupofotosensor">
+		<xs:sequence>
+			<xs:element name="entradareposo" type="tipoluz"/>
+			<xs:element name="salidareposo" type="tipovoltaje"/>
+			<xs:element name="entradaactivacion" type="tipoluz"/>
+			<xs:element name="salidaactivacion" type="tipovoltaje"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="tipofotosensor">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupofotosensor"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	
+	
+	
+	<xs:group name="grupolampara">
+		<xs:sequence>
+			<xs:element name="color" type="tipocolor"/>
+			<xs:element name="entradareposo" type="tipovoltaje"/>
+			<xs:element name="salidareposo" type="tipoluz"/>
+			<xs:element name="entradaactivacion" type="tipovoltaje"/>
+			<xs:element name="salidaactivacion" type="tipoluz"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="tipolampara">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupolampara"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:group name="grupoelectroiman">
+		<xs:sequence>
+			<xs:element name="entradareposo" type="tipovoltaje"/>
+			<xs:element name="salidareposo" type="tipomagnetismo"/>
+			<xs:element name="entradaactivacion" type="tipovoltaje"/>
+			<xs:element name="salidaactivacion" type="tipomagnetismo"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="tipoelectroiman">
+	<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupoelectroiman"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:group name="grupozumbador">
+		<xs:sequence>
+			<xs:element name="entradareposo" type="tipovoltaje"/>
+			<xs:element name="salidareposo" type="tipofrecuencia"/>
+			<xs:element name="entradaactivacion" type="tipovoltaje"/>
+			<xs:element name="salidaactivacion" type="tipofrecuencia"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="tipozumbador">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupozumbador"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:group name="grupomotor">
+		<xs:sequence>
+			<xs:element name="entradagiro1" type="tipovoltajepositivo"/>
+			<xs:element name="salidagiro1" type="tipomovimientomotor"/>
+			<xs:element name="entradagiro2" type="tipovoltajenegativo"/>
+			<xs:element name="salidagiro2" type="tipomovimientomotor"/>
+			<xs:element name="entradareposo" type="tipovoltaje"/>
+			<xs:element name="salidareposo" type="tipomovimientomotor"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="tipomotor">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupomotor"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	
+	<xs:complexType name="tipovector">
+		<xs:sequence>
+			<xs:element name="numelementos" type="xs:positiveInteger"/>
+			<xs:choice>
+				<xs:element name="pulsador" type="tiposensorpulsador"/>
+				<xs:element name="reed" type="tiposensormagnetico"/>
+				<xs:element name="fotosensor" type="tipofotosensor"/>
+				<xs:element name="lampara" type="tipolampara"/>
+				<xs:element name="electroiman" type="tipoelectroiman"/>
+				<xs:element name="motor" type="tipomotor"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="tiporelacion">
+		<xs:sequence>
+			<xs:element name="primario" type="tiponombre"/>
+			<xs:element name="secundario" type="tiponombre"/>
+		</xs:sequence>
+	</xs:complexType>
+		
+	
+	<xs:group name="elemento">
+		<xs:choice>
+			<xs:element name="pulsador" type="tiposensorpulsador"/>
+			<xs:element name="reed" type="tiposensormagnetico"/>
+			<xs:element name="fotosensor" type="tipofotosensor"/>
+			<xs:element name="lampara" type="tipolampara"/>
+			<xs:element name="electroiman" type="tipoelectroiman"/>
+			<xs:element name="motor" type="tipomotor"/>
+			<xs:element name="relacion" type="tiporelacion"/>
+			<xs:element name="vector" type="tipovector"/>
+			<xs:element name="temporizador" type="tipotemporizador"/>
+			<xs:element name="contador" type="tipocontador"/>
+			
+			
+		</xs:choice>
+	</xs:group>
+	
+	
+	<xs:complexType name="tiposistema">
+		<xs:group ref="elemento" minOccurs="1" maxOccurs="unbounded"/>
+	</xs:complexType>
+	
+	
+	<xs:element name="sistema" type="tiposistema"/>
+</xs:schema>

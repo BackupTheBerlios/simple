@@ -50,7 +50,8 @@ class Elemento {
 		virtual void construir 	 (DOMNode *nodo)=0;
 		virtual	void setEntrada	 (float entrada)	;
 	protected:
-		void 		inicializar();
+		void 		inicializar	();
+		bool		iguales 	(const XMLCh* cad1, const XMLCh* cad2);
 		float		entradaActual,	salidaActual;		
 		XMLCh* 		nombreElemento;
 		Elemento* 	listaSuscriptores[MAX_SUSCRIPTORES];
@@ -61,124 +62,11 @@ class Elemento {
 /*Los elementos concretos se construyen a partir de un nodo DOM,
   es decir, directamente de un "trozo" en XML*/
   
-class Reed : public Elemento {
-       public:
-              Reed();
-              void 	construir (DOMNode* nodo);
-              float	getEntradaReposo		();
-              float getSalidaReposo			();
-              float	getEntradaActivacion	();
-              float	getSalidaActivacion		();
-       private:
-               /*Para un cierto magnetismo de entrada hay un voltaje
-                *de salida*/
-               float entradaReposo,			salidaReposo 	;
-			   float entradaActivacion, 	salidaActivacion;
-};
-
-class Pulsador: public Elemento {
-      public:
-             Pulsador ();
-             void construir (DOMNode* nodo);
-             float getEntradaReposo 	();
-             float getSalidaReposo		();
-             float getEntradaActivacion	();
-             float getSalidaActivacion	();
-             void  setEntrada(float entrada);
-      private:
-              float entradaReposo, 		salidaReposo 		;
-              float entradaActivacion, 	salidaActivacion	;
-};
-
-class FotoSensor: public Elemento {
-	public:
-		FotoSensor ();
-		void 	construir (DOMNode* nodo);
-		float	getEntradaReposo		();
-        float 	getSalidaReposo			();
-        float	getEntradaActivacion	();
-        float	getSalidaActivacion		();
-	private:
-		float entradaReposo, 		salidaReposo 		;
-        float entradaActivacion, 	salidaActivacion	;
-};
 
 
-class Lampara: public Elemento {
-	public:
-		Lampara ();
-		void 	construir 				(DOMNode* nodo);
-		float	getEntradaReposo		();
-		float	getSalidaReposo			();
-		float 	getEntradaActivacion	();
-		float	getSalidaActivacion		();
-		XMLCh*	getColor				();
-	private:
-		float entradaReposo, 		salidaReposo 		;
-		float entradaActivacion,  	salidaActivacion   	;	
-		XMLCh* color;	
-};
 
-class Electroiman: public Elemento {
-	public:
-		Electroiman () ;
-		void construir (DOMNode* nodo);
-		float	getEntradaReposo		();
-		float	getSalidaReposo			();
-		float 	getEntradaActivacion	();
-		float	getSalidaActivacion		();
-	private:
-		float entradaReposo, 		salidaReposo ;
-		float entradaActivacion,	salidaActivacion ;	
-};
 
-class Motor: public Elemento {
-	public:
-		Motor 	();
-		~Motor 	();
-		void 	construir (DOMNode* nodo);
-		float	getEntradaGiro1	() const;						
-		float	getEntradaGiro2	() const;
-		float	getEntradaReposo() const;
-		XMLCh*	getSalidaGiro1	() const;
-		XMLCh*	getSalidaGiro2	() const;
-		XMLCh*	getSalidaReposo	() const;
-		
-	private:
-		float 	entradaGiro1	;
-		XMLCh*	salidaGiro1 	; 
-		float 	entradaGiro2	;
-		XMLCh*	salidaGiro2 	;
-		float 	entradaReposo	;
-		XMLCh*	salidaReposo  	;
-};
 
-class Relacion; /*Relacion está mas adelante*/
-
-/*	El número máximo de componentes o relaciones es este*/
-#define MAX_TAM_VECTOR 128
-
-class Sistema: public Elemento {
-	public:
-		Sistema 	() ;
-		void		construir 			(DOMNode* nodo);
-		int 		anadirRelacion 		(Relacion* r);
-		int 		anadirComponente	(Elemento* e);
-		int			getComponentes 		(Elemento* vectorElementos[]);
-		int			getRelaciones		(Relacion* vectorRelaciones[]);	
-		int			getNumComponentes	();
-		int			getNumRelaciones	();
-		
-		/*	Estas funciones nos devuelven una referencia al
-			elemento cuyo nombre sea uno de los parámetros
-			o NULL en caso contrario */
-		Elemento*	getRefElemento		(char* nombre);
-		Elemento*	getRefElemento		(XMLCh* nombre);
-	private:
-		Elemento* 	listaComponentes[MAX_TAM_VECTOR];
-		Relacion*	listaRelaciones [MAX_TAM_VECTOR];
-		int			numComponentes, numRelaciones;
-};
 
 
 /*	Esta clase representa la relacion entre un elemento llamado

@@ -1,7 +1,8 @@
 #include <iostream>
+
 #include "elementos.h"
 #include "parser.h"
-
+#include "sistema.h"
 //Evitar instanciación de plantillas
 #define XERCES_TMPLSINC
 

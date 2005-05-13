@@ -1,4 +1,5 @@
 #include "parser.h"
+#include "sistema.h"
 
 using namespace std;
 /*Se construye un parser a partir de un fichero dado*/
@@ -98,6 +99,7 @@ vector <Elemento*> Parser::extraerElementos ()
 				}
 				if (XMLString::equals (nombre,"lampara"))
 				{
+					cout << "Encontrada lampara" << nombre << endl;
 					Lampara* l=new Lampara();
 					l->construir (elemento_siguiente);
 					vector_elementos.push_back(l);

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sistema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:noNamespaceSchemaLocation='sistema2.xsd'>	
+	   
+	   <nombre> Sistema de ejemplo </nombre>
 	<!--Ejemplo sencillo de sensor pulsador-->
 	<pulsador>
 		<nombreelemento>Pulsador1</nombreelemento>
@@ -76,11 +78,23 @@
 	</motor>
 	
 	<relacion>
-        <primario>Pulsador1</primario>
-        <secundario>lampara3</secundario>
+		<primario>Pulsador1</primario>
+		<secundario>lampara3</secundario>
 	</relacion>
 	
+	<lampara>
+		<nombreelemento>Lampara1</nombreelemento>
+		<color>add3e3</color>
+		<entradareposo>0</entradareposo>
+		<salidareposo>0</salidareposo>
+		<entradaactivacion>9</entradaactivacion>
+		<salidaactivacion>1</salidaactivacion>
+	</lampara>
 	
+	<relacion>
+			<primario>Pulsador1</primario>
+			<secundario>Lampara1</secundario>
+	</relacion>
 	<!--Ejemplo de un vector de motores. Tiene 10 motores que con un voltaje
 	de 9V giran en sentido antihorario, con un voltaje de -9V giran en sentido
 	horario y con 0V detienen su actividad-->

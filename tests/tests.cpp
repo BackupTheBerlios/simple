@@ -3,6 +3,7 @@
 #include <string>
 
 #include "parser.h"
+#include "sistema.h"
 #include <unit++.h>	
 
 using namespace std;
@@ -31,7 +32,7 @@ namespace {
 		{
 			v=p->extraerElementos();
 			assert_eq ("Vector vacio?", false, v.empty() );
-			assert_eq ("Tamano 6?", 6, v.size() );
+			assert_eq ("Tamano 7?", 7, v.size() );
 		}
 		void pruebaMotor()
 		{
@@ -155,7 +156,7 @@ namespace {
 		}
 		void pruebaInsertaRelaciones()
 		{
-			assert_eq ("Relaciones inexistentes", 1, r.size());
+			assert_eq ("Relaciones inexistentes", 2, r.size());
 			for (int i=0;i<r.size();i++)
 			{
 				assert_eq ("Insercion de r", 
@@ -165,7 +166,7 @@ namespace {
 		
 		void pruebaInsertaComponentes()
 		{
-			for (int i=0;i<6;i++)
+			for (int i=0;i<7;i++)
 			{
 				assert_eq ("Insercion de v",
 					0, s->anadirComponente ( (Elemento*) v.at(i) ));
@@ -175,18 +176,16 @@ namespace {
 		{
 			Elemento* vectorComponentes[20];
 			int numComponentes;
-			cout << "Obteniendo componentes" << endl;
 			numComponentes=s->getComponentes(vectorComponentes);
-			assert_eq ("numComponentes", 6, numComponentes);
+			assert_eq ("numComponentes", 7, numComponentes);
 		}
 		
 		void pruebaListaRelaciones()
 		{
 			Relacion* vectorRelaciones[40];
 			int numRelaciones;
-			cout << "Obteniendo relaciones" << endl;
 			numRelaciones=s->getRelaciones (vectorRelaciones);
-			assert_eq ("numRelaciones", 1, numRelaciones);
+			assert_eq ("numRelaciones", 2, numRelaciones);
 		}
 		
 		void pruebaRefElemento ()
@@ -215,7 +214,14 @@ namespace {
 				Así es como está definido en el fichero*/
 			p->setEntrada(1);
 			
-			assert_eq ("Salida de la lampara", 0, l->getSalida() );
+			assert_eq ("Salida de la lampara", 1, l->getSalida() );
+			
+			/*	Obtenemos un puntero a la otra lampara y comprobamos
+				que tambien ha sido activada y que hay un uno a su salida
+				Recordemos que en principio las lamparas se crean
+				con una salida 0 (no activada) */
+			l=(Lampara*) s->getRefElemento ("Lampara1");
+			assert_eq ("Lampara1 encendida?", 1, l->getSalida() );
 			
 		}
 	public:

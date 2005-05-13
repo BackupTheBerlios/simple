@@ -338,6 +338,7 @@
 	
 	
 	<xs:complexType name="tiposistema">
+		<xs:element name="nombre" type="tiponombre"/>
 		<xs:group ref="elemento" minOccurs="1" maxOccurs="65536"/>
 	</xs:complexType>
 	

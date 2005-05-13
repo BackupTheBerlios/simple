@@ -104,28 +104,7 @@ float Elemento::getSalida()
 
 
 
-Elemento* Sistema::getRefElemento (XMLCh* nombre)
-{
-	for (int i=0;i<numComponentes;i++)
-	{
-		if (XMLString::equals 
-			(nombre, listaComponentes[i]->getNombreElemento()) )
-		{
-			return listaComponentes[i];
-		} 
-	} //Fin del for
-	
-	/*Si el elemento no ha aparecido...*/
-	return NULL;
-}
 
-
-Elemento* Sistema::getRefElemento (char* nombre)
-{
-	XMLCh* nombreAux;
-	nombreAux=XMLString::transcode (nombre);
-	return (getRefElemento(nombreAux));
-}
 /*	Desarrollamos las relaciones */
 Relacion::Relacion()
 {

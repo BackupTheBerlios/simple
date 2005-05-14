@@ -128,6 +128,12 @@ vector <Elemento*> Parser::extraerElementos ()
 					e->construir (elemento_siguiente);
 					vector_elementos.push_back(e);
 				}
+				if (XMLString::equals (nombre, "zumbador"))
+				{
+					Zumbador* z=new Zumbador();
+					z->construir (elemento_siguiente);
+					vector_elementos.push_back(z);
+				}
 				
 			}
 			

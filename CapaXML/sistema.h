@@ -5,6 +5,7 @@
 #include "lampara.h"
 #include "pulsador.h"
 #include "fotosensor.h"
+#include "zumbador.h"
 #include <iostream>
 #ifndef _sistema_
 #define _sistema_

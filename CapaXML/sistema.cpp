@@ -132,3 +132,7 @@ Elemento* Sistema::getRefElemento (char* nombre)
 	nombreAux=XMLString::transcode (nombre);
 	return (getRefElemento(nombreAux));
 }
+
+DOMNode* getNodo()
+{
+}

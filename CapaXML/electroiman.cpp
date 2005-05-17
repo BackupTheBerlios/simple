@@ -68,3 +68,15 @@ float Electroiman::getSalidaActivacion()
 {
 	return salidaActivacion;
 }
+
+DOMNode* getNodo()
+{
+	DOMNode* nodoElementoActual;
+	DOMNode* nodoEntradaReposo;
+	DOMNode* nodoSalidaReposo;
+	DOMNode* nodoEntradaActivacion;
+	DOMNode* nodoSalidaActivacion;
+	/*	Creamos los nodos hijo y rellenamos su contenido*/
+	nodoEntradaReposo=new DOMNode();
+	nodoEntradaReposo->setNodeValue(
+}

@@ -47,8 +47,9 @@ class Elemento {
         float 	getSalida			();
 		//Este metodo puede re-implementarse (y de hecho se hará)
 		//en las clases hija
-		virtual void construir 	 (DOMNode *nodo)=0;
-		virtual	void setEntrada	 (float entrada)	;
+		virtual void 		construir 	 (DOMNode *nodo)=0;
+		virtual	void 		setEntrada	 (float entrada)	;
+		virtual DOMNode*	getNodo();
 	protected:
 		void 		inicializar	();
 		bool		iguales 	(const XMLCh* cad1, const XMLCh* cad2);

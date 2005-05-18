@@ -32,7 +32,7 @@ namespace {
 		{
 			v=p->extraerElementos();
 			assert_eq ("Vector vacio?", false, v.empty() );
-			assert_eq ("Tamano 7?", 7, v.size() );
+			assert_eq ("Tamano 8?", 8, v.size() );
 		}
 		void pruebaMotor()
 		{
@@ -147,6 +147,21 @@ namespace {
 			assert_eq ("Nombre",			true,
 				XMLString::equals (nombre,f->getNombreElemento()));
 		}
+		void pruebaZumbador()
+		{
+			XMLCh*	nombre;
+			
+			Zumbador* z=(Zumbador*) v.at (7);
+			
+			nombre=XMLString::transcode ("ZumbadorA");
+			
+			assert_eq ("Entradareposo",		0,z->getEntradaReposo		()	);
+			assert_eq ("Salidareposo",		0,z->getSalidaReposo		()	);
+			assert_eq ("Entradaactivacion",	9,z->getEntradaActivacion	()	);
+			assert_eq ("Salidaactivacion",	4000,z->getSalidaActivacion	()	);
+			assert_eq ("Nombre",			true,
+				XMLString::equals (nombre,z->getNombreElemento()));
+		}
 		void pruebaRelacion ()
 		{
 			r=p->extraerRelaciones();
@@ -245,6 +260,8 @@ namespace {
 				(this, "Electroiman", &pruebaParser::pruebaElectroiman));
 			add ("Comprobacion de FotoSensor", testcase
 				(this, "FotoSensor1", &pruebaParser::pruebaFotoSensor));
+			add ("Comprobacion de Zumbador", testcase
+				(this, "ZumbadorA", &pruebaParser::pruebaZumbador));
 			add ("Comprobacion de la extraccion de relaciones", testcase
 				(this, "Relacion 1", &pruebaParser::pruebaRelacion));
 			add ("Prueba insercion componentes", testcase

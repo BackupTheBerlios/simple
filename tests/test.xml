@@ -95,6 +95,14 @@
 			<primario>Pulsador1</primario>
 			<secundario>Lampara1</secundario>
 	</relacion>
+	
+	<zumbador>
+		<nombreelemento>ZumbadorA</nombreelemento>
+		<entradareposo>0</entradareposo>
+		<salidareposo>	0</salidareposo>
+		<entradaactivacion>9</entradaactivacion>
+		<salidaactivacion>  4000   </salidaactivacion>
+	</zumbador>
 	<!--Ejemplo de un vector de motores. Tiene 10 motores que con un voltaje
 	de 9V giran en sentido antihorario, con un voltaje de -9V giran en sentido
 	horario y con 0V detienen su actividad-->

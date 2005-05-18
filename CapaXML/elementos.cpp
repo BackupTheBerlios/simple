@@ -6,7 +6,7 @@
 #include "elementos.h"
 #include "sistema.h"
 #include <iostream>
-
+#include <stdio.h>
 
 #ifdef XERCES_CPP_NAMESPACE_USE
 XERCES_CPP_NAMESPACE_USE
@@ -98,6 +98,15 @@ float Elemento::getSalida()
 	return salidaActual;
 }
 
+XMLCh*	convertir (float entrada)
+{
+	char cadAux[40];
+	XMLCh* valorNodo;
+	
+	sprintf (cadAux, "%f", entrada);
+	valorNodo=XMLString::transcode (cadAux);
+	return valorNodo;
+}
 
 
 

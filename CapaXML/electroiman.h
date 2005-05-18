@@ -4,11 +4,12 @@
 class Electroiman: public Elemento {
 	public:
 		Electroiman () ;
-		void construir (DOMNode* nodo);
-		float	getEntradaReposo		();
-		float	getSalidaReposo			();
-		float 	getEntradaActivacion	();
-		float	getSalidaActivacion		();
+		void 		construir 				(DOMNode* nodo);
+		float		getEntradaReposo		();
+		float		getSalidaReposo			();
+		float 		getEntradaActivacion	();
+		float		getSalidaActivacion		();
+		DOMElement*	getNodo					();
 	private:
 		float entradaReposo, 		salidaReposo ;
 		float entradaActivacion,	salidaActivacion ;	

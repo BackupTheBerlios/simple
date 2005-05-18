@@ -1,6 +1,8 @@
 
 #include "electroiman.h"
 #include "constantes.h"
+#include <stdio.h>
+
 Electroiman::Electroiman (){
 	inicializar();
 	entradaReposo	=	salidaReposo	=	VALOR_INICIAL;
@@ -69,14 +71,43 @@ float Electroiman::getSalidaActivacion()
 	return salidaActivacion;
 }
 
-DOMNode* getNodo()
+DOMElement* Electroiman::getNodo()
 {
-	DOMNode* nodoElementoActual;
-	DOMNode* nodoEntradaReposo;
-	DOMNode* nodoSalidaReposo;
-	DOMNode* nodoEntradaActivacion;
-	DOMNode* nodoSalidaActivacion;
+	DOMElement* 	nodoElementoActual;
+	DOMElement* 	nodoEntradaReposo;
+	DOMElement* 	nodoSalidaReposo;
+	DOMElement* 	nodoEntradaActivacion;
+	DOMElement* 	nodoSalidaActivacion;
+	char*			aux;
+	XMLCh*			nombreNodo;
+	XMLCh*			valorNodo;
+	
+	
+	/*	Obtenemos una implementación DOM
+		Nos basta con que implemente el núcleo (CORE) del
+		estándar DOM*/
+	DOMImplementation* implementacion=
+		DOMImplementationRegistry::getDOMImplementation 
+			(XMLString::transcode ("Core"));
+	
+	/*	Se va a implementar un minidocumento electroiman. Los documentos
+		en general se pueden "incrustar" dentro de otros documentos.
+		No usa espacios de nombres (0), se llamara "electroiman"
+		y no le ponemos ningun tipo al documento (0)*/
+	DOMDocument* doc= implementacion->createDocument 
+		(0, XMLString::transcode ("electroiman"), 0);
+	
+	/*	El puntero al documento raiz apunta al minidocumento
+		"electroiman" creado antes. Se necesita para empezar
+		a insertar elementos dentro del elemento*/
+	DOMElement* punteroDocRaiz=doc->getDocumentElement();
+	
 	/*	Creamos los nodos hijo y rellenamos su contenido*/
-	nodoEntradaReposo=new DOMNode();
-	nodoEntradaReposo->setNodeValue(
+	nombreNodo=XMLString::transcode ("entradareposo");
+	nodoEntradaReposo=doc->createElement(nombreNodo);
+	valorNodo= convertir (entradaReposo);
+	nodoEntradaReposo->setTextContent(valorNodo);
+	
+	
+
 }

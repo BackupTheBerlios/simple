@@ -130,9 +130,11 @@ vector <Elemento*> Parser::extraerElementos ()
 				}
 				if (XMLString::equals (nombre, "zumbador"))
 				{
+					cout << "Encontrado un zumbador" << endl;
 					Zumbador* z=new Zumbador();
 					z->construir (elemento_siguiente);
 					vector_elementos.push_back(z);
+					cout << "El tamaño es " << vector_elementos.size();
 				}
 				
 			}

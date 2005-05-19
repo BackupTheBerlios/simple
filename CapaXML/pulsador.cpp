@@ -143,7 +143,7 @@ DOMElement* Pulsador::getNodo()
 	nombreNodo=XMLString::transcode ("nombreelemento");
 	nodoNombreElemento=doc->createElement(nombreNodo);
 	valorNodo= getNombreElemento();
-	nodoSalidaActivacion->setTextContent(valorNodo);
+	nodoNombreElemento->setTextContent(valorNodo);
 	
 	/*	El puntero al documento raiz apunta al minidocumento
 		"electroiman" creado antes. Se necesita para empezar

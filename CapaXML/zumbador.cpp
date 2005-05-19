@@ -1,4 +1,7 @@
 #include "zumbador.h"
+#include <iostream>
+
+using namespace std;
 //El constructor solo inicializa los miembros de la clase*/
 Zumbador::Zumbador()
 {
@@ -30,6 +33,7 @@ void Zumbador::construir (DOMNode *nodo){
 			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
 					nombreElemento=XMLString::replicate (valor_propiedad);
 					XMLString::removeWS(nombreElemento);
+					cout << "Encontrado el nombre del zumbador" << endl;
 			  }
               
               elementoXMLabuscar=XMLString::transcode ("entradareposo");
@@ -40,11 +44,13 @@ void Zumbador::construir (DOMNode *nodo){
 			  elementoXMLabuscar=XMLString::transcode ("salidareposo");
 			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
 					salidaReposo=XMLString::parseInt (valor_propiedad);
+					cout << "Encontrado la salida reposo" << endl;
 			  }
 			  
 			  elementoXMLabuscar=XMLString::transcode ("entradaactivacion");
 			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
 					entradaActivacion=XMLString::parseInt (valor_propiedad);
+					cout << "Encontrado la entradaact del zumbador" << endl;
 			  }
 			  elementoXMLabuscar=XMLString::transcode ("salidaactivacion");
 			  if ( iguales (nombre_propiedad, elementoXMLabuscar ) ){
@@ -127,7 +133,7 @@ DOMElement* Zumbador::getNodo()
 	nombreNodo=XMLString::transcode ("nombreelemento");
 	nodoNombreElemento=doc->createElement(nombreNodo);
 	valorNodo= getNombreElemento();
-	nodoSalidaActivacion->setTextContent(valorNodo);
+	nodoNombreElemento->setTextContent(valorNodo);
 	
 	/*	El puntero al documento raiz apunta al minidocumento
 		"electroiman" creado antes. Se necesita para empezar
@@ -137,7 +143,7 @@ DOMElement* Zumbador::getNodo()
 	punteroDocRaiz->appendChild (nodoSalidaReposo);
 	punteroDocRaiz->appendChild (nodoEntradaActivacion);
 	punteroDocRaiz->appendChild (nodoSalidaActivacion);	
-	
+
 	/*	Una vez enganchados los elementos, devolvemos el minidocumento*/
 	return (DOMElement*) doc;
 

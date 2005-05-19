@@ -102,7 +102,7 @@ DOMElement* Reed::getNodo()
 		No usa espacios de nombres (0), se llamara "electroiman"
 		y no le ponemos ningun tipo al documento (0)*/
 	DOMDocument* doc= implementacion->createDocument 
-		(0, XMLString::transcode ("pulsador"), 0);
+		(0, XMLString::transcode ("reed"), 0);
 	
 	
 	/*	Creamos los nodos hijo y rellenamos su contenido*/
@@ -129,7 +129,7 @@ DOMElement* Reed::getNodo()
 	nombreNodo=XMLString::transcode ("nombreelemento");
 	nodoNombreElemento=doc->createElement(nombreNodo);
 	valorNodo= getNombreElemento();
-	nodoSalidaActivacion->setTextContent(valorNodo);
+	nodoNombreElemento->setTextContent(valorNodo);
 	
 	/*	El puntero al documento raiz apunta al minidocumento
 		"electroiman" creado antes. Se necesita para empezar
@@ -139,6 +139,7 @@ DOMElement* Reed::getNodo()
 	punteroDocRaiz->appendChild (nodoSalidaReposo);
 	punteroDocRaiz->appendChild (nodoEntradaActivacion);
 	punteroDocRaiz->appendChild (nodoSalidaActivacion);	
+	punteroDocRaiz->appendChild (nodoNombreElemento);	
 	
 	/*	Una vez enganchados los elementos, devolvemos el minidocumento*/
 	return (DOMElement*) doc;

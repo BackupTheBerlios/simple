@@ -40,24 +40,19 @@ int Sistema::anadirRelacion(Relacion* relacion)
 			cout << "Comparando " << elem << endl ;
 			if (XMLString::equals(nombrePrimario, nombreElementoActual))
 			{
-				cout << "Encontrado el primario" << endl;
 				primario=listaComponentes[i];
 			}
 			
 			if (XMLString::equals(nombreSecundario, nombreElementoActual))
 			{
-				cout << "encontrado el secundario" << endl;
 				secundario=listaComponentes[i];
 			}
 		}
 		/*	... y si los dos elementos existen se "encadenan"*/
 		if ( (primario!=NULL) && (secundario!=NULL) )
 		{
-			cout << "Anadiendo suscriptor" << endl;
 			primario->anadirSuscriptor(secundario);
-			cout << "Suscriptor anadido"<< endl;
 			listaRelaciones[numRelaciones++]=relacion;
-			cout << "Relacion anadida" << endl;
 			return 0;
 		}
 	} /*Fin del if global*/

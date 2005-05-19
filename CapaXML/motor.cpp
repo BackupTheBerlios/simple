@@ -102,3 +102,84 @@ XMLCh* Motor::getSalidaReposo() const
 {
 	return salidaReposo;
 }
+
+DOMElement* Motor::getNodo()
+{
+	DOMElement* 	nodoElementoActual;
+	DOMElement* 	nodoEntradaGiro1;
+	DOMElement* 	nodoSalidaGiro1;
+	DOMElement* 	nodoEntradaGiro2;
+	DOMElement* 	nodoSalidaGiro2;
+	DOMElement*		nodoEntradaReposo;
+	DOMElement*		nodoSalidaReposo;
+	DOMElement*		nodoNombreElemento;
+	char*			aux;
+	XMLCh*			nombreNodo;
+	XMLCh*			valorNodo;
+	
+	
+	/*	Obtenemos una implementación DOM
+		Nos basta con que implemente el núcleo (CORE) del
+		estándar DOM*/
+	DOMImplementation* implementacion=
+		DOMImplementationRegistry::getDOMImplementation 
+			(XMLString::transcode ("Core"));
+	
+	/*	Se va a implementar un minidocumento electroiman. Los documentos
+		en general se pueden "incrustar" dentro de otros documentos.
+		No usa espacios de nombres (0), se llamara "electroiman"
+		y no le ponemos ningun tipo al documento (0)*/
+	DOMDocument* doc= implementacion->createDocument 
+		(0, XMLString::transcode ("pulsador"), 0);
+	
+	
+	/*	Creamos los nodos hijo y rellenamos su contenido*/
+	nombreNodo=XMLString::transcode ("entradagiro1");
+	nodoEntradaGiro1=doc->createElement(nombreNodo);
+	valorNodo= convertir (entradaGiro1);
+	nodoEntradaGiro1->setTextContent(valorNodo);
+	
+	nombreNodo=XMLString::transcode ("salidagiro1");
+	nodoSalidaGiro1=doc->createElement(nombreNodo);
+	valorNodo= salidaGiro1;
+	nodoSalidaGiro1->setTextContent(valorNodo);
+	
+	nombreNodo=XMLString::transcode ("entradagiro2");
+	nodoEntradaGiro2=doc->createElement(nombreNodo);
+	valorNodo= convertir (entradaGiro2);
+	nodoEntradaGiro2->setTextContent(valorNodo);
+	
+	nombreNodo=XMLString::transcode ("salidagiro2");
+	nodoSalidaGiro2=doc->createElement(nombreNodo);
+	valorNodo= salidaGiro2;
+	nodoSalidaGiro2->setTextContent(valorNodo);
+	
+	nombreNodo=XMLString::transcode ("entradareposo");
+	nodoEntradaReposo=doc->createElement(nombreNodo);
+	valorNodo= convertir (entradaReposo);
+	nodoEntradaReposo->setTextContent(valorNodo);
+	
+	nombreNodo=XMLString::transcode ("salidareposo");
+	nodoSalidaReposo=doc->createElement(nombreNodo);
+	valorNodo= salidaReposo;
+	nodoSalidaReposo->setTextContent(valorNodo);
+	
+	nombreNodo=XMLString::transcode ("nombreelemento");
+	nodoNombreElemento=doc->createElement(nombreNodo);
+	valorNodo= getNombreElemento();
+	nodoNombreElemento->setTextContent(valorNodo);
+	
+	/*	El puntero al documento raiz apunta al minidocumento
+		"electroiman" creado antes. Se necesita para empezar
+		a insertar elementos dentro del elemento*/
+	DOMElement* punteroDocRaiz=doc->getDocumentElement();
+	punteroDocRaiz->appendChild (nodoEntradaGiro1);
+	punteroDocRaiz->appendChild (nodoSalidaGiro1);
+	punteroDocRaiz->appendChild (nodoEntradaGiro2);
+	punteroDocRaiz->appendChild (nodoSalidaGiro2);	
+	punteroDocRaiz->appendChild	(nodoNombreElemento);
+	
+	/*	Una vez enganchados los elementos, devolvemos el minidocumento*/
+	return (DOMElement*) doc;
+
+}

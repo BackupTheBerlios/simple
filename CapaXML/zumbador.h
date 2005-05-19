@@ -12,6 +12,7 @@ class Zumbador : public Elemento {
               float getSalidaReposo			();
               float	getEntradaActivacion	();
               float	getSalidaActivacion		();
+              DOMElement* getNodo			();
        private:
                /*Para un cierto magnetismo de entrada hay un voltaje
                 *de salida*/

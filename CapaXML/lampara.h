@@ -6,13 +6,14 @@
 class Lampara: public Elemento {
 	public:
 		Lampara ();
-		void 	construir 				(DOMNode* nodo);
-		float	getEntradaReposo		();
-		float	getSalidaReposo			();
-		float 	getEntradaActivacion	();
-		float	getSalidaActivacion		();
-		XMLCh*	getColor				();
-		void  	setEntrada				(float entrada);
+		void 		construir 				(DOMNode* nodo);
+		float		getEntradaReposo		();
+		float		getSalidaReposo			();
+		float 		getEntradaActivacion	();
+		float		getSalidaActivacion		();
+		XMLCh*		getColor				();
+		void  		setEntrada				(float entrada);
+		DOMElement*	getNodo					();
 	private:
 		float entradaReposo, 		salidaReposo 		;
 		float entradaActivacion,  	salidaActivacion   	;	

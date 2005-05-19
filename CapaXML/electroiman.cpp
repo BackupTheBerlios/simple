@@ -97,10 +97,6 @@ DOMElement* Electroiman::getNodo()
 	DOMDocument* doc= implementacion->createDocument 
 		(0, XMLString::transcode ("electroiman"), 0);
 	
-	/*	El puntero al documento raiz apunta al minidocumento
-		"electroiman" creado antes. Se necesita para empezar
-		a insertar elementos dentro del elemento*/
-	DOMElement* punteroDocRaiz=doc->getDocumentElement();
 	
 	/*	Creamos los nodos hijo y rellenamos su contenido*/
 	nombreNodo=XMLString::transcode ("entradareposo");
@@ -108,6 +104,31 @@ DOMElement* Electroiman::getNodo()
 	valorNodo= convertir (entradaReposo);
 	nodoEntradaReposo->setTextContent(valorNodo);
 	
+	nombreNodo=XMLString::transcode ("salidareposo");
+	nodoSalidaReposo=doc->createElement(nombreNodo);
+	valorNodo= convertir (salidaReposo);
+	nodoSalidaReposo->setTextContent(valorNodo);
 	
+	nombreNodo=XMLString::transcode ("entradaactivacion");
+	nodoEntradaActivacion=doc->createElement(nombreNodo);
+	valorNodo= convertir (entradaActivacion);
+	nodoEntradaActivacion->setTextContent(valorNodo);
+	
+	nombreNodo=XMLString::transcode ("salidaactivacion");
+	nodoSalidaActivacion=doc->createElement(nombreNodo);
+	valorNodo= convertir (salidaActivacion);
+	nodoSalidaActivacion->setTextContent(valorNodo);
+	
+	/*	El puntero al documento raiz apunta al minidocumento
+		"electroiman" creado antes. Se necesita para empezar
+		a insertar elementos dentro del elemento*/
+	DOMElement* punteroDocRaiz=doc->getDocumentElement();
+	punteroDocRaiz->appendChild (nodoEntradaReposo);
+	punteroDocRaiz->appendChild (nodoSalidaReposo);
+	punteroDocRaiz->appendChild (nodoEntradaActivacion);
+	punteroDocRaiz->appendChild (nodoSalidaActivacion);	
+	
+	/*	Una vez enganchados los elementos, devolvemos el minidocumento*/
+	return (DOMElement*) doc;
 
 }

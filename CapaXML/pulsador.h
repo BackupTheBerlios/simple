@@ -6,12 +6,13 @@
 class Pulsador: public Elemento {
       public:
              Pulsador ();
-             void construir (DOMNode* nodo);
-             float getEntradaReposo 	();
-             float getSalidaReposo		();
-             float getEntradaActivacion	();
-             float getSalidaActivacion	();
-             void  setEntrada(float entrada);
+             void 			construir 			(DOMNode* nodo);
+             float 			getEntradaReposo 	();
+             float 			getSalidaReposo		();
+             float 			getEntradaActivacion();
+             float 			getSalidaActivacion	();
+             void  			setEntrada			(float entrada);
+             DOMElement*	getNodo				();
       private:
               float entradaReposo, 		salidaReposo 		;
               float entradaActivacion, 	salidaActivacion	;

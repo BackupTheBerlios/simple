@@ -98,7 +98,7 @@ float Elemento::getSalida()
 	return salidaActual;
 }
 
-XMLCh*	convertir (float entrada)
+XMLCh*	Elemento::convertir (float entrada)
 {
 	char cadAux[40];
 	XMLCh* valorNodo;
@@ -106,6 +106,12 @@ XMLCh*	convertir (float entrada)
 	sprintf (cadAux, "%f", entrada);
 	valorNodo=XMLString::transcode (cadAux);
 	return valorNodo;
+}
+
+DOMElement* Elemento::getNodo()
+{
+	/*	Implementacion vacia. Se realiza en las
+		clases hijas*/
 }
 
 

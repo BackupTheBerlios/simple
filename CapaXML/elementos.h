@@ -50,7 +50,7 @@ class Elemento {
 		virtual void 		construir 	 (DOMNode *nodo)=0;
 		virtual	void 		setEntrada	 (float entrada);
 		virtual XMLCh*		convertir	 (float entrada);	
-		virtual DOMNode*	getNodo();
+		virtual DOMElement*	getNodo();
 	protected:
 		void 		inicializar	();
 		bool		iguales 	(const XMLCh* cad1, const XMLCh* cad2);

@@ -181,7 +181,7 @@ namespace {
 		
 		void pruebaInsertaComponentes()
 		{
-			for (int i=0;i<7;i++)
+			for (int i=0;i<v.size();i++)
 			{
 				assert_eq ("Insercion de v",
 					0, s->anadirComponente ( (Elemento*) v.at(i) ));
@@ -192,7 +192,7 @@ namespace {
 			Elemento* vectorComponentes[20];
 			int numComponentes;
 			numComponentes=s->getComponentes(vectorComponentes);
-			assert_eq ("numComponentes", 7, numComponentes);
+			assert_eq ("numComponentes", 8, numComponentes);
 		}
 		
 		void pruebaListaRelaciones()
@@ -214,6 +214,14 @@ namespace {
 			e=s->getRefElemento ("Pulsador1");
 			esNulo=(e==NULL);
 			assert_eq ("getRefElemento valido", false, esNulo );
+			
+			e=s->getRefElemento ("reed2");
+			esNulo=(e==NULL);
+			assert_eq ("getRefElemento valido para reed2",false, esNulo);
+			
+			e=s->getRefElemento ("ZumbadorA");
+			esNulo=(e==NULL);
+			assert_eq ("getRefElemento valido para ZumbadorA",false, esNulo);
 		}
 		void pruebaRelacionConNotificacion()
 		{
@@ -239,6 +247,101 @@ namespace {
 			assert_eq ("Lampara1 encendida?", 1, l->getSalida() );
 			
 		}
+		
+		void pruebaDevolucionNodoElectroiman()
+		{
+			Elemento* 		e;
+			Electroiman* 	iman;
+			bool 			esRefNula;
+			DOMElement*		elementoElectroiman;
+			e=s->getRefElemento ("electroiman2");
+			esRefNula=(e==NULL);
+			assert_eq ("Electroiman nulo?", false, esRefNula);
+			iman=(Electroiman*) e;
+			elementoElectroiman=iman->getNodo();
+			esRefNula=(elementoElectroiman==NULL);
+			assert_eq ("¿DOMElement electroiman2?", false, esRefNula);
+		}
+		
+		void pruebaDevolucionNodoLampara()
+		{
+			Elemento* 		e;
+			Lampara*		lampara;
+			bool 			esRefNula;
+			DOMElement*		elementoLampara;
+			e=s->getRefElemento ("lampara3");
+			esRefNula=(e==NULL);
+			assert_eq ("Lampara nula?", false, esRefNula);
+			lampara=(Lampara*) e;
+			elementoLampara=lampara->getNodo();
+			esRefNula=(elementoLampara==NULL);
+			assert_eq ("¿DOMElement lampara3?", false, esRefNula);
+		}
+		
+		void pruebaDevolucionNodoFotoSensor()
+		{
+			Elemento* 		e;
+			FotoSensor*		f;
+			bool 			esRefNula;
+			DOMElement*		elementoFotoSensor;
+			e=s->getRefElemento ("fotosensor1");
+			esRefNula=(e==NULL);
+			assert_eq ("FotoSensor nulo?", false, esRefNula);
+			f=(FotoSensor*) e;
+			elementoFotoSensor=f->getNodo();
+			esRefNula=(elementoFotoSensor==NULL);
+			assert_eq ("¿DOMElement lampara3?", false, esRefNula);
+		}
+		
+		void pruebaDevolucionNodoReed()
+		{
+			Elemento* 		e;
+			Reed*			r;
+			bool 			esRefNula;
+			DOMElement*		elementoReed;
+			e=s->getRefElemento ("reed2");
+			esRefNula=(e==NULL);
+			assert_eq ("Reed nulo?", false, esRefNula);
+			r=(Reed*) e;
+			elementoReed=r->getNodo();
+			esRefNula=(elementoReed==NULL);
+			assert_eq ("¿DOMElement lampara3?", false, esRefNula);
+		}
+		
+		
+		
+		void pruebaDevolucionNodoPulsador()
+		{
+			Elemento* 		e;
+			Pulsador*		p;
+			bool 			esRefNula;
+			DOMElement*		elementoPulsador;
+			
+			e=s->getRefElemento ("Pulsador1");
+			esRefNula=(e==NULL);
+			assert_eq ("FotoSensor nulo?", false, esRefNula);
+			p=(Pulsador*) e;
+			elementoPulsador=p->getNodo();
+			esRefNula=(elementoPulsador==NULL);
+			assert_eq ("¿DOMElement lampara3?", false, esRefNula);
+		}
+		
+		void pruebaDevolucionNodoZumbador()
+		{
+			Elemento* 		e;
+			Zumbador*		z;
+			bool 			esRefNula;
+			DOMElement*		elementoZumbador;
+			
+			e=s->getRefElemento ("ZumbadorA");
+			esRefNula=(e==NULL);
+			assert_eq ("Zumbador nulo?", false, esRefNula);
+			z=(Zumbador*) z;
+			elementoZumbador=z->getNodo();
+			esRefNula=(elementoZumbador==NULL);
+			assert_eq ("¿DOMElement lampara3?", false, esRefNula);
+		}		
+
 	public:
 		pruebaParser() : suite ("Prueba de clase parser")
 		{
@@ -276,6 +379,18 @@ namespace {
 				(this, "Referencias a elementos", &pruebaParser::pruebaRefElemento));	
 			add ("RelacionConNotificacion", testcase
 				(this, "Notificador pulsador->lampara", &pruebaParser::pruebaRelacionConNotificacion));	
+			add ("Devolucion de un nodo electroiman", testcase
+				(this, "Electroiman devuelve DOMDocument?", &pruebaParser::pruebaDevolucionNodoElectroiman));	
+			add ("Devolucion de un nodo lampara", testcase
+				(this, "Lampara devuelve DOMDocument?", &pruebaParser::pruebaDevolucionNodoLampara));	
+			add ("Devolucion de un nodo fotosensor", testcase
+				(this, "FotoSensor devuelve DOMDocument?", &pruebaParser::pruebaDevolucionNodoFotoSensor));	
+			add ("Devolucion de un nodo Pulsador", testcase
+				(this, "Pulsador devuelve DOMDocument?", &pruebaParser::pruebaDevolucionNodoPulsador));					
+			add ("Devolucion de un nodo Reed", testcase
+				(this, "Reed devuelve DOMDocument?", &pruebaParser::pruebaDevolucionNodoReed));									
+			add ("Devolucion de un nodo Zumbador", testcase
+				(this, "Zumbador devuelve DOMDocument?", &pruebaParser::pruebaDevolucionNodoZumbador));													
 			suite::main().add ("pruebaFicheroTest", this);
 				
 		}

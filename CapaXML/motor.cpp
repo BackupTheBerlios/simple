@@ -103,6 +103,8 @@ XMLCh* Motor::getSalidaReposo() const
 	return salidaReposo;
 }
 
+/*	Se sobreescribe totalmente la implementacion original debido
+	a la magnitud de los cambios que supone un motor*/
 DOMElement* Motor::getNodo()
 {
 	DOMElement* 	nodoElementoActual;
@@ -130,7 +132,7 @@ DOMElement* Motor::getNodo()
 		No usa espacios de nombres (0), se llamara "electroiman"
 		y no le ponemos ningun tipo al documento (0)*/
 	DOMDocument* doc= implementacion->createDocument 
-		(0, XMLString::transcode ("pulsador"), 0);
+		(0, XMLString::transcode ("motor"), 0);
 	
 	
 	/*	Creamos los nodos hijo y rellenamos su contenido*/
@@ -173,11 +175,11 @@ DOMElement* Motor::getNodo()
 		"electroiman" creado antes. Se necesita para empezar
 		a insertar elementos dentro del elemento*/
 	DOMElement* punteroDocRaiz=doc->getDocumentElement();
+	punteroDocRaiz->appendChild	(nodoNombreElemento);
 	punteroDocRaiz->appendChild (nodoEntradaGiro1);
 	punteroDocRaiz->appendChild (nodoSalidaGiro1);
 	punteroDocRaiz->appendChild (nodoEntradaGiro2);
 	punteroDocRaiz->appendChild (nodoSalidaGiro2);	
-	punteroDocRaiz->appendChild	(nodoNombreElemento);
 	
 	/*	Una vez enganchados los elementos, devolvemos el minidocumento*/
 	return (DOMElement*) doc;

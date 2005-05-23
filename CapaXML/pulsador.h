@@ -1,21 +1,11 @@
-#include "elementos.h"
+#include "elementosimple.h"
 #include "constantes.h"
 #ifndef _pulsador_
 #define _pulsador_
 
-class Pulsador: public Elemento {
+class Pulsador: public ElementoSimple {
       public:
-             Pulsador ();
-             void 			construir 			(DOMNode* nodo);
-             float 			getEntradaReposo 	();
-             float 			getSalidaReposo		();
-             float 			getEntradaActivacion();
-             float 			getSalidaActivacion	();
-             void  			setEntrada			(float entrada);
-             DOMElement*	getNodo				();
-      private:
-              float entradaReposo, 		salidaReposo 		;
-              float entradaActivacion, 	salidaActivacion	;
+             virtual DOMElement* 	getNodo();
 };
 
 #endif

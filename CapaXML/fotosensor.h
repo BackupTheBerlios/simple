@@ -1,21 +1,12 @@
-#include "elementos.h"
+#include "elementosimple.h"
 #include "constantes.h"
 
 #ifndef _fotosensor_
 #define _fotosensor_
 
-class FotoSensor: public Elemento {
+class FotoSensor: public ElementoSimple {
 	public:
-		FotoSensor ();
-		void 			construir 				(DOMNode* nodo);
-		float			getEntradaReposo		();
-        float 			getSalidaReposo			();
-        float			getEntradaActivacion	();
-        float			getSalidaActivacion		();
-        DOMElement*		getNodo					();
-	private:
-		float entradaReposo, 		salidaReposo 		;
-        float entradaActivacion, 	salidaActivacion	;
+		virtual DOMElement*		getNodo();
 };
 
 

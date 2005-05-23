@@ -1,22 +1,14 @@
-#include "elementos.h"
+#include "elementosimple.h"
 
 #ifndef _lampara_
 #define _lampara_
 
-class Lampara: public Elemento {
+class Lampara: public ElementoSimple {
 	public:
-		Lampara ();
-		void 		construir 				(DOMNode* nodo);
-		float		getEntradaReposo		();
-		float		getSalidaReposo			();
-		float 		getEntradaActivacion	();
-		float		getSalidaActivacion		();
+		void 		construir				(DOMNode *nodo);
 		XMLCh*		getColor				();
-		void  		setEntrada				(float entrada);
 		DOMElement*	getNodo					();
 	private:
-		float entradaReposo, 		salidaReposo 		;
-		float entradaActivacion,  	salidaActivacion   	;	
 		XMLCh* color;	
 };
 

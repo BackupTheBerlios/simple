@@ -39,6 +39,9 @@ class Parser {
 		 *del sistema que queremos simular*/
 		vector <Elemento*> 	extraerElementos 	();
 		vector <Relacion*> 	extraerRelaciones	();
+		
+		/*Esta funcion escribe un nodo determinado en un fichero*/
+		void				escribir (DOMNode* documento, char *fichero);
 	private:
 		XercesDOMParser* 	elParser;
 		DOMBuilder* 		parser;

@@ -1,7 +1,7 @@
 [Project]
 FileName=CapaXML.dev
 Name=CapaXML
-UnitCount=22
+UnitCount=24
 Type=1
 Ver=1
 ObjFiles=
@@ -16,7 +16,7 @@ Linker=_@@_xerces-c_2.lib_@@_
 IsCpp=1
 Icon=
 ExeOutput=
-ObjectOutput=
+ObjectOutput=..\objs
 OverrideOutput=0
 OverrideOutputName=CapaXML.exe
 HostApplication=
@@ -259,6 +259,26 @@ BuildCmd=
 
 [Unit21]
 FileName=zumbador.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit23]
+FileName=elementosimple.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit24]
+FileName=elementosimple.cpp
 CompileCpp=1
 Folder=
 Compile=1

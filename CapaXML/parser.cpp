@@ -1,6 +1,6 @@
 #include "parser.h"
 #include "sistema.h"
-
+#include <xercesc/framework/LocalFileFormatTarget.hpp>
 using namespace std;
 /*Se construye un parser a partir de un fichero dado*/
 Parser::Parser () 
@@ -183,6 +183,24 @@ vector <Relacion*> Parser::extraerRelaciones ()
 		return vector_relaciones;
 }
 
+
+void Parser::escribir (DOMNode* documento, char *fichero)
+{
+	LocalFileFormatTarget* destino=
+		new LocalFileFormatTarget (fichero);	
+		
+	/*	Obtenemos una implementacion de DOM que pueda hacer
+		Load and Save */
+	static const XMLCh gLS[] = { chLatin_L, chLatin_S, chNull };
+	DOMImplementation *impl = 
+		DOMImplementationRegistry::getDOMImplementation(gLS);
+	DOMWriter* escritor=((DOMImplementationLS*)impl)->createDOMWriter();
+	
+	escritor->writeNode (destino, *documento);
+	
+	delete destino;
+	delete escritor;
+}
 Parser::~Parser()
 {
 	delete elParser;

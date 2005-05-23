@@ -341,7 +341,22 @@ namespace {
 			esRefNula=(elementoZumbador==NULL);
 			assert_eq ("¿DOMElement lampara3?", false, esRefNula);
 		}		
-
+		
+		void pruebaEscritura()
+		{
+			Elemento*	e;
+			Pulsador*	pulsador1;
+			
+			e=s->getRefElemento("Pulsador1");
+			
+			pulsador1=(Pulsador*) e;
+			DOMNode* nodo=pulsador1->getNodo();
+			bool nulo=(nodo==NULL);
+			assert_eq ("Nodo devuelto por pulsador 1 es nulo?",	
+				false, nulo);
+			//p->escribir (pulsador1->getNodo(), "puls.xml");
+			
+		}	
 	public:
 		pruebaParser() : suite ("Prueba de clase parser")
 		{
@@ -390,7 +405,9 @@ namespace {
 			add ("Devolucion de un nodo Reed", testcase
 				(this, "Reed devuelve DOMDocument?", &pruebaParser::pruebaDevolucionNodoReed));									
 			add ("Devolucion de un nodo Zumbador", testcase
-				(this, "Zumbador devuelve DOMDocument?", &pruebaParser::pruebaDevolucionNodoZumbador));													
+				(this, "Zumbador devuelve DOMDocument?", &pruebaParser::pruebaDevolucionNodoZumbador));
+			add ("Escritura del pulsador", testcase
+				(this, "¿Se escribe pulsador1?", &pruebaParser::pruebaEscritura));	
 			suite::main().add ("pruebaFicheroTest", this);
 				
 		}

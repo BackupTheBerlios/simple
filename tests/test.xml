@@ -120,4 +120,21 @@
 			<salidareposo>		stop	</salidareposo>
 		</motor>
 	</vector>
+	
+	<rele>
+		<nombreelemento>pruebaRele </nombreelemento>
+		<entradainicial>0</entradainicial>
+		<salidainicial>0</salidainicial>
+		<entradaactivacion>6</entradaactivacion>
+		<salidaactivacion>1</salidaactivacion>
+	</rele>
+	
+	<temporizador>
+		<nombreelemento>TemporizadorXX</nombreelemento>
+		<voltajeentradainicial>0</voltajeentradainicial>
+		<voltajesalidainicial>0</voltajesalidainicial>
+		<tiempo>4000</tiempo>
+		<voltajeactivacion>5</voltajeactivacion>
+		<voltajesalidaentimeout>5</voltajesalidaentimeout>
+	</temporizador>
 </sistema>

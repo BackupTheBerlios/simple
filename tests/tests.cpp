@@ -32,7 +32,7 @@ namespace {
 		{
 			v=p->extraerElementos();
 			assert_eq ("Vector vacio?", false, v.empty() );
-			assert_eq ("Tamano 8?", 8, v.size() );
+			assert_eq ("Tamano 9?", 9, v.size() );
 		}
 		void pruebaMotor()
 		{
@@ -192,7 +192,7 @@ namespace {
 			Elemento* vectorComponentes[20];
 			int numComponentes;
 			numComponentes=s->getComponentes(vectorComponentes);
-			assert_eq ("numComponentes", 8, numComponentes);
+			assert_eq ("numComponentes", 9, numComponentes);
 		}
 		
 		void pruebaListaRelaciones()

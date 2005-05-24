@@ -137,6 +137,17 @@ vector <Elemento*> Parser::extraerElementos ()
 					cout << "El tamaño es " << vector_elementos.size();
 				}
 				
+				if (XMLString::equals (nombre, "rele"))
+				{
+					cout << "Encontrado un rele" << endl;
+					Rele* r=new Rele();
+					r->construir (elemento_siguiente);
+					vector_elementos.push_back(r);
+					cout << "El tamaño es " << vector_elementos.size();
+				}
+				
+				
+				
 			}
 			
 			elemento_siguiente=elemento_siguiente->getNextSibling();

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
 	<!--Los elementos podran tener nombres de 1 a 20 letras o numeros pero
@@ -140,17 +140,36 @@
 		</xs:sequence>
 	</xs:complexType>
 	
+	<!--Un relé es un interruptor mecanico controlado por una tensión.Ante un voltaje
+	inicial, el interruptor puede estar activado (1) o no activado (0). Se ha usado el tipo presion
+	para reutilizar y porque actua de forma similar al presionado de un pulsador-->
+	<xs:group name="gruporele">
+		<xs:sequence>
+			<xs:element name="entradainicial" type="tipovoltaje"/>
+			<xs:element name="salidainicial" type="tipopresion"/>
+			<xs:element name="entradaactivacion" type="tipovoltaje"/>
+			<xs:element name="salidaactivacion" type="tipopresion"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="tiporele">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="gruporele"/>
+		</xs:sequence>
+	</xs:complexType>
+	
 	<!--Un temporizador tiene un voltaje de salida inicial (por ejemplo 0V). Cuando recibe un flanco
 	en su entrada (por ejemplo el voltajeinicial de 0V alcanza un voltaje de activacion de 5V (por ejemplo)
 	el temporizador inicia su cuenta, activando un voltaje de salida determinado tras un cierto tiempo 
-	(en segundos)-->
+	(en milisegundos)-->
 	<xs:group name="grupotemporizador">
 		<xs:sequence>
-			<xs:element name="voltajeinicial" type="tipovoltaje"/>
-			<xs:element name="voltajeactivacion" type="tipovoltaje"/>
-			<xs:element name="tiempo" type="tipotiempo"/>
+			<xs:element name="voltajeentradainicial" type="tipovoltaje"/>
 			<xs:element name="voltajesalidainicial" type="tipovoltaje"/>
-			<xs:element name="voltajesalidaentemporizacion" type="tipovoltaje"/>
+			<xs:element name="tiempo" type="tipotiempo"/>
+			<xs:element name="voltajeactivacion" type="tipovoltaje"/>
+			<xs:element name="voltajesalidaentimeout" type="tipovoltaje"/>
 		</xs:sequence>
 	</xs:group>
 	
@@ -330,7 +349,7 @@
 			<xs:element name="vector" type="tipovector"/>
 			<xs:element name="temporizador" type="tipotemporizador"/>
 			<xs:element name="contador" type="tipocontador"/>
-			
+			<xs:element name="rele" type="tiporele"/>
 			<!--Observese que con esto permitirmos la recursividad de sistemas-->
 			<xs:element name="sistema" type="tiposistema"/>
 		</xs:choice>

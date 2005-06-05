@@ -181,19 +181,13 @@
 	</xs:complexType>
 	
 	
-	<!--Un contador actua por flancos. Es necesario que se indique el voltaje inicial del flanco y el voltaje final 
-	(esto permitira construir contadores que actuen por flanco de subida y de bajada). Tras un numero determinado
-	de flancos (indicado por cuentamaxima) el voltaje de salida del contador cambiara. El reset del contador
-	también actua por flanco-->
 	<xs:group name="grupocontador">
 		<xs:sequence>
-			<xs:element name="voltajeinicial" type="tipovoltaje"/>
-			<xs:element name="voltajefinal" type="tipovoltaje"/>
-			<xs:element name="cuentamaxima" type="xs:positiveInteger"/>
-			<xs:element name="voltajeinicialreset" type="tipovoltaje"/>
-			<xs:element name="voltajefinalreset" type="tipovoltaje"/>
-			<xs:element name="voltajeinicialsalida" type="tipovoltaje"/>
-			<xs:element name="voltajefinalsalida" type="tipovoltaje"/>
+			<xs:element name="entradareposo" type="tipovoltaje"/>
+			<xs:element name="salidareposo" type="tipovoltaje"/>
+			<xs:element name="entradaactivacion" type="tipovoltaje"/>
+			<xs:element name="salidaactivacion" type="tipovoltaje"/>
+			<xs:element name="numerodepulsos" type="xs:integer"/>
 		</xs:sequence>
 	</xs:group>
 	
@@ -349,6 +343,7 @@
 			<xs:element name="vector" type="tipovector"/>
 			<xs:element name="temporizador" type="tipotemporizador"/>
 			<xs:element name="contador" type="tipocontador"/>
+			<xs:element name="zumbador" type="tipozumbador"/>
 			<xs:element name="rele" type="tiporele"/>
 			<!--Observese que con esto permitirmos la recursividad de sistemas-->
 			<xs:element name="sistema" type="tiposistema"/>
@@ -357,7 +352,11 @@
 	
 	
 	<xs:complexType name="tiposistema">
-		<xs:group ref="elemento" minOccurs="1" maxOccurs="65536"/>
+		<xs:sequence>
+			<xs:element name="nombre" type="tiponombre"/>
+			<xs:group ref="elemento" minOccurs="1" maxOccurs="65536"/>
+		</xs:sequence>
+		
 	</xs:complexType>
 	
 	

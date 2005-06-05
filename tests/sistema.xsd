@@ -11,7 +11,7 @@
 		</xs:restriction>
 	</xs:simpleType>
 	
-	<!--Voltaje: Los voltajes usados oscilan en torno a los 9V-->
+	<!--Voltaje: Los voltajes usados oscilan en torno a 9V y -9V-->
 	<xs:simpleType name="tipovoltaje">
 		<xs:restriction base="xs:integer">
 		<xs:minInclusive value="-9"/>
@@ -100,7 +100,7 @@
 	
 	<!--Un sensor pulsador puede tener dos entradas y dos salidas. Para una entrada
 	pulsado (1) emitira una salida (en Voltaje) y para una entrada no pulsado (0) emitira
-	una salida (también en voltaje)-->
+	una salida (tambien en voltaje)-->
 	<xs:group name="gruposensorpulsador">
 		<xs:sequence>
 			<xs:element name="entradareposo" type="tipopresion"/>
@@ -111,7 +111,7 @@
 	</xs:group>
 	
 	
-	<!--Aqui se definen los tipos de verdad. Por qué hacerlo de esta manera?
+	<!--Aqui se definen los tipos de verdad. Por que hacerlo de esta manera?
 	Porque al separar características de esta manera podemos "heredarlas"
 	en los pulsadores simples, en los vectores de pulsadores y en otras construcciones
 	mas complejas-->
@@ -162,28 +162,6 @@
 	</xs:complexType>
 	
 	
-	<!--Un contador actua por flancos. Es necesario que se indique el voltaje inicial del flanco y el voltaje final 
-	(esto permitira construir contadores que actuen por flanco de subida y de bajada). Tras un numero determinado
-	de flancos (indicado por cuentamaxima) el voltaje de salida del contador cambiara. El reset del contador
-	también actua por flanco-->
-	<xs:group name="grupocontador">
-		<xs:sequence>
-			<xs:element name="voltajeinicial" type="tipovoltaje"/>
-			<xs:element name="voltajefinal" type="tipovoltaje"/>
-			<xs:element name="cuentamaxima" type="xs:positiveInteger"/>
-			<xs:element name="voltajeinicialreset" type="tipovoltaje"/>
-			<xs:element name="voltajefinalreset" type="tipovoltaje"/>
-			<xs:element name="voltajeinicialsalida" type="tipovoltaje"/>
-			<xs:element name="voltajefinalsalida" type="tipovoltaje"/>
-		</xs:sequence>
-	</xs:group>
-	
-	<xs:complexType name="tipocontador">
-		<xs:sequence>
-			<xs:element name="nombreelemento" type="tiponombre"/>
-			<xs:group ref="grupocontador"/>
-		</xs:sequence>
-	</xs:complexType>
 	
 	<xs:group name="grupofotosensor">
 		<xs:sequence>
@@ -203,7 +181,22 @@
 		</xs:sequence>
 	</xs:complexType>
 	
+	<xs:group name="grupocontador">
+		<xs:sequence>
+			<xs:element name="entradareposo" type="tipopresion"/>
+			<xs:element name="salidareposo" type="tipovoltaje"/>
+			<xs:element name="entradaactivacion" type="tipopresion"/>
+			<xs:element name="salidaactivacion" type="tipovoltaje"/>
+			<xs:element name="numerodepulsos" type="xs:integer"/>
+		</xs:sequence>
+	</xs:group>
 	
+	<xs:complexType name="tipocontador">
+		<xs:sequence>
+			<xs:element name="nombreelemento" type="tiponombre"/>
+			<xs:group ref="grupolampara"/>
+		</xs:sequence>
+	</xs:complexType>
 	
 	
 	
@@ -297,6 +290,7 @@
 				<xs:element name="lampara" type="tipolampara"/>
 				<xs:element name="electroiman" type="tipoelectroiman"/>
 				<xs:element name="motor" type="tipomotor"/>
+				<xs:element name="contador" type="tipocontador"/>
 			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>

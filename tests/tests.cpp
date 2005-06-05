@@ -32,7 +32,7 @@ namespace {
 		{
 			v=p->extraerElementos();
 			assert_eq ("Vector vacio?", false, v.empty() );
-			assert_eq ("Tamano 9?", 9, v.size() );
+			assert_eq ("Tamano 10?", 10, v.size() );
 		}
 		void pruebaMotor()
 		{
@@ -192,7 +192,7 @@ namespace {
 			Elemento* vectorComponentes[20];
 			int numComponentes;
 			numComponentes=s->getComponentes(vectorComponentes);
-			assert_eq ("numComponentes", 9, numComponentes);
+			assert_eq ("numComponentes 10?", 10, numComponentes);
 		}
 		
 		void pruebaListaRelaciones()
@@ -290,7 +290,7 @@ namespace {
 			f=(FotoSensor*) e;
 			elementoFotoSensor=f->getNodo();
 			esRefNula=(elementoFotoSensor==NULL);
-			assert_eq ("¿DOMElement lampara3?", false, esRefNula);
+			assert_eq ("¿DOMElement Fotosensor?", false, esRefNula);
 		}
 		
 		void pruebaDevolucionNodoReed()
@@ -305,7 +305,7 @@ namespace {
 			r=(Reed*) e;
 			elementoReed=r->getNodo();
 			esRefNula=(elementoReed==NULL);
-			assert_eq ("¿DOMElement lampara3?", false, esRefNula);
+			assert_eq ("¿DOMElement reed2?", false, esRefNula);
 		}
 		
 		
@@ -340,6 +340,31 @@ namespace {
 			elementoZumbador=z->getNodo();
 			esRefNula=(elementoZumbador==NULL);
 			assert_eq ("¿DOMElement lampara3?", false, esRefNula);
+		}		
+		void pruebaRefTemporizador()
+		{
+			Elemento *e,*f;
+			bool esNulo;
+			e=s->getRefElemento("TemporizadorXX");
+			f=NULL;
+			esNulo=(e==s);
+			assert_eq ("getRefElemento Temporizador NULL", false, esNulo );
+		}
+		
+		void pruebaDevolucionNodoTemporizador()
+		{
+			Elemento* 		e;
+			Temporizador*	t;
+			bool 			esRefNula;
+			DOMElement*		elementoTemporizador;
+			
+			e=s->getRefElemento ("TemporizadorXX");
+			esRefNula=(e==NULL);
+			assert_eq ("Referencia a temporizador?", false, esRefNula);
+			t=(Temporizador*)t;
+			elementoTemporizador=t->getNodo();
+			esRefNula=(elementoTemporizador==NULL);
+			assert_eq ("¿DOMElement TemporizadorXXX?", false, esRefNula);
 		}		
 		
 		void pruebaEscritura()
@@ -408,6 +433,10 @@ namespace {
 				(this, "Zumbador devuelve DOMDocument?", &pruebaParser::pruebaDevolucionNodoZumbador));
 			add ("Escritura del pulsador", testcase
 				(this, "¿Se escribe pulsador1?", &pruebaParser::pruebaEscritura));	
+			add ("Devolucion de un nodo Temporizador", testcase
+				(this, "Temporizador devuelve DOMDocument", &pruebaParser::pruebaDevolucionNodoTemporizador));	
+			add ("Referencia del temporizador", testcase
+				(this, "REFTemporizador", &pruebaParser::pruebaRefTemporizador));					
 			suite::main().add ("pruebaFicheroTest", this);
 				
 		}

@@ -1,7 +1,7 @@
 [Project]
 FileName=tests.dev
 Name=Proyecto1
-UnitCount=13
+UnitCount=14
 Type=1
 Ver=1
 ObjFiles=
@@ -169,6 +169,16 @@ BuildCmd=
 
 [Unit13]
 FileName=..\CapaXML\rele.cpp
+CompileCpp=1
+Folder=Proyecto1
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit14]
+FileName=..\CapaXML\temporizador.cpp
 CompileCpp=1
 Folder=Proyecto1
 Compile=1

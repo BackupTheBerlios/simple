@@ -130,7 +130,7 @@
 	</rele>
 	
 	<temporizador>
-		<nombreelemento>TemporizadorXX</nombreelemento>
+        <nombreelemento>TemporizadorXX</nombreelemento>
 		<voltajeentradainicial>0</voltajeentradainicial>
 		<voltajesalidainicial>0</voltajesalidainicial>
 		<tiempo>4000</tiempo>

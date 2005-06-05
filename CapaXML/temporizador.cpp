@@ -51,7 +51,10 @@ void Temporizador::construir (DOMNode* nodo)
            hijo=hijo->getNextSibling();
      }                   	
 }
-
+DOMElement*	Temporizador::getNodo()
+{
+	return Temporizador::getNodo("temporizador");
+}
 DOMElement* Temporizador::getNodo(char *nombreElemento)
 {
 	char*			aux;
@@ -71,34 +74,40 @@ DOMElement* Temporizador::getNodo(char *nombreElemento)
 	
 	
 	/*	Creamos los nodos hijo y rellenamos su contenido*/
-	nombreNodo=XMLString::transcode ("entradareposo");
-	nodoEntradaReposo=doc->createElement(nombreNodo);
-	valorNodo= convertir (entradaReposo);
-	nodoEntradaReposo->setTextContent(valorNodo);
+	nombreNodo=XMLString::transcode ("voltajeentradainicial");
+	nodoVoltajeEntradaInicial=doc->createElement(nombreNodo);
+	valorNodo= convertir (voltajeEntradaInicial);
+	nodoVoltajeEntradaInicial->setTextContent(valorNodo);
 	
-	nombreNodo=XMLString::transcode ("salidareposo");
-	nodoSalidaReposo=doc->createElement(nombreNodo);
-	valorNodo= convertir (salidaReposo);
-	nodoSalidaReposo->setTextContent(valorNodo);
+	nombreNodo=XMLString::transcode ("voltajesalidainicial");
+	nodoVoltajeSalidaInicial=doc->createElement(nombreNodo);
+	valorNodo= convertir (voltajeSalidaInicial);
+	nodoVoltajeSalidaInicial->setTextContent(valorNodo);
 	
-	nombreNodo=XMLString::transcode ("entradaactivacion");
-	nodoEntradaActivacion=doc->createElement(nombreNodo);
-	valorNodo= convertir (entradaActivacion);
-	nodoEntradaActivacion->setTextContent(valorNodo);
+	nombreNodo=XMLString::transcode ("voltajeactivacion");
+	nodoVoltajeActivacion=doc->createElement(nombreNodo);
+	valorNodo= convertir (voltajeActivacion);
+	nodoVoltajeActivacion->setTextContent(valorNodo);
 	
-	nombreNodo=XMLString::transcode ("salidaactivacion");
-	nodoSalidaActivacion=doc->createElement(nombreNodo);
-	valorNodo= convertir (salidaActivacion);
-	nodoSalidaActivacion->setTextContent(valorNodo);
+	nombreNodo=XMLString::transcode ("voltajesalidaentimeout");
+	nodoVoltajeSalidaEnTimeout=doc->createElement(nombreNodo);
+	valorNodo= convertir (voltajeSalidaEnTimeout);
+	nodoVoltajeSalidaEnTimeout->setTextContent(valorNodo);
+	
+	nombreNodo=XMLString::transcode ("tiempo");
+	nodoTiempo=doc->createElement(nombreNodo);
+	valorNodo= convertir (tiempo);
+	nodoTiempo->setTextContent(valorNodo);
 	
 	/*	El puntero al documento raiz apunta al minidocumento
-		"electroiman" creado antes. Se necesita para empezar
+		creado antes. Se necesita para empezar
 		a insertar elementos dentro del elemento*/
 	DOMElement* punteroDocRaiz=doc->getDocumentElement();
-	punteroDocRaiz->appendChild (nodoEntradaReposo);
-	punteroDocRaiz->appendChild (nodoSalidaReposo);
-	punteroDocRaiz->appendChild (nodoEntradaActivacion);
-	punteroDocRaiz->appendChild (nodoSalidaActivacion);	
+	punteroDocRaiz->appendChild (nodoVoltajeEntradaInicial);
+	punteroDocRaiz->appendChild (nodoVoltajeSalidaInicial);
+	punteroDocRaiz->appendChild (nodoVoltajeActivacion);
+	punteroDocRaiz->appendChild (nodoVoltajeSalidaEnTimeout);	
+	punteroDocRaiz->appendChild (nodoTiempo);	
 	
 	/*	Una vez enganchados los elementos, devolvemos el minidocumento*/
 	return (DOMElement*) doc;

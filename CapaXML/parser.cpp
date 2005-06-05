@@ -146,6 +146,15 @@ vector <Elemento*> Parser::extraerElementos ()
 					cout << "El tamaño es " << vector_elementos.size();
 				}
 				
+				if (XMLString::equals (nombre, "temporizador"))
+				{
+					cout << "Encontrado un temporizador" << endl;
+					Temporizador* t=new Temporizador();
+					t->construir (elemento_siguiente);
+					vector_elementos.push_back(t);
+					cout << "El tamaño es " << vector_elementos.size() << endl;
+				}
+				
 				
 				
 			}

@@ -9,6 +9,8 @@
 using namespace std;
 using namespace unitpp;
 
+
+#define NUM_COMPONENTES 11
 //Todas las pruebas están situadas en un espacio
 //de nombre anónimo y totalmente aparte
 namespace {
@@ -32,7 +34,7 @@ namespace {
 		{
 			v=p->extraerElementos();
 			assert_eq ("Vector vacio?", false, v.empty() );
-			assert_eq ("Tamano 10?", 10, v.size() );
+			assert_eq ("Tamano correcto?", NUM_COMPONENTES, v.size() );
 		}
 		void pruebaMotor()
 		{
@@ -162,6 +164,37 @@ namespace {
 			assert_eq ("Nombre",			true,
 				XMLString::equals (nombre,z->getNombreElemento()));
 		}
+		
+		void pruebaContador()
+		{
+			XMLCh* nombre;
+			
+			Contador* c=(Contador*) v.at (10);
+			nombre=XMLString::transcode ("ContadorX");
+			
+			assert_eq ("Entradareposo",		0,c->getEntradaReposo		()	);
+			assert_eq ("Salidareposo",		0,c->getSalidaReposo		()	);
+			assert_eq ("Entradaactivacion",	9,c->getEntradaActivacion	()	);
+			assert_eq ("Salidaactivacion",	9,c->getSalidaActivacion	()	);
+			assert_eq ("Numero de pulsos",	40,c->getNumeroDePulsos		()	);
+			assert_eq ("Nombre", true, XMLString::equals (nombre,c->getNombreElemento()));
+		}
+		
+		void pruebaTemporizador()
+		{
+			XMLCh* nombre;
+			
+			Temporizador* t=(Temporizador*) v.at (9);
+			nombre=XMLString::transcode ("TemporizadorXX");
+			
+			assert_eq ("Entradainicial",	0,t->getVoltajeEntradaInicial	()	);
+			assert_eq ("Salidainicial",		0,t->getVoltajeSalidaInicial	()	);
+			assert_eq ("Entradaactivacion",	5,t->getVoltajeActivacion		()	);
+			assert_eq ("Salidaactivacion",	5,t->getVoltajeSalidaEnTimeout	()	);
+			assert_eq ("Tiempo",			4000,t->getTiempo				()	);
+			assert_eq ("Nombre", true, 
+				XMLString::equals (nombre,t->getNombreElemento()));
+		}
 		void pruebaRelacion ()
 		{
 			r=p->extraerRelaciones();
@@ -169,6 +202,8 @@ namespace {
 				exactamente una relacion*/
 			assert_eq ("Vector de relaciones", false, r.empty());
 		}
+		
+		
 		void pruebaInsertaRelaciones()
 		{
 			assert_eq ("Relaciones inexistentes", 2, r.size());
@@ -192,7 +227,8 @@ namespace {
 			Elemento* vectorComponentes[20];
 			int numComponentes;
 			numComponentes=s->getComponentes(vectorComponentes);
-			assert_eq ("numComponentes 10?", 10, numComponentes);
+			assert_eq ("numComponentes del vector correcto?", 
+				NUM_COMPONENTES, numComponentes);
 		}
 		
 		void pruebaListaRelaciones()
@@ -405,6 +441,10 @@ namespace {
 				(this, "FotoSensor1", &pruebaParser::pruebaFotoSensor));
 			add ("Comprobacion de Zumbador", testcase
 				(this, "ZumbadorA", &pruebaParser::pruebaZumbador));
+			add ("Comprobacion de Temporizador", testcase
+				(this, "TemporizadorXX", &pruebaParser::pruebaTemporizador));
+			add ("Comprobacion de contador", testcase
+				(this, "ContadorX", &pruebaParser::pruebaContador));
 			add ("Comprobacion de la extraccion de relaciones", testcase
 				(this, "Relacion 1", &pruebaParser::pruebaRelacion));
 			add ("Prueba insercion componentes", testcase

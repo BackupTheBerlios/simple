@@ -7,6 +7,7 @@
 #include "fotosensor.h"
 #include "zumbador.h"
 #include "rele.h"
+#include "contador.h"
 #include "temporizador.h"
 #include <iostream>
 #ifndef _sistema_

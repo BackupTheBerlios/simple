@@ -38,6 +38,10 @@ XERCES_CPP_NAMESPACE_USE
 
 #ifndef _elementos_
 #define _elementos_
+
+/*Los elementos concretos se construyen a partir de un nodo DOM,
+  es decir, directamente de un "trozo" en XML*/
+
 class Elemento {
 	public:
 		XMLCh*	getNombreElemento	()				;
@@ -60,17 +64,7 @@ class Elemento {
 		int 		totalSuscriptores;
 };
 
-
-/*Los elementos concretos se construyen a partir de un nodo DOM,
-  es decir, directamente de un "trozo" en XML*/
   
-
-
-
-
-
-
-
 /*	Esta clase representa la relacion entre un elemento llamado
 	primario y otro llamado secundario. La salida del primario
 	irá conectada a la entrada del secundario, haciendo que el

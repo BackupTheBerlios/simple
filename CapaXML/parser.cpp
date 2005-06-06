@@ -155,6 +155,14 @@ vector <Elemento*> Parser::extraerElementos ()
 					cout << "El tamaño es " << vector_elementos.size() << endl;
 				}
 				
+				if (XMLString::equals (nombre, "contador"))
+				{
+					cout << "Encontrado un contador" << endl;
+					Contador* c=new Contador();
+					c->construir (elemento_siguiente);
+					vector_elementos.push_back(c);
+					cout << "El tamaño es " << vector_elementos.size() << endl;
+				}
 				
 				
 			}

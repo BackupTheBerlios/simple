@@ -258,6 +258,14 @@ namespace {
 			e=s->getRefElemento ("ZumbadorA");
 			esNulo=(e==NULL);
 			assert_eq ("getRefElemento valido para ZumbadorA",false, esNulo);
+			
+			e=s->getRefElemento ("TemporizadorXX");
+			esNulo=(e==NULL);
+			assert_eq ("getRefElemento valido para Temporizador", false, esNulo);
+			
+			e=s->getRefElemento ("ContadorX");
+			esNulo=(e==NULL);
+			assert_eq ("getRefElemento valido para Contador", false, esNulo);
 		}
 		void pruebaRelacionConNotificacion()
 		{

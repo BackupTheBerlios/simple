@@ -112,7 +112,7 @@
 	
 	
 	<!--Aqui se definen los tipos de verdad. Por que hacerlo de esta manera?
-	Porque al separar características de esta manera podemos "heredarlas"
+	Porque al separar caracteristicas de esta manera podemos "heredarlas"
 	en los pulsadores simples, en los vectores de pulsadores y en otras construcciones
 	mas complejas-->
 	<xs:complexType name="tiposensorpulsador">
@@ -297,14 +297,38 @@
 	
 	<!--DEFINICION DE RELACIONES ENTRE ELEMENTOS-->
 	
+	<!--	En una relacion pueden intervenir dos elementos a los que llamaremos primario
+		y secundario. Cada elemento puede ser el nombre de un elemento simple o un
+		elemento que forme parte de un vector de elementos-->
 	
+	<xs:complexType name="vector">
+		<xs:sequence>
+			<xs:element name="nombre" type="tiponombre"/>
+			<xs:element name="posicion" type="xs:positiveInteger"/>
+		</xs:sequence>
+	</xs:complexType>
 	
-	<!--Definicion de una relación entre dos componentes. Hay un elemento primario
+	<xs:group name="participanteprimarioenrelacion">
+		<xs:choice>
+			<xs:element name="primario" type="tiponombre"/>
+			<xs:element name="primario" type="vector"/>
+		</xs:choice>
+	</xs:group>
+	
+	<xs:group name="participantesecundarioenrelacion">
+		<xs:choice>
+			<xs:element name="secundario" type="tiponombre"/>
+			<xs:element name="secundario" type="vector"/>
+		</xs:choice>
+	</xs:group>
+
+	
+	<!--Definicion de una relacion entre dos componentes. Hay un elemento primario
 	que conecta su salida a la entrada del siguiente (que llamamos secundario)-->
 	<xs:complexType name="tiporelacion">
 		<xs:sequence>
-			<xs:element name="primario" type="tiponombre"/>
-			<xs:element name="secundario" type="tiponombre"/>
+			<xs:group ref="participanteprimarioenrelacion"/>
+			<xs:group ref="participantesecundarioenrelacion
 		</xs:sequence>
 	</xs:complexType>
 	

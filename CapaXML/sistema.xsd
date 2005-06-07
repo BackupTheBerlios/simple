@@ -317,13 +317,37 @@
 	<!--DEFINICION DE RELACIONES ENTRE ELEMENTOS-->
 	
 	
+	<!--	En una relacion pueden intervenir dos elementos a los que llamaremos primario
+		y secundario. Cada elemento puede ser el nombre de un elemento simple o un
+		elemento que forme parte de un vector de elementos-->
+	
+	<xs:complexType name="vector">
+		<xs:sequence>
+			<xs:element name="nombre" type="tiponombre"/>
+			<xs:element name="posicion" type="xs:positiveInteger"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:group name="participanteprimarioenrelacion">
+		<xs:choice>
+			<xs:element name="primario" type="tiponombre"/>
+			<xs:element name="primario" type="vector"/>
+		</xs:choice>
+	</xs:group>
+	
+	<xs:group name="participantesecundarioenrelacion">
+		<xs:choice>
+			<xs:element name="secundario" type="tiponombre"/>
+			<xs:element name="secundario" type="vector"/>
+		</xs:choice>
+	</xs:group>
 	
 	<!--Definicion de una relación entre dos componentes. Hay un elemento primario
 	que conecta su salida a la entrada del siguiente (que llamamos secundario)-->
 	<xs:complexType name="tiporelacion">
 		<xs:sequence>
-			<xs:element name="primario" type="tiponombre"/>
-			<xs:element name="secundario" type="tiponombre"/>
+			<xs:group ref="participanteprimarioenrelacion"/>
+			<xs:group ref="participantesecundarioenrelacion"/>
 		</xs:sequence>
 	</xs:complexType>
 	

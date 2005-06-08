@@ -10,7 +10,8 @@ using namespace std;
 using namespace unitpp;
 
 
-#define NUM_COMPONENTES 11
+#define NUM_COMPONENTES 	11
+#define NUM_RELACIONES 		4
 //Todas las pruebas están situadas en un espacio
 //de nombre anónimo y totalmente aparte
 namespace {
@@ -176,7 +177,7 @@ namespace {
 			assert_eq ("Salidareposo",		0,c->getSalidaReposo		()	);
 			assert_eq ("Entradaactivacion",	9,c->getEntradaActivacion	()	);
 			assert_eq ("Salidaactivacion",	9,c->getSalidaActivacion	()	);
-			assert_eq ("Numero de pulsos",	40,c->getNumeroDePulsos		()	);
+			assert_eq ("Numero de pulsos",	4,c->getNumeroDePulsos		()	);
 			assert_eq ("Nombre", true, XMLString::equals (nombre,c->getNombreElemento()));
 		}
 		
@@ -206,7 +207,7 @@ namespace {
 		
 		void pruebaInsertaRelaciones()
 		{
-			assert_eq ("Relaciones inexistentes", 2, r.size());
+			assert_eq ("Relaciones inexistentes", NUM_RELACIONES, r.size());
 			for (int i=0;i<r.size();i++)
 			{
 				assert_eq ("Insercion de r", 
@@ -236,7 +237,7 @@ namespace {
 			Relacion* vectorRelaciones[40];
 			int numRelaciones;
 			numRelaciones=s->getRelaciones (vectorRelaciones);
-			assert_eq ("numRelaciones", 2, numRelaciones);
+			assert_eq ("numRelaciones", NUM_RELACIONES, numRelaciones);
 		}
 		
 		void pruebaRefElemento ()
@@ -411,6 +412,32 @@ namespace {
 			assert_eq ("¿DOMElement TemporizadorXXX?", false, esRefNula);
 		}		
 		
+		void pruebaMultiplePulsacionDePulsador()
+		{
+			Elemento*	e;
+			Pulsador*	pulsador1;
+			Contador*	ContadorX;
+			e=s->getRefElemento("Pulsador1");
+			pulsador1=(Pulsador*) e;
+
+			e=s->getRefElemento ("ContadorX");
+			ContadorX=(Contador*) e;
+			
+			for (int i=0;i<200;i++)
+			{
+				pulsador1->setEntrada(0);
+				pulsador1->setEntrada(1);
+				
+				/*	Como es para una prueba, reseteamos el contador
+					al azar, por ejemplo, cada 20 pulsaciones*/
+				if ( (i%5)==0) 
+				{
+					cout << "Reseteando..." << endl;
+					ContadorX->reset();
+				}
+					
+			}
+		}
 		void pruebaEscritura()
 		{
 			Elemento*	e;
@@ -485,6 +512,8 @@ namespace {
 				(this, "Temporizador devuelve DOMDocument", &pruebaParser::pruebaDevolucionNodoTemporizador));	
 			add ("Referencia del temporizador", testcase
 				(this, "REFTemporizador", &pruebaParser::pruebaRefTemporizador));					
+			add ("Pulsacion multiple de pulsador", testcase
+				(this, "Pulsador...", &pruebaParser::pruebaMultiplePulsacionDePulsador));					
 			suite::main().add ("pruebaFicheroTest", this);
 				
 		}

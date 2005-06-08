@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sistema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:noNamespaceSchemaLocation='sistema2.xsd'>	
+	   
+	   <nombre> Sistema1</nombre>
 	<!--Ejemplo sencillo de sensor pulsador-->
 	<pulsador>
 		<nombreelemento>Pulsador1</nombreelemento>
@@ -76,11 +78,31 @@
 	</motor>
 	
 	<relacion>
-	<primario>Sensor1</primario>
-	<secundario>Motor1</secundario>
+		<primario>Pulsador1</primario>
+		<secundario>lampara3</secundario>
 	</relacion>
 	
+	<lampara>
+		<nombreelemento>Lampara1</nombreelemento>
+		<color>add3e3</color>
+		<entradareposo>0</entradareposo>
+		<salidareposo>0</salidareposo>
+		<entradaactivacion>9</entradaactivacion>
+		<salidaactivacion>1</salidaactivacion>
+	</lampara>
 	
+	<relacion>
+			<primario>Pulsador1</primario>
+			<secundario>Lampara1</secundario>
+	</relacion>
+	
+	<zumbador>
+		<nombreelemento>ZumbadorA</nombreelemento>
+		<entradareposo>0</entradareposo>
+		<salidareposo>	0</salidareposo>
+		<entradaactivacion>9</entradaactivacion>
+		<salidaactivacion>  4000   </salidaactivacion>
+	</zumbador>
 	<!--Ejemplo de un vector de motores. Tiene 10 motores que con un voltaje
 	de 9V giran en sentido antihorario, con un voltaje de -9V giran en sentido
 	horario y con 0V detienen su actividad-->
@@ -108,11 +130,30 @@
 	</rele>
 	
 	<temporizador>
-		<nombreelemento>TemporizadorXX</nombreelemento>
+        <nombreelemento>TemporizadorXX</nombreelemento>
 		<voltajeentradainicial>0</voltajeentradainicial>
 		<voltajesalidainicial>0</voltajesalidainicial>
 		<tiempo>4000</tiempo>
 		<voltajeactivacion>5</voltajeactivacion>
 		<voltajesalidaentimeout>5</voltajesalidaentimeout>
 	</temporizador>
+	
+	<contador>
+		<nombreelemento>ContadorX</nombreelemento>
+		<entradareposo>0</entradareposo>
+		<salidareposo>0</salidareposo>
+		<entradaactivacion>9</entradaactivacion>
+		<salidaactivacion>9</salidaactivacion>
+		<numerodepulsos>4</numerodepulsos>
+	</contador>
+	
+	<relacion>
+		<primario>Pulsador1</primario>
+		<secundario>ContadorX</secundario>
+	</relacion>
+	
+	<relacion>
+		<primario>ContadorX</primario>
+		<secundario>ZumbadorA</secundario>
+	</relacion>
 </sistema>

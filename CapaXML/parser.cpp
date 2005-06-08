@@ -46,6 +46,7 @@ Parser::Parser ()
 bool Parser::esValido(const char* fichero){
 	const XMLCh* nombrefichero;
 	
+	cout << "Analizando " << fichero << endl;
 	nombrefichero=XMLString::transcode (fichero);
 	try {
 		
@@ -99,7 +100,6 @@ vector <Elemento*> Parser::extraerElementos ()
 				}
 				if (XMLString::equals (nombre,"lampara"))
 				{
-					cout << "Encontrada lampara" << nombre << endl;
 					Lampara* l=new Lampara();
 					l->construir (elemento_siguiente);
 					vector_elementos.push_back(l);
@@ -130,38 +130,30 @@ vector <Elemento*> Parser::extraerElementos ()
 				}
 				if (XMLString::equals (nombre, "zumbador"))
 				{
-					cout << "Encontrado un zumbador" << endl;
 					Zumbador* z=new Zumbador();
 					z->construir (elemento_siguiente);
 					vector_elementos.push_back(z);
-					cout << "El tamaño es " << vector_elementos.size();
 				}
 				
 				if (XMLString::equals (nombre, "rele"))
 				{
-					cout << "Encontrado un rele" << endl;
 					Rele* r=new Rele();
 					r->construir (elemento_siguiente);
 					vector_elementos.push_back(r);
-					cout << "El tamaño es " << vector_elementos.size();
 				}
 				
 				if (XMLString::equals (nombre, "temporizador"))
 				{
-					cout << "Encontrado un temporizador" << endl;
 					Temporizador* t=new Temporizador();
 					t->construir (elemento_siguiente);
 					vector_elementos.push_back(t);
-					cout << "El tamaño es " << vector_elementos.size() << endl;
 				}
 				
 				if (XMLString::equals (nombre, "contador"))
 				{
-					cout << "Encontrado un contador" << endl;
 					Contador* c=new Contador();
 					c->construir (elemento_siguiente);
 					vector_elementos.push_back(c);
-					cout << "El tamaño es " << vector_elementos.size() << endl;
 				}
 				
 				

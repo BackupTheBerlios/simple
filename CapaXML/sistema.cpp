@@ -37,7 +37,6 @@ int Sistema::anadirRelacion(Relacion* relacion)
 		{
 			nombreElementoActual=listaComponentes[i]->getNombreElemento();
 			char* elem=XMLString::transcode (nombreElementoActual);
-			cout << "Comparando " << elem << endl ;
 			if (XMLString::equals(nombrePrimario, nombreElementoActual))
 			{
 				primario=listaComponentes[i];
@@ -67,7 +66,6 @@ int Sistema::anadirComponente(Elemento* componente)
 	{
 		listaComponentes[numComponentes++]=componente;
 		char* nombre=XMLString::transcode (componente->getNombreElemento());
-		cout << "Anadiendo " << nombre << endl;
 		XMLString::release (&nombre);
 		return 0;
 	}

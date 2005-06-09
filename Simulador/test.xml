@@ -144,7 +144,7 @@
 		<salidareposo>0</salidareposo>
 		<entradaactivacion>9</entradaactivacion>
 		<salidaactivacion>9</salidaactivacion>
-		<numerodepulsos>4</numerodepulsos>
+                <numerodepulsos>2</numerodepulsos>
 	</contador>
 	
 	<relacion>

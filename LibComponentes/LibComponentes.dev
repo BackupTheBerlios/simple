@@ -32,7 +32,7 @@ CompilerSettings=1000000000000001000000
 [Unit1]
 FileName=..\CapaXML\zumbador.cpp
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -42,7 +42,7 @@ BuildCmd=
 [Unit2]
 FileName=..\CapaXML\contador.cpp
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -52,7 +52,7 @@ BuildCmd=
 [Unit3]
 FileName=..\CapaXML\electroiman.cpp
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -62,7 +62,7 @@ BuildCmd=
 [Unit4]
 FileName=..\CapaXML\elementos.cpp
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -72,7 +72,7 @@ BuildCmd=
 [Unit5]
 FileName=..\CapaXML\elementosimple.cpp
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -82,7 +82,7 @@ BuildCmd=
 [Unit6]
 FileName=..\CapaXML\fotosensor.cpp
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -92,7 +92,7 @@ BuildCmd=
 [Unit7]
 FileName=..\CapaXML\lampara.cpp
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -102,7 +102,7 @@ BuildCmd=
 [Unit8]
 FileName=..\CapaXML\motor.cpp
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -112,7 +112,7 @@ BuildCmd=
 [Unit9]
 FileName=..\CapaXML\parser.cpp
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -122,7 +122,7 @@ BuildCmd=
 [Unit10]
 FileName=..\CapaXML\pulsador.cpp
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -132,7 +132,7 @@ BuildCmd=
 [Unit11]
 FileName=..\CapaXML\reed.cpp
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -142,7 +142,7 @@ BuildCmd=
 [Unit12]
 FileName=..\CapaXML\rele.cpp
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -152,7 +152,7 @@ BuildCmd=
 [Unit13]
 FileName=..\CapaXML\sistema.cpp
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -162,7 +162,7 @@ BuildCmd=
 [Unit14]
 FileName=..\CapaXML\temporizador.cpp
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -172,7 +172,7 @@ BuildCmd=
 [Unit15]
 FileName=..\CapaXML\zumbador.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -182,7 +182,7 @@ BuildCmd=
 [Unit16]
 FileName=..\CapaXML\constantes.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -192,7 +192,7 @@ BuildCmd=
 [Unit17]
 FileName=..\CapaXML\contador.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -202,7 +202,7 @@ BuildCmd=
 [Unit18]
 FileName=..\CapaXML\electroiman.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -212,7 +212,7 @@ BuildCmd=
 [Unit19]
 FileName=..\CapaXML\elementos.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -222,7 +222,7 @@ BuildCmd=
 [Unit20]
 FileName=..\CapaXML\elementosimple.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -232,7 +232,7 @@ BuildCmd=
 [Unit21]
 FileName=..\CapaXML\fotosensor.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -242,7 +242,7 @@ BuildCmd=
 [Unit22]
 FileName=..\CapaXML\lampara.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -252,7 +252,7 @@ BuildCmd=
 [Unit23]
 FileName=..\CapaXML\motor.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -262,7 +262,7 @@ BuildCmd=
 [Unit24]
 FileName=..\CapaXML\parser.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -272,7 +272,7 @@ BuildCmd=
 [Unit25]
 FileName=..\CapaXML\pulsador.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -282,7 +282,7 @@ BuildCmd=
 [Unit26]
 FileName=..\CapaXML\reed.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -292,7 +292,7 @@ BuildCmd=
 [Unit27]
 FileName=..\CapaXML\rele.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -302,7 +302,7 @@ BuildCmd=
 [Unit28]
 FileName=..\CapaXML\sistema.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000
@@ -312,7 +312,7 @@ BuildCmd=
 [Unit29]
 FileName=..\CapaXML\temporizador.h
 CompileCpp=1
-Folder=LibComponentes
+Folder=
 Compile=1
 Link=1
 Priority=1000

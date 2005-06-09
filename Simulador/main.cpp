@@ -5,15 +5,6 @@
 
 
 #include "funciones.h"
-//Evitar instanciación de plantillas
-#define XERCES_TMPLSINC
-
-#include <xercesc/parsers/XercesDOMParser.hpp>
-#include <xercesc/dom/DOM.hpp>
-#include <xercesc/sax/HandlerBase.hpp>
-#include <xercesc/util/XMLString.hpp>
-#include <xercesc/util/PlatformUtils.hpp>
-
 
 using namespace std;
 
@@ -44,8 +35,20 @@ int main(int argc, char *argv[])
 	{
 		s->anadirRelacion(relaciones.at(i));
 	}
-	
+	for (int x=0;x<6;x++)
+	{
 	escribe_componentes (s);	
+	cout << endl;
+	escribe_relaciones (s);
+	cout << "Escriba el nombre del elemento para modificar su entrada" << endl;
+	char nombre[40];
+	cin >> nombre;
+	cout << "Introduzca la nueva entrada." << endl;
+	int entrada;
+	cin >> entrada;
+	Elemento* e=s->getRefElemento (nombre);
+	e->setEntrada(entrada);
+}
     system("PAUSE");
     return EXIT_SUCCESS;
 }

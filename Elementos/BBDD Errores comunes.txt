@@ -1,0 +1,39 @@
+Errores comunes
+
+1.-Off by one en bucles
+
+2.-Poner un punto y coma al final del for
+
+3.-Variable declarada dos veces
+
+4.-Comprobar que el limite maximo del bucle for es el correcto
+
+5.-Confundir ( con [ o ) con ]
+
+6.-No recompilar la libreria y sí recompilar los test
+
+7.-Existen elementos en el XML que no están definidos en el esquema
+
+8.-Acentos en el xml
+
+9.-D:\depo\Elementos\elemento.h ISO C++ forbids declaration of `DOMElement' with no type 
+	En este caso asegurarse de que se usa el espacio de nombre DOM con
+	#ifdef XERCES_CPP_NAMESPACE_USE
+		XERCES_CPP_NAMESPACE_USE
+	#endif	
+
+
+10.-Confundir PrimeraEntrada con PrimeraEntradaUtil y PrimeraSalida con PrimeraSalidaUtil
+
+11.-No se puede compilar un Xerces: Hay que apuntar a c:\dec-cpp\xerces...\include
+
+12.-No se conoce BaseRefVectorOfc: Hay que poner 
+	//Evitar instanciación de plantillas
+		#define XERCES_TMPLSINC 
+	al principio del fichero para evitar que se instancien las plantillas
+
+13.-Errores al no instalar el gestor de errores DOMHandler
+
+14.-Averiguar lo que es la normalizacion de tipos DOM
+
+15.-Arreglar el esquema

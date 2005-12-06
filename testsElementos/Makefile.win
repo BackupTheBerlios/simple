@@ -1,0 +1,72 @@
+# Project: TestsElementos
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe -D__DEBUG__
+CC   = gcc.exe -D__DEBUG__
+WINDRES = windres.exe
+RES  = 
+OBJ  = testzumbador.o testbiestable.o testconexiones.o testcontador.o testelectroiman.o testelemento.o testfotosensor.o testlampara.o testmotor.o testpulsador.o testreed.o testrele.o testsistema.o testsuscripcion.o testeliminacion.o $(RES)
+LINKOBJ  = testzumbador.o testbiestable.o testconexiones.o testcontador.o testelectroiman.o testelemento.o testfotosensor.o testlampara.o testmotor.o testpulsador.o testreed.o testrele.o testsistema.o testsuscripcion.o testeliminacion.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -L"C:/Dev-Cpp/xerces-c_2_5_0/lib" -Wl --enable-runtime-pseudo-reloc  ../Elementos/Elementos.a ../unit++/Unit++.a  -g3 
+INCS =  -I"C:/Dev-Cpp/include"  -I"D:/depo/Elementos"  -I"D:/depo/unit++" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include"  -I"D:/depo/Elementos"  -I"D:/depo/unit++" 
+BIN  = TestsElementos.exe
+CXXFLAGS = $(CXXINCS)   -ansi -g3
+CFLAGS = $(INCS)   -ansi -g3
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before TestsElementos.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "TestsElementos.exe" $(LIBS)
+
+testzumbador.o: testzumbador.cpp D:/depo/Elementos/zumbador.h   D:/depo/Elementos/elemento.h D:/depo/Elementos/senal.h   C:/Dev-Cpp/include/c++/3.4.2/string D:/depo/Elementos/constantes.h   D:/depo/Elementos/pulsador.h D:/depo/unit++/unit++.h   C:/Dev-Cpp/include/c++/3.4.2/vector C:/Dev-Cpp/include/c++/3.4.2/map   C:/Dev-Cpp/include/c++/3.4.2/iostream D:/depo/unit++/optmap.h   C:/Dev-Cpp/include/c++/3.4.2/stdexcept
+	$(CPP) -c testzumbador.cpp -o testzumbador.o $(CXXFLAGS)
+
+testbiestable.o: testbiestable.cpp D:/depo/unit++/unit++.h   C:/Dev-Cpp/include/c++/3.4.2/vector C:/Dev-Cpp/include/c++/3.4.2/string   C:/Dev-Cpp/include/c++/3.4.2/map C:/Dev-Cpp/include/c++/3.4.2/iostream   D:/depo/unit++/optmap.h C:/Dev-Cpp/include/c++/3.4.2/stdexcept   D:/depo/Elementos/biestable.h D:/depo/Elementos/elemento.h   D:/depo/Elementos/senal.h D:/depo/Elementos/constantes.h
+	$(CPP) -c testbiestable.cpp -o testbiestable.o $(CXXFLAGS)
+
+testconexiones.o: testconexiones.cpp D:/depo/unit++/unit++.h   C:/Dev-Cpp/include/c++/3.4.2/vector C:/Dev-Cpp/include/c++/3.4.2/string   C:/Dev-Cpp/include/c++/3.4.2/map C:/Dev-Cpp/include/c++/3.4.2/iostream   D:/depo/unit++/optmap.h C:/Dev-Cpp/include/c++/3.4.2/stdexcept   D:/depo/Elementos/pulsador.h D:/depo/Elementos/elemento.h   D:/depo/Elementos/senal.h D:/depo/Elementos/constantes.h   D:/depo/Elementos/lampara.h D:/depo/Elementos/elemento.h   D:/depo/Elementos/biestable.h D:/depo/Elementos/constantes.h
+	$(CPP) -c testconexiones.cpp -o testconexiones.o $(CXXFLAGS)
+
+testcontador.o: testcontador.cpp D:/depo/unit++/unit++.h   C:/Dev-Cpp/include/c++/3.4.2/vector C:/Dev-Cpp/include/c++/3.4.2/string   C:/Dev-Cpp/include/c++/3.4.2/map C:/Dev-Cpp/include/c++/3.4.2/iostream   D:/depo/unit++/optmap.h C:/Dev-Cpp/include/c++/3.4.2/stdexcept   D:/depo/Elementos/contador.h D:/depo/Elementos/elemento.h   D:/depo/Elementos/senal.h D:/depo/Elementos/constantes.h   D:/depo/Elementos/biestable.h
+	$(CPP) -c testcontador.cpp -o testcontador.o $(CXXFLAGS)
+
+testelectroiman.o: testelectroiman.cpp D:/depo/unit++/unit++.h   C:/Dev-Cpp/include/c++/3.4.2/vector C:/Dev-Cpp/include/c++/3.4.2/string   C:/Dev-Cpp/include/c++/3.4.2/map C:/Dev-Cpp/include/c++/3.4.2/iostream   D:/depo/unit++/optmap.h C:/Dev-Cpp/include/c++/3.4.2/stdexcept   D:/depo/Elementos/electroiman.h D:/depo/Elementos/elemento.h   D:/depo/Elementos/senal.h D:/depo/Elementos/constantes.h
+	$(CPP) -c testelectroiman.cpp -o testelectroiman.o $(CXXFLAGS)
+
+testelemento.o: testelemento.cpp D:/depo/unit++/unit++.h   C:/Dev-Cpp/include/c++/3.4.2/vector C:/Dev-Cpp/include/c++/3.4.2/string   C:/Dev-Cpp/include/c++/3.4.2/map C:/Dev-Cpp/include/c++/3.4.2/iostream   D:/depo/unit++/optmap.h C:/Dev-Cpp/include/c++/3.4.2/stdexcept   D:/depo/Elementos/elemento.h D:/depo/Elementos/senal.h   D:/depo/Elementos/constantes.h D:/depo/Elementos/constantes.h   D:/depo/Elementos/biestable.h D:/depo/Elementos/elemento.h   D:/depo/Elementos/lampara.h D:/depo/Elementos/zumbador.h
+	$(CPP) -c testelemento.cpp -o testelemento.o $(CXXFLAGS)
+
+testfotosensor.o: testfotosensor.cpp D:/depo/unit++/unit++.h   C:/Dev-Cpp/include/c++/3.4.2/vector C:/Dev-Cpp/include/c++/3.4.2/string   C:/Dev-Cpp/include/c++/3.4.2/map C:/Dev-Cpp/include/c++/3.4.2/iostream   D:/depo/unit++/optmap.h C:/Dev-Cpp/include/c++/3.4.2/stdexcept   D:/depo/Elementos/fotosensor.h D:/depo/Elementos/elemento.h   D:/depo/Elementos/senal.h D:/depo/Elementos/constantes.h   D:/depo/Elementos/lampara.h
+	$(CPP) -c testfotosensor.cpp -o testfotosensor.o $(CXXFLAGS)
+
+testlampara.o: testlampara.cpp D:/depo/unit++/unit++.h   C:/Dev-Cpp/include/c++/3.4.2/vector C:/Dev-Cpp/include/c++/3.4.2/string   C:/Dev-Cpp/include/c++/3.4.2/map C:/Dev-Cpp/include/c++/3.4.2/iostream   D:/depo/unit++/optmap.h C:/Dev-Cpp/include/c++/3.4.2/stdexcept   D:/depo/Elementos/lampara.h D:/depo/Elementos/elemento.h   D:/depo/Elementos/senal.h D:/depo/Elementos/constantes.h
+	$(CPP) -c testlampara.cpp -o testlampara.o $(CXXFLAGS)
+
+testmotor.o: testmotor.cpp D:/depo/Elementos/motor.h   D:/depo/Elementos/elemento.h D:/depo/Elementos/senal.h   C:/Dev-Cpp/include/c++/3.4.2/string D:/depo/Elementos/constantes.h   D:/depo/unit++/unit++.h C:/Dev-Cpp/include/c++/3.4.2/vector   C:/Dev-Cpp/include/c++/3.4.2/map C:/Dev-Cpp/include/c++/3.4.2/iostream   D:/depo/unit++/optmap.h C:/Dev-Cpp/include/c++/3.4.2/stdexcept
+	$(CPP) -c testmotor.cpp -o testmotor.o $(CXXFLAGS)
+
+testpulsador.o: testpulsador.cpp D:/depo/unit++/unit++.h   C:/Dev-Cpp/include/c++/3.4.2/vector C:/Dev-Cpp/include/c++/3.4.2/string   C:/Dev-Cpp/include/c++/3.4.2/map C:/Dev-Cpp/include/c++/3.4.2/iostream   D:/depo/unit++/optmap.h C:/Dev-Cpp/include/c++/3.4.2/stdexcept   D:/depo/Elementos/pulsador.h D:/depo/Elementos/elemento.h   D:/depo/Elementos/senal.h D:/depo/Elementos/constantes.h   D:/depo/Elementos/contador.h
+	$(CPP) -c testpulsador.cpp -o testpulsador.o $(CXXFLAGS)
+
+testreed.o: testreed.cpp D:/depo/unit++/unit++.h   C:/Dev-Cpp/include/c++/3.4.2/vector C:/Dev-Cpp/include/c++/3.4.2/string   C:/Dev-Cpp/include/c++/3.4.2/map C:/Dev-Cpp/include/c++/3.4.2/iostream   D:/depo/unit++/optmap.h C:/Dev-Cpp/include/c++/3.4.2/stdexcept   D:/depo/Elementos/reed.h D:/depo/Elementos/elemento.h   D:/depo/Elementos/senal.h D:/depo/Elementos/constantes.h   D:/depo/Elementos/electroiman.h
+	$(CPP) -c testreed.cpp -o testreed.o $(CXXFLAGS)
+
+testrele.o: testrele.cpp D:/depo/unit++/unit++.h   C:/Dev-Cpp/include/c++/3.4.2/vector C:/Dev-Cpp/include/c++/3.4.2/string   C:/Dev-Cpp/include/c++/3.4.2/map C:/Dev-Cpp/include/c++/3.4.2/iostream   D:/depo/unit++/optmap.h C:/Dev-Cpp/include/c++/3.4.2/stdexcept   D:/depo/Elementos/rele.h D:/depo/Elementos/elemento.h   D:/depo/Elementos/senal.h D:/depo/Elementos/constantes.h
+	$(CPP) -c testrele.cpp -o testrele.o $(CXXFLAGS)
+
+testsistema.o: testsistema.cpp D:/depo/unit++/unit++.h   C:/Dev-Cpp/include/c++/3.4.2/vector C:/Dev-Cpp/include/c++/3.4.2/string   C:/Dev-Cpp/include/c++/3.4.2/map C:/Dev-Cpp/include/c++/3.4.2/iostream   D:/depo/unit++/optmap.h C:/Dev-Cpp/include/c++/3.4.2/stdexcept   D:/depo/Elementos/sistema.h D:/depo/Elementos/constantes.h   D:/depo/Elementos/elemento.h D:/depo/Elementos/senal.h   D:/depo/Elementos/conector.h D:/depo/Elementos/pulsador.h   D:/depo/Elementos/lampara.h D:/depo/Elementos/fotosensor.h   D:/depo/Elementos/biestable.h D:/depo/Elementos/rele.h
+	$(CPP) -c testsistema.cpp -o testsistema.o $(CXXFLAGS)
+
+testsuscripcion.o: testsuscripcion.cpp   C:/Dev-Cpp/include/c++/3.4.2/cstdlib   C:/Dev-Cpp/include/c++/3.4.2/iostream D:/depo/unit++/unit++.h   C:/Dev-Cpp/include/c++/3.4.2/vector C:/Dev-Cpp/include/c++/3.4.2/map   D:/depo/unit++/optmap.h C:/Dev-Cpp/include/c++/3.4.2/stdexcept   D:/depo/Elementos/elemento.h D:/depo/Elementos/senal.h   D:/depo/Elementos/constantes.h
+	$(CPP) -c testsuscripcion.cpp -o testsuscripcion.o $(CXXFLAGS)
+
+testeliminacion.o: testeliminacion.cpp D:/depo/unit++/unit++.h   C:/Dev-Cpp/include/c++/3.4.2/vector C:/Dev-Cpp/include/c++/3.4.2/string   C:/Dev-Cpp/include/c++/3.4.2/map C:/Dev-Cpp/include/c++/3.4.2/iostream   D:/depo/unit++/optmap.h C:/Dev-Cpp/include/c++/3.4.2/stdexcept   D:/depo/Elementos/biestable.h D:/depo/Elementos/elemento.h   D:/depo/Elementos/senal.h D:/depo/Elementos/constantes.h   D:/depo/Elementos/pulsador.h D:/depo/Elementos/lampara.h   D:/depo/Elementos/sistema.h D:/depo/Elementos/conector.h
+	$(CPP) -c testeliminacion.cpp -o testeliminacion.o $(CXXFLAGS)

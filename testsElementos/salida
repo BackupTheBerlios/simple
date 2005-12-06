@@ -1,0 +1,101 @@
+Nueva suscripcion: Emisor Pulsador1(0) y receptor Lampara1(3)
+El elemento Pulsador1 ocupa la entrada 4
+Haciendo la conexion a la entrada 4 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Pulsador1(0)
+Haciendo la conexion a la entrada 5 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Pulsador1(1)
+Haciendo la conexion a la entrada 6 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Pulsador1(2)
+Haciendo la conexion a la entrada 7 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Pulsador1(3)
+
+
+El elemento Pulsador1 ocupa la salida 1
+Nueva suscripcion: Emisor Pulsador1(0) y receptor Conector(3)
+Pulsador1 tiene 4 entradas y 1 salidas
+_________________________
+
+El elemento Lampara1 ocupa la entrada 8
+Haciendo la conexion a la entrada 8 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Lampara1(0)
+Haciendo la conexion a la entrada 9 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Lampara1(1)
+Haciendo la conexion a la entrada 10 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Lampara1(2)
+Haciendo la conexion a la entrada 11 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Lampara1(3)
+
+
+El elemento Lampara1 ocupa la salida 2
+Nueva suscripcion: Emisor Lampara1(0) y receptor Conector(3)
+Lampara1 tiene 4 entradas y 1 salidas
+_________________________
+
+
+La salida de Pulsador1 es la posicion:1
+
+La salida de Pulsador1 es la posicion:1
+
+La salida de Pulsador1 es la posicion:1
+Nueva suscripcion: Emisor Pulsador1(0) y receptor Lampara1(3)
+
+
+----Depurando el sistema recursivo
+
+
+El elemento Pulsador1 ocupa la entrada 4
+Haciendo la conexion a la entrada 4 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Pulsador1(0)
+Haciendo la conexion a la entrada 5 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Pulsador1(1)
+Haciendo la conexion a la entrada 6 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Pulsador1(2)
+Haciendo la conexion a la entrada 7 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Pulsador1(3)
+
+
+El elemento Pulsador1 ocupa la salida 1
+Nueva suscripcion: Emisor Pulsador1(0) y receptor Conector(3)
+Pulsador1 tiene 4 entradas y 1 salidas
+_________________________
+
+El elemento Lampara1 ocupa la entrada 8
+Haciendo la conexion a la entrada 8 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Lampara1(0)
+Haciendo la conexion a la entrada 9 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Lampara1(1)
+Haciendo la conexion a la entrada 10 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Lampara1(2)
+Haciendo la conexion a la entrada 11 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor Lampara1(3)
+
+
+El elemento Lampara1 ocupa la salida 2
+Nueva suscripcion: Emisor Lampara1(0) y receptor Conector(3)
+Lampara1 tiene 4 entradas y 1 salidas
+_________________________
+
+El elemento FotoSensor1 ocupa la entrada 4
+Haciendo la conexion a la entrada 4 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor FotoSensor1(0)
+Haciendo la conexion a la entrada 5 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor FotoSensor1(1)
+Haciendo la conexion a la entrada 6 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor FotoSensor1(2)
+Haciendo la conexion a la entrada 7 del sistema
+Nueva suscripcion: Emisor Conector(0) y receptor FotoSensor1(3)
+
+
+El elemento FotoSensor1 ocupa la salida 1
+Nueva suscripcion: Emisor FotoSensor1(0) y receptor Conector(3)
+FotoSensor1 tiene 4 entradas y 1 salidas
+_________________________
+
+Salida lamp1 en S1:2	Entrada Fs1 en S2:1
+Al sistema Sistema S1(salida 2) se le suscribe Sistema S2(entrada 4)
+Nueva suscripcion: Emisor Conector(0) y receptor Sistema S2(4)
+La primera entrada del pulsador en el sistema es 1
+En el sistema Sistema S1 se ha activado el conector 4
+Se recibio una señal true en el elemento Sistema S1
+La lampara tiene NEGRO
+FAIL: PruebaSistemaRecursivo

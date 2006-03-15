@@ -1,5 +1,6 @@
 #include "domgestionerror.h"
 
+
 DOMGestionError::DOMGestionError()
 {
 	existenErrores=false;

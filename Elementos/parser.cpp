@@ -38,5 +38,5 @@ void Parser::extraerElementos(const char* fichero)
 {
 	DOMDocument* documento;
 	const XMLCh* nombreFichero=XMLString::transcode(fichero);
-	errorHandler.resetErrors();
+	//errorHandler.resetErrors();
 }

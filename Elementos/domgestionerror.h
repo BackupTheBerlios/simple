@@ -24,6 +24,11 @@
 #include <xercesc/dom/DOMAttr.hpp>
 #include <xercesc/dom/DOMErrorHandler.hpp>
 
+#ifdef XERCES_CPP_NAMESPACE_USE
+XERCES_CPP_NAMESPACE_USE
+#endif	
+#include <iostream>
+using namespace std;
 
 #ifndef _domgestionerror_
 #define _domgestionerror_

@@ -37,3 +37,11 @@ Errores comunes
 14.-Averiguar lo que es la normalizacion de tipos DOM
 
 15.-Arreglar el esquema
+
+16.- Usar true (que es de C++) en vez de la macro TRUE de WxWidgets
+
+17.- Confundir onInit (mal) en vez de OnInit (bien) para arrancar wxApp
+
+18.- En los cuadros de dialogo FileDialog no se pueden dejar espacios
+     en las cadenas. P.ej se debe sustituir "Ficheros xml | *.xml | ..."
+     por "Ficheros xml|*.xml|..."

@@ -209,4 +209,5 @@ int main(int argc, char *argv[])
 {
     PruebaSistemaSimple();
     PruebaSistemaRecursivo();
+    system ("PAUSE");
 }

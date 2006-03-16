@@ -6,6 +6,7 @@
 class Zumbador: public Elemento
 {
 	public:
+		Zumbador ();
 		Zumbador (Voltaje* voltReposo, Frecuencia* frecReposo,
 			Voltaje* voltActivacion, Frecuencia* frecActivacion);
 		

@@ -1,6 +1,14 @@
 #include "lampara.h"
 #include "constantes.h"
-
+Lampara::Lampara ()
+{
+	this->v1=NULL;
+	this->v2=NULL;
+	this->l1=NULL;
+	this->l2=NULL;	
+	entradas[POS_ENTRADA] = NULL;
+	salidas [POS_SALIDA]  = NULL;
+}
 Lampara::Lampara(Voltaje* v1, Luminosidad* l1, Voltaje* v2, Luminosidad* l2)
 {
 	this->v1=v1;

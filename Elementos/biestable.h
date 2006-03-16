@@ -6,6 +6,7 @@
 class Biestable: public Elemento
 {
 	public:
+		Biestable();
 		Biestable(Voltaje* activar_r, Voltaje* desactivar_r,
 			Voltaje* activar_s, Voltaje* desactivar_s,
 			Voltaje* activar_Q, Voltaje* desactivar_Q, 

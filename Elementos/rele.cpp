@@ -1,6 +1,9 @@
 #include "constantes.h"
 #include "rele.h"
-
+Rele::Rele ()
+{
+	Rele::Rele (NULL, NULL, NULL, NULL);
+}
 Rele::Rele(Voltaje* v1,Conexion* c1, Voltaje* v2, Conexion* c2)
 {
 	this->c1=c1;

@@ -1,6 +1,16 @@
 #include "electroiman.h"
 #include "constantes.h"
 
+Electroiman::Electroiman ()
+{
+	voltajeEntradaReposo	=	NULL;
+	voltajeEntradaActivacion=	NULL;
+	magSalidaReposo			=	NULL;
+	magSalidaActivacion		=	NULL;
+	
+	entradas[POS_ENTRADA]= NULL;
+	salidas [POS_SALIDA ]= NULL;
+}
 Electroiman::Electroiman(Voltaje* vEntradaReposo, Voltaje* vEntradaActivacion,
 			Magnetismo* mSalidaReposo, Magnetismo* mSalidaActivacion)
 {

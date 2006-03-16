@@ -1,6 +1,9 @@
 #include "reed.h"
 #include "constantes.h"
-
+Reed::Reed ()
+{
+	Reed::Reed (NULL, NULL, NULL, NULL);
+}
 Reed::Reed (Magnetismo *mReposo, Conexion *aReposo,
 	Magnetismo *mActivacion, Conexion *aActivacion)
 {

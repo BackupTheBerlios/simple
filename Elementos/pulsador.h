@@ -6,6 +6,7 @@
 class Pulsador: public Elemento
 {
 	public:
+		Pulsador ();
 		/* 	Cuando se conecta de la forma c1, se devuelve el voltaje v1
 			y cuando se conecta de la forma c2, se devuelve el voltaje v2*/
 		Pulsador(Conexion* c1, Voltaje* v1, Conexion* c2, Voltaje* v2);

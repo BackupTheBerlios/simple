@@ -1,5 +1,22 @@
 #include "contador.h"
 
+
+Contador::Contador ()
+{
+	voltajeEntradaReposo		=	NULL;
+	voltajeEntradaActivacion	=	NULL;
+	voltajeSalidaReposo			=	NULL;
+	voltajeSalidaActivacion		=	NULL;
+	
+	this->autoReset=false;
+	
+	this->maxPulsos=-1;
+
+	cuentaPulsos=0;
+	
+	entradas[POS_ENTRADA]=NULL;
+	salidas [POS_SALIDA] =NULL;
+}
 Contador::Contador(unsigned int maxPulsos,Voltaje *v_e_reposo,
 			Voltaje* v_e_activacion, Voltaje* v_s_reposo, 
 			Voltaje* v_s_activacion, bool autoReset)

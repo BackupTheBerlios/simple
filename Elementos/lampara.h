@@ -6,6 +6,7 @@
 class Lampara : public Elemento
 {
 	public:
+		Lampara ();
 		Lampara (Voltaje* v1, Luminosidad* l1, Voltaje* v2, Luminosidad* l2);	
 	
 		Voltaje*		getVoltajeReposo();

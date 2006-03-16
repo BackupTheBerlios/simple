@@ -1,5 +1,9 @@
 #include "zumbador.h"
 
+Zumbador::Zumbador ()
+{
+	Zumbador::Zumbador (NULL, NULL, NULL, NULL);
+}
 Zumbador::Zumbador (Voltaje* voltReposo, Frecuencia* frecReposo,
 			Voltaje* voltActivacion, Frecuencia* frecActivacion)
 {

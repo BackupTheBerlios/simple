@@ -6,6 +6,7 @@
 class FotoSensor : public Elemento
 {
 	public:
+		FotoSensor ();
 		FotoSensor(Luminosidad* lReposo, Luminosidad* lActivacion,
 			Voltaje* vReposo, Voltaje* vActivacion);
 		

@@ -1,7 +1,10 @@
 #include "pulsador.h"
 #include "constantes.h"
 
-
+Pulsador::Pulsador ()
+{
+	Pulsador::Pulsador(NULL, NULL, NULL, NULL);
+}
 Pulsador::Pulsador(Conexion* c1, Voltaje *v1, Conexion* c2, Voltaje* v2)
 {
 	this->c1=c1;

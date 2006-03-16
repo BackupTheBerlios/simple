@@ -1,6 +1,19 @@
 #include "motor.h"
 #include "constantes.h"
 
+Motor::Motor ()
+{
+	this->voltajeReposo	=	NULL;
+	this->giroReposo	=	NULL;
+	this->voltajeGiroCW	=	NULL;
+	this->giroCW		=	NULL;
+	this->voltajeGiroCCW=	NULL;
+	this->giroCCW		=	NULL;
+	this->rpm			=	0;
+	
+	entradas[POS_ENTRADA]=NULL;
+	salidas [POS_SALIDA] =NULL;
+}
 Motor::Motor (Voltaje* voltReposo,	Giro* giroReposo, 
 			  Voltaje* voltGiroCW,	Giro* giroCW,
 			  Voltaje* voltGiroCCW,Giro* giroCCW, unsigned int revoluciones)

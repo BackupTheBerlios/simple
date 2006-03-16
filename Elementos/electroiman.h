@@ -6,6 +6,7 @@
 class Electroiman : public Elemento
 {
 	public:
+		Electroiman ();
 		Electroiman(Voltaje* vEntradaReposo, Voltaje* vEntradaActivacion,
 			Magnetismo* mSalidaReposo, Magnetismo* mSalidaActivacion);
 		

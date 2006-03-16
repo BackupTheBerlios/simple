@@ -6,6 +6,7 @@
 class Motor: public Elemento
 {
 	public:
+		Motor ();
 		Motor (Voltaje* voltReposo,	Giro* giroReposo, 
 			   Voltaje* voltGiroCW,	Giro* giroCW,
 			   Voltaje* voltGiroCCW,Giro* giroCCW, unsigned int revoluciones);

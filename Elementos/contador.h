@@ -14,6 +14,7 @@
 class Contador: public Elemento
 {
 	public:
+		Contador ();
 		Contador (unsigned int maxPulsos,Voltaje *v_e_reposo,
 			Voltaje* v_e_activacion, Voltaje* v_s_reposo, 
 			Voltaje* v_s_activacion, bool autoReset=false);

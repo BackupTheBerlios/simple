@@ -6,6 +6,7 @@
 class Rele: public Elemento
 {
 	public:
+		Rele ();
 		Rele(Voltaje* v1,Conexion* c1, Voltaje* v2, Conexion* c2);
 		
 		Conexion*	getConexionReposo();

@@ -1,6 +1,16 @@
 #include "fotosensor.h"
 #include "constantes.h"
 
+FotoSensor::FotoSensor ()
+{
+	luminosidadReposo		=	NULL;
+	luminosidadActivacion	=	NULL;
+	voltajeSalidaReposo		=	NULL;
+	voltajeSalidaActivacion	=	NULL;
+	
+	entradas[POS_ENTRADA]=NULL;
+	salidas [POS_SALIDA] =NULL;
+}
 FotoSensor::FotoSensor(Luminosidad* lReposo, Luminosidad* lActivacion,
 			Voltaje* vReposo, Voltaje* vActivacion)
 {

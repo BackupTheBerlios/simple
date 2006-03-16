@@ -1,73 +1,75 @@
-# Project: Elementos
+# Project: Proyecto1
 # Makefile created by Dev-C++ 4.9.9.2
 
 CPP  = g++.exe -D__DEBUG__
 CC   = gcc.exe -D__DEBUG__
 WINDRES = windres.exe
 RES  = 
-OBJ  = objs/elemento.o objs/pulsador.o objs/lampara.o objs/conector.o objs/sistema.o objs/biestable.o objs/contador.o objs/fotosensor.o objs/electroiman.o objs/reed.o objs/motor.o objs/zumbador.o objs/rele.o objs/parser.o objs/domgestionerror.o $(RES)
-LINKOBJ  = objs/elemento.o objs/pulsador.o objs/lampara.o objs/conector.o objs/sistema.o objs/biestable.o objs/contador.o objs/fotosensor.o objs/electroiman.o objs/reed.o objs/motor.o objs/zumbador.o objs/rele.o objs/parser.o objs/domgestionerror.o $(RES)
-LIBS =  -L"d:/Dev-Cpp/lib" -L"D:/Dev-Cpp/xerces-c_2_5_0/lib" -lxerces-c_2  xerces-c_2.lib  -g3 
+OBJ  = main.o zumbador.o biestable.o conector.o contador.o electroiman.o elemento.o fotosensor.o lampara.o motor.o pulsador.o reed.o rele.o sistema.o parser.o temporizador.o $(RES)
+LINKOBJ  = main.o zumbador.o biestable.o conector.o contador.o electroiman.o elemento.o fotosensor.o lampara.o motor.o pulsador.o reed.o rele.o sistema.o parser.o temporizador.o $(RES)
+LIBS =  -L"d:/Dev-Cpp/lib" -L"D:/Dev-Cpp/xerces-c_2_5_0/lib" -lxerces-c_2  -g3 
 INCS =  -I"d:/Dev-Cpp/include" 
 CXXINCS =  -I"d:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"d:/Dev-Cpp/include/c++/3.4.2/backward"  -I"d:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"d:/Dev-Cpp/include/c++/3.4.2"  -I"d:/Dev-Cpp/include"  -I"D:/Dev-Cpp/xerces-c_2_5_0/include" 
-BIN  = Elementos.a
+BIN  = MainElementos.exe
 CXXFLAGS = $(CXXINCS)   -ansi -fverbose-asm -g3
 CFLAGS = $(INCS)   -ansi -fverbose-asm -g3
 RM = rm -f
 
 .PHONY: all all-before all-after clean clean-custom
 
-all: all-before Elementos.a all-after
+all: all-before MainElementos.exe all-after
 
 
 clean: clean-custom
 	${RM} $(OBJ) $(BIN)
 
-$(BIN): $(LINKOBJ)
-	ar r $(BIN) $(LINKOBJ)
-	ranlib $(BIN)
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "MainElementos.exe" $(LIBS)
 
-objs/elemento.o: elemento.cpp
-	$(CPP) -c elemento.cpp -o objs/elemento.o $(CXXFLAGS)
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
 
-objs/pulsador.o: pulsador.cpp
-	$(CPP) -c pulsador.cpp -o objs/pulsador.o $(CXXFLAGS)
+zumbador.o: zumbador.cpp
+	$(CPP) -c zumbador.cpp -o zumbador.o $(CXXFLAGS)
 
-objs/lampara.o: lampara.cpp
-	$(CPP) -c lampara.cpp -o objs/lampara.o $(CXXFLAGS)
+biestable.o: biestable.cpp
+	$(CPP) -c biestable.cpp -o biestable.o $(CXXFLAGS)
 
-objs/conector.o: conector.cpp
-	$(CPP) -c conector.cpp -o objs/conector.o $(CXXFLAGS)
+conector.o: conector.cpp
+	$(CPP) -c conector.cpp -o conector.o $(CXXFLAGS)
 
-objs/sistema.o: sistema.cpp
-	$(CPP) -c sistema.cpp -o objs/sistema.o $(CXXFLAGS)
+contador.o: contador.cpp
+	$(CPP) -c contador.cpp -o contador.o $(CXXFLAGS)
 
-objs/biestable.o: biestable.cpp
-	$(CPP) -c biestable.cpp -o objs/biestable.o $(CXXFLAGS)
+electroiman.o: electroiman.cpp
+	$(CPP) -c electroiman.cpp -o electroiman.o $(CXXFLAGS)
 
-objs/contador.o: contador.cpp
-	$(CPP) -c contador.cpp -o objs/contador.o $(CXXFLAGS)
+elemento.o: elemento.cpp
+	$(CPP) -c elemento.cpp -o elemento.o $(CXXFLAGS)
 
-objs/fotosensor.o: fotosensor.cpp
-	$(CPP) -c fotosensor.cpp -o objs/fotosensor.o $(CXXFLAGS)
+fotosensor.o: fotosensor.cpp
+	$(CPP) -c fotosensor.cpp -o fotosensor.o $(CXXFLAGS)
 
-objs/electroiman.o: electroiman.cpp
-	$(CPP) -c electroiman.cpp -o objs/electroiman.o $(CXXFLAGS)
+lampara.o: lampara.cpp
+	$(CPP) -c lampara.cpp -o lampara.o $(CXXFLAGS)
 
-objs/reed.o: reed.cpp
-	$(CPP) -c reed.cpp -o objs/reed.o $(CXXFLAGS)
+motor.o: motor.cpp
+	$(CPP) -c motor.cpp -o motor.o $(CXXFLAGS)
 
-objs/motor.o: motor.cpp
-	$(CPP) -c motor.cpp -o objs/motor.o $(CXXFLAGS)
+pulsador.o: pulsador.cpp
+	$(CPP) -c pulsador.cpp -o pulsador.o $(CXXFLAGS)
 
-objs/zumbador.o: zumbador.cpp
-	$(CPP) -c zumbador.cpp -o objs/zumbador.o $(CXXFLAGS)
+reed.o: reed.cpp
+	$(CPP) -c reed.cpp -o reed.o $(CXXFLAGS)
 
-objs/rele.o: rele.cpp
-	$(CPP) -c rele.cpp -o objs/rele.o $(CXXFLAGS)
+rele.o: rele.cpp
+	$(CPP) -c rele.cpp -o rele.o $(CXXFLAGS)
 
-objs/parser.o: parser.cpp
-	$(CPP) -c parser.cpp -o objs/parser.o $(CXXFLAGS)
+sistema.o: sistema.cpp
+	$(CPP) -c sistema.cpp -o sistema.o $(CXXFLAGS)
 
-objs/domgestionerror.o: domgestionerror.cpp
-	$(CPP) -c domgestionerror.cpp -o objs/domgestionerror.o $(CXXFLAGS)
+parser.o: parser.cpp
+	$(CPP) -c parser.cpp -o parser.o $(CXXFLAGS)
+
+temporizador.o: temporizador.cpp
+	$(CPP) -c temporizador.cpp -o temporizador.o $(CXXFLAGS)

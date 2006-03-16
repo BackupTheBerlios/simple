@@ -6,6 +6,7 @@
 class Reed: public Elemento
 {
 	public:
+		Reed ();
 		Reed (Magnetismo *mReposo, Conexion* cReposo,
 			Magnetismo *mActivacion, Conexion* cActivacion);
 		int	setEntrada (Senal* v, int posicion=POS_ENTRADA);	

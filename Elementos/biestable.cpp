@@ -1,6 +1,30 @@
 #include "biestable.h"
 #include "constantes.h"
 
+Biestable::Biestable()
+{
+	this->activar_R			=	NULL;
+	this->desactivar_R		=	NULL;	
+	this->activar_S			=	NULL;
+	this->desactivar_S		=	NULL;
+	
+	this->activar_Q			=	NULL;
+	this->desactivar_Q		=	NULL;
+	this->activar_Qneg		=	NULL;
+	this->desactivar_Qneg	=	NULL;
+	
+	entradas[POS_ENTRADA] 	=	NULL;
+	entradas[POS_ENTRADA+1]	=	NULL;
+	
+	salidas[POS_SALIDA]		=	NULL;
+	salidas[POS_SALIDA+1]	=	NULL;
+#ifdef DEBUG
+	printf ("\nBiestable construido correctamente\n");
+#endif
+	totalEntradas=POS_ENTRADA+2; /*El biestable tiene dos entradas*/
+	totalSalidas =POS_SALIDA+2;
+}
+
 Biestable::Biestable(Voltaje* activar_r, Voltaje* desactivar_r,
 			Voltaje* activar_s, Voltaje* desactivar_s,
 			Voltaje* activar_q, Voltaje* desactivar_q, 

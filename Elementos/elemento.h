@@ -94,6 +94,10 @@ class Elemento {
 	
 	/*	Esta funcion devuelve el nodo DOM que representa a un elemento*/
 	DOMElement* getNodo();
+	
+	/* 	Esta funcion rellena los valores del elemento con
+		los que se encuentren en un nodo XML */
+	void construir (DOMNode*);
 	protected:
 		void notificar();
 		char nombreElemento[MAX_LONG_NOMBRE_ELEMENTO];
@@ -171,6 +175,9 @@ class Suscripcion
 				return -1;
 			salidaAvisador=salida;
 			return 0;
+		}
+		void construir (DOMNode* nodo)
+		{
 		}
 	
 	private:

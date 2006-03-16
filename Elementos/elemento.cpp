@@ -349,3 +349,7 @@ void Elemento::borrarSuscripcion (int posicion)
 DOMElement* Elemento::getNodo()
 {
 }
+
+void Elemento::construir (DOMNode*)
+{
+}

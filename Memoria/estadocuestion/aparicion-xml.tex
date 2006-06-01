@@ -1,0 +1,46 @@
+\subsection {La aparición de XML}
+El nuevo lenguaje de marcas se popularizó muy deprisa debido a su facilidad de uso así como al auge de las herramientas que lo utilizaban. Desde simples editores de texto freeware hasta paquetes profesionales de diseño, todo el mercado de herramientas de procesamiento de texto adoptó HTML como opción a la hora de almacenar documentos.
+
+Sin embargo, a lo largo de la discusión que se ha hecho en este capítulo se ha hecho notable que toda la argumentación sobre los lenguajes de marcas ha terminado centrada en las aplicaciones de procesamiento de textos. No es casualidad ya que HTML es un lenguaje que define marcas orientadas a la presentación. Para aclarar más esto se propone el siguiente ejemplo, que muestra  un supuesto de pedido a un almacén de repuestos automovilísticos.
+
+\includegraphics {figuras/png/EjemploHTML.png}
+
+Si abrimos este fichero en un navegador cualquiera observamos lo siguiente:
+
+\includegraphics {figuras/png/Navegador.png}
+
+Se puede abrir este ejemplo con cualquier otro navegador y se obtendría el mismo resultado (o al menos uno muy parecido) sin embargo no hay nada que indique que esto es un pedido, ni los elementos que se pide reponer, ni de qué tipo son ni nada por el estilo y es que se debe recalcar que HTML es un lenguaje orientado a la presentación.
+
+Los elementos de marcado como <li>
+solamente indican que una cadena de caracteres es un ítem de una lista pero ningún programa que analizara el HTML de la Ilustración 1  podría obtener ninguna información.
+
+Existen mecanismos que permiten añadir información sobre como se deben presentar las marcas en los navegadores pero en ningún caso hay ninguna forma de separar el contenido de la presentación, que es en suma el problema principal de HTML.
+
+Así, XML surge como solución a este problema al proponer un enfoque diferente a los propuestos por SGML y HTML.
+
+\begin{itemize}
+\item {XML es notablemente más sencillo que SGML por lo que el desarrollo de herramientas que lo usen se simplifica en gran medida.}
+\item {XML no está enfocado a la presentación sino a contener información sobre la información marcada, es decir a servir de metainformación. La presentación de la información marcada mediante XML se hará mediante distintos lenguajes orientados a la presentación de archivos XML.}
+\end{itemize}
+
+Este último punto es el que hace más atractivo a XML como formato de intercambio universal. XML permite marcar un documento con información que describa el contenido del archivo, sin indicar como se mostrará y dejando la presentación para otros lenguajes. Esta separación de lenguajes es la que permite separar dos intereses encontrados como son la presentación y el marcado del contenido.
+
+\includegraphics {figuras/png/EjemploXML.png}
+
+En la Ilustración 3 se muestra un ejemplo de cómo se puede realizar el mismo documento anterior en XML aportando una cantidad de información mayor tanto al programa que necesite interpretar dicho fichero como a una persona que lo leyera.
+
+Cabe destacar que XML no es un lenguaje en sí mismo sino un estándar que permite la definición de lenguajes propios mediante los criterios definidos en la especificación de XML. Dicha especificación es un documento público y libremente accesible, desarrollado por el World Wide Web Consortium (o W3C) por lo que cualquier desarrollador o usuario puede implementar herramientas o documentos que sigan dicho estándar.
+
+Existen multitud de tecnologías asociadas a XML encaminadas a definir estándares o a resolver problemas. Se citan a continuación las que están mas avanzadas:
+
+\begin{itemize}
+\item {XML 1.0 y 1.1 son las recomendaciones  del W3C para construir documentos con marcas creadas por el usuario.}
+\item {Las Definiciones de Tipo de Documento o DTD y los XML Schemas dictan las reglas a seguir para escribir las gramáticas a las cuales se deben ceñir los documentos XML. Se discutirán las diferencias entre ellos más adelante.}
+\item {Aparte de reglas para escribir documentos, el W3C publica normas para la construcción de bibliotecas que vayan a leer o escribir documentos XML. Estas normas indican los nombres de las clases, los métodos, los interfaces y el comportamiento que deben tener las herramientas. Se hace una discusión más detallada en la página 2 ("Implementaciones de APIs para XML") }
+\item {XPath documenta las reglas a seguir para referirse a partes concretas de un documento.}
+\item {CSS es un lenguaje heredado de HTML que permite escribir normas para que los documentos XML sean visibles en navegadores.}
+\item {XSLT se usa para transformar un documento XML en otro documento XML que podría ceñirse a una gramática DTD distinta.}
+\item {XSL:FO está enfocada a convertir documentos XML en documentos imprimibles.}
+\item {En XML hay una característica muy popular en los lenguajes de programación denominada ``espacios de nombres'' y que permiten que marcas de uso común puedan repetirse en distintos documentos indicando que pertenecen a espacios distintos.}
+
+\end {itemize}

@@ -1,0 +1,28 @@
+\subsection {Los primeros lenguajes de marcas}
+
+A pesar de que los formatos de almacenamiento binarios gozaban de ventajas tales como su reducido tamaño o la eficiencia de su procesamiento, rápidamente se observó que los ficheros de texto poseían otra cualidad muy interesante: Eran legibles por parte de todos los programas con relativa facilidad, e incluso en ciertos casos, comprensible por las personas.
+
+Esta cualidad fue la que llevó al desarrollo de un mecanismo que permitiera almacenar la información en forma de texto, pero a la vez permitiendo la existencia de datos binarios. Este mecanismo de almacenamiento quedó plasmado en SGML, un lenguaje que definía un formato de almacenamiento basado fundamentalmente en texto, pero que incluía la definición de marcas que daban información sobre la información en sí. Esta ``información sobre la información'' se conoce con el nombre de metainformación .
+
+SGML significa Standard Generalized Markup Language (Lenguaje de Marcas Generalizado Standard) y fue un serio intento para definir un formato universal para el marcado de información. SGML adquirió mucha popularidad entre los desarrolladores de sistemas de gestión documentales sin embargo no fue utilizado por los fabricantes de software debido a dos grandes problemas:
+
+\begin {itemize}
+
+\item {Era un lenguaje muy potente, pero como tal, también suponía una gran complejidad y suponía abandonar todo el conocimiento adquirido hasta entonces en cuanto al almacenamiento y empezar a pensar desde una nueva perspectiva.}
+
+\item {Debido a dicha complejidad, el soporte de herramientas para su uso era muy escaso y en ocasiones limitado por lo que en el momento de su aparición SGML prácticamente generaba más problemas de los que resolvía.}
+\end {itemize}
+
+Con el paso del tiempo los formatos binarios ganaron más y más popularidad hasta la aparición de la WWW. Los documentos almacenados en páginas Web fueron concebidos para ser ``interpretados'' por un programa específico denominado ``navegador'' o ``browser''. Estos documentos utilizaban una versión muy simplificada de SGML que incluía marcas para que el navegador supiera de que tamaño tenía que mostrar un texto o de qué color. 
+
+El uso de un conjunto de marcas más reducido dio lugar a varias consecuencias interesantes para los desarrolladores:
+
+\begin {itemize}
+\item {Cualquiera podía crear un programa para la creación de páginas Web, ya que el conjunto de marcas era pequeño y bien conocido.}
+\item {Cualquier página Web podía ser modificada por cualquier programa, ya que el análisis del texto de las marcas es sencillo.}
+\item {La creación de navegadores se hizo relativamente sencilla al simplificarse el lenguaje de marcas.}
+\item {Cualquier creador de documentos puede confiar en que su documento se verá igual en cualquier software de navegación sin necesidad de código adicional.}
+\end{itemize}
+
+Hoy día, muchos procesadores de texto permiten almacenar los resultados en HTML, lo que muestra la amplia difusión de dicho lenguaje de marcas.
+

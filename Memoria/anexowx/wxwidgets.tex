@@ -1,0 +1,382 @@
+\chapter {Referencia rápida de WxWidgets}
+
+\section {Un primer programa}
+
+Un programa en WxWidgets solo se puede lanzar desde dentro de una clase especial por lo que para empezar se debe crear una clase que herede de esta clase llamada wxApp y que por ejemplo llamaremos Aplicación. Dentro de esta clase se pueden implementar todos los métodos que queramos pero sobre todo se debe implementar un método virtual que proporciona wxApp y cuya declaración es la siguiente:
+
+\begin{lstlisting}
+virtual bool OnInit()
+\end{lstlisting}
+Normalmente dentro de OnInit crearemos la ventana principal del programa pero sobre todo debemos terminar devolviendo un valor bool que indique a wxWidgets si debe comenzar o no el bucle de procesado de eventos, por lo que a no ser que se desee algo muy especial se devolverá true la mayor parte de las veces.
+
+Es posible preguntarse ¿donde está la función main() o WinMain o el punto de entrada al programa?. En ningún sitio, no se debe poner pues WxWidgets lo añade automáticamente. Lo único que necesita saber la biblioteca es el nombre de la clase que tiene que asignar a un objeto interno denominado wxTheApp (que normalmente no es necesario manipular) y para indicárselo se usa la macro
+
+\begin{lstlisting}
+DECLARE_APP (<nombre de la clase que hereda de wxApp>)
+\end{lstlisting}
+
+Para que la función pueda enlazar el método OnInit al punto de entrada al programa se debe utilizar la macro 
+
+\begin{lstlisting}
+IMPLEMENT_APP (<nombre de la clase que hereda de wxApp>)
+\end{lstlisting}
+
+Así, una clase Aplicación muy simple sería como la siguiente:
+
+\begin{lstlisting}
+
+// Este es el fichero de cabecera aplicacion.h
+\#include "wx/wx.h"
+
+class Aplicacion : public wxApp
+{
+ public:
+   virtual bool OnInit(); 
+};
+
+DECLARE_APP (Aplicacion)
+
+
+\end{lstlisting}
+
+\begin{lstlisting}
+
+//Este es el fichero aplicacion.cpp
+
+#include "aplicacion.h"
+#include "ventana.h"
+
+IMPLEMENT_APP (Aplicacion)
+
+bool Aplicacion::OnInit()
+{
+  Ventana *v=new Ventana();
+  v->Show(true);
+	return (true);
+}
+
+\end{lstlisting}
+
+Como se puede ver, lo único que hace el método OnInit es crear un objeto de la clase Ventana (que se comentará en seguida) y llamar a su método Show, devolviendo true al final y comenzando así el bucle de eventos.
+
+Todo esto por sí mismo no hace nada. Una biblioteca para construcción de interfaces de usuario debe proporcionar mucho más. Para empezar, veamos como crear una simple ventana. Existen muchas clases de ventana pero la más elemental es wxFrame, que contiene el comportamiento más básico de cualquier ventana. Hay que destacar que en wxWidgets se permite un control total sobre el comportamiento de TODOS los controles por lo que la complejidad de la programación con esta biblioteca también es muy grande. Sin embargo una vez superada la curva de aprendizaje se dispone del control total sobre el más mínimo detalle sumado a la ventajas de la programación multiplataforma.
+
+Empezaremos creando una ventana muy simple. Para ello crearemos una clase Ventana que herede de wxFrame
+
+\begin{lstlisting}
+// Fichero ventana.h
+#include "wx/wx.h"
+
+class Ventana : public wxFrame
+{
+ public:
+  Ventana();
+};
+
+\end{lstlisting}
+
+Cuya implementación se muestra en el siguiente fichero
+
+\begin{lstlisting}
+//Fichero ventana.cpp
+
+#include "ventana.h"
+
+Ventana::Ventana() :
+ wxFrame (NULL, wxID_ANY, "Ventana con WxWidgets")
+{
+}
+
+\end{lstlisting}
+
+Como se puede ver, lo único que se hace es llamar al constructor de la clase padre. Se pueden pasar muchos parámetros (consultar la ayuda de WxWidgets para ampliar) pero con los tres primeros es suficiente. El primer parámetro pide el identificador de ventana de la ventana ``padre'' de esta ventana. Si se desea que ésta sea la ventana principal pasamos NULL. El segundo parámetro permite indicar el identificador de esta ventana. Usando la constante predefinida wxID\_ANY permitimos que la biblioteca asigne cualquiera que esté libre. El tercer parámetro es el título que debe aparecer en la ventana.
+
+Aparte de eso, no se hace absolutamente nada más. En la clase principal aplicación se creó un objeto ventana y se llamó al método Show() que mostrará esta ventana principal. Si compilamos y ejecutamos obtendremos una ventana como la siguiente:
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.45]{figuras/png/ventanasimple.png}
+	\end{center}
+	\caption{Ventana mínima de WxWidgets}
+	\label{fig:ventanasimple}
+\end{figure}
+
+
+Esta ventana se puede mover, cerrar, cambiar de tamaño etc... y sin haber programado nada. La clase wxFrame proporciona el comportamiento por defecto para una ventana estándar
+
+Sin embargo una ventana vacía no sirve de mucho. Una aplicación normal constará de botones, cuadros de texto, menús, etc... Y aquí entra otro concepto fundamental en WxWidgets. Los eventos. En todas las bibliotecas orientadas a la programación gráfica existe el concepto de funciones que se disparan cuando se produce un evento y que se denominan funciones de retro-llamada o funciones callback. En WxWidgets se deben declarar cuales son las funciones que se disparan cuando se produzca un cierto evento y conectar esas funciones a eventos concretos. Una ventana o control que desee responder a eventos deberá incluir la macro DECLARE\_EVENT\_TABLE en su fichero de declaración (en este caso ventana.h) y macros que conecten los eventos (identificados por un número que declararemos más adelante) a dichas funciones. Esta conexión se suele hacer en el fichero de implementación (ventana.cpp) y usando las macros BEGIN\_EVENT\_TABLE() y END\_EVENT\_TABLE()
+Por ejemplo, supongamos que queremos que nuestra ventana reaccione a la pulsación de la tecla C y que su reacción consista en cerrar la ventana. Para ello, hay que crear una función callback en la clase Ventana como esta
+
+\begin{lstlisting}
+void OnPulsaTecla (wxKeyEvent &evento); 
+\end{lstlisting}
+
+La clase wxKeyEvent almacena un evento de pulsación de tecla. No necesitamos manejarla ya que el bucle de eventos nos entregará dicho evento de pulsación en la aplicación.
+
+Su implementación comprueba si se ha pulsado la C
+\begin{lstlisting}
+void OnPulsaTecla (wxKeyEvent &evento)
+{
+ //Se comprueba si el código ASCII de la tecla pulsada es C
+ if (evento->m_keyCode == 67)
+ {
+  Close();
+ }
+}
+\end{lstlisting}
+
+Y se conecta el evento de pulsación de teclado a esta función con
+\begin{lstlisting}
+BEGIN_EVENT_TABLE(Ventana, wxFrame)
+ EVT_KEY_DOWN (Ventana::OnPulsaTecla)
+END_EVENT_TABLE()
+\end{lstlisting}
+
+Por lo que el fichero ventana.h queda
+\begin{lstlisting}
+#include "wx/wx.h"
+
+class Ventana : public wxFrame
+{
+ public:
+  Ventana();
+	void OnPulsaTecla (wxKeyEvent &evento);
+ private:
+  DECLARE_EVENT_TABLE ()
+};
+\end{lstlisting}
+
+y el fichero ventana.cpp queda
+
+\begin{lstlisting}
+#include "ventana.h"
+
+Ventana::Ventana() :
+ wxFrame (NULL, wxID_ANY, "Ventana")
+{
+}
+
+
+void Ventana::OnPulsaTecla (wxKeyEvent &evento)
+{
+ //Se comprueba si el código ASCII de la tecla pulsada es C
+ if (evento.m_keyCode == 67)
+ {
+  this->Close();
+ }
+}
+
+BEGIN_EVENT_TABLE(Ventana, wxFrame)
+ EVT_KEY_DOWN (Ventana::OnPulsaTecla)
+END_EVENT_TABLE()
+
+\end{lstlisting}
+
+
+Sizers
+
+Los sizer son ``ajustadores de tamaño''. Son elementos corrientes en la programación gráfica y sobre todo en la multiplataforma, existen en GTK, en QT, en Java y en otros toolkits menos populares como FLTK, etc... La idea de un sizer es almacenar controles gráficos ajustando el tamaño de lo que contienen. En principio podríamos desear que los botones, paneles o menús tuvieran un tamaño fijo pero esto no es buena idea debido a las variaciones de resolución de unos sistemas a otros por un lado y a la posibilidad de poder reajustar automáticamente el tamaño de los controles si alguien cambia el tamaño de la ventana. Un sizer se limita a almacenar controles y calcular automáticamente el mejor tamaño, manteniendo la proporcionalidad si queremos por supuesto. El algoritmo de cálculo de tamaño de un control se basa en si hay controles hijo y en el tamaño total de la ventana (ya que puede haber otros sizers conteniendo más controles) y es bastante complejo. No se necesitan saber los detalles pero se puede acudir a la documentación de WxWidgets si se desea más información. Para nuestros intereses pensemos simplemente que los sizer son ``contenedores invisibles'' y que ajustan el tamaño automáticamente. 
+
+Existen varios tipos de sizer: Contenedores que ajustan los controles horizontalmente, verticalmente, en rejilla, etc... Al utilizar los distintos sizer se debe de olvidar el concepto de que un botón mide x píxeles y otro botón mide y píxeles. Al usar contenedores como los sizer solo se necesita pensar en el ``tamaño relativo''. Por ejemplo, supongamos que deseamos que en nuestra ventana haya dos botones y un control de texto. Cuando se pulse uno de los botones se imprimirá un mensaje en el control de texto y al pulsar el otro se imprime un mensaje distinto. Si deseamos que el control de texto ocupe la mitad superior y el par de botones la mitad inferior podríamos pensar en apilar los controles. Esto se puede hacer mediante un wxBoxSizer, que se limita a poner los controles uno detrás de otro en horizontal (pasando el parámetro wxHORIZONTAL) o poniendo uno debajo de otro (usando wxVERTICAL)
+
+Para conseguir esto, a grandes rasgos solo tenemos que crear el contenedor, crear los tres controles, añadir los controles al contenedor y hacer que el contenedor sea el contenedor principal de nuestra ventana. Así que en el fichero ventana.cpp la implementación del constructor queda así:
+
+\begin{lstlisting}
+Fichero ventana.cpp
+Ventana::Ventana() :
+ wxFrame (NULL, wxID_ANY, "Ventana")
+{
+ contenedor= new wxBoxSizer(wxVERTICAL);
+ boton1 = new wxButton (this, wxID_BOTON1, "Mensaje 1");
+ boton2 = new wxButton (this, wxID_BOTON2, "Mensaje 2");
+ texto = new wxTextCtrl(this, wxID_ANY, "Aqui va el texto",
+ wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE);
+ contenedor->Add (boton1);
+ contenedor->Add (boton2);
+ contenedor->Add (texto);
+ this->SetSizer (contenedor);
+}
+\end{lstlisting}
+
+Si compilamos veremos que se obtiene algo semejante a esto:
+
+INSERTAR AQUI IMAGEN SIZER
+
+Se observan varias cosas
+
+\begin{itemize}
+	\item {
+		Aunque se pulsen los botones no pasa nada.
+	}
+	\item {
+		Los controles están demasiado pegados.
+	}
+	\item {
+		La apariencia de los controles no es la que esperábamos.
+	}
+
+\end{itemize}
+
+En cuanto al primer problema la respuesta es simple. Tenemos que gestionar los eventos de pulsación y conectarlos con funciones que impriman cosas en el control. El segundo y el tercer problema tienen que ver con los contenedores y su gestión Para resolver el primer problema simplemente creamos una función como esta en el fichero de implementación
+
+\begin{lstlisting}
+void Ventana::OnPulsacionBoton1(wxCommandEvent& evento)
+{
+ texto->AppendText ("Se ha pulsado el boton 1\n");
+}
+\end{lstlisting}
+
+Y conectamos el evento de pulsación de botón con esta función
+
+
+\begin{lstlisting}
+BEGIN_EVENT_TABLE(Ventana, wxFrame)
+ EVT_KEY_UP (Ventana::OnPulsaTecla)
+ EVT_BUTTON (wxID_BOTON1, Ventana::OnPulsacionBoton1)
+END_EVENT_TABLE()
+\end{lstlisting}
+
+De forma que el fichero ventana.h queda así
+
+\begin{lstlisting}
+#include "wx/wx.h"
+
+class Ventana : public wxFrame
+{
+ public:
+  Ventana();
+	void OnPulsaTecla (wxKeyEvent &evento);
+	void OnPulsacionBoton1(wxCommandEvent& evento);
+	void OnPulsacionBoton2(wxCommandEvent& evento);
+ private:
+  wxBoxSizer* contenedor;
+  wxButton* boton1;
+  wxButton* boton2;
+  wxTextCtrl* texto;
+  DECLARE_EVENT_TABLE ()
+};
+
+enum {
+ wxID_BOTON1=1,
+ wxID_BOTON2=2
+}
+}; //Fin de la clase
+
+\end{lstlisting}
+
+Y ventana.cpp contiene:
+
+\begin{lstlisting}
+#include "ventana.h"
+
+Ventana::Ventana() :
+ wxFrame (NULL, wxID_ANY, "Ventana")
+{
+ /* Se crea el contenedor */
+ contenedor= new wxBoxSizer(wxVERTICAL);
+ 
+ /* Se crean los controles*/
+ boton1 = new wxButton (this, wxID_BOTON1, "Mensaje 1");
+ boton2 = new wxButton (this, wxID_BOTON2, "Mensaje 2");
+ texto = new wxTextCtrl(this, wxID_ANY, "Aqui va el texto",
+ wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE);
+
+ /* Se añaden los controles*/
+ contenedor->Add (boton1);
+ contenedor->Add (boton2);
+ contenedor->Add (texto);
+ 
+ /* Y se establece el contenedor*/ 
+ this->SetSizer (contenedor);
+}
+
+void Ventana::OnPulsaTecla (wxKeyEvent &evento)
+{
+ //Se comprueba si el código ASCII de la tecla pulsada es C
+ if (evento.m_keyCode == 67)
+ {
+  this->Close();
+ }	
+}
+
+void Ventana::OnPulsacionBoton1(wxCommandEvent& evento)
+{
+ texto->AppendText ("Se ha pulsado el boton 1\n");
+}
+
+BEGIN_EVENT_TABLE(Ventana, wxFrame)
+ EVT_KEY_UP (Ventana::OnPulsaTecla)
+ EVT_BUTTON (wxID_BOTON1, Ventana::OnPulsacionBoton1)
+END_EVENT_TABLE()
+
+\end{lstlisting}
+
+Con esto, al pulsar el primer boton se añade un mensaje control de texto. 
+
+El siguiente problema es algo más difícil de resolver, ¿Como conseguir que los controles tengan la apariencia que queremos?. En primer lugar, nos gustaría que los botones estuvieran centrados horizontalmente. Si miramos la documentación veremos que se puede añadir el flag wxALIGN\_CENTER al método Add del contenedor, que los centrará. Así que las líneas de añadido quedan así
+
+\begin{lstlisting}
+contenedor->Add (boton1, wxALIGN_CENTER);
+contenedor->Add (boton2, wxALIGN_CENTER);
+\end{lstlisting}
+
+Y se obtiene
+
+
+INSERTAR AQUI LA IMAGEN DE LOS SIZER
+
+La explicación a esto es que el contenedor está poniendo controles UNOS ENCIMA DE OTROS por lo que al centrar se dedica a centrar VERTICALMENTE. La solución al problema pasa por las jerarquías de contenedores. Los botones irán en su propio wxBoxSizer en horizontal, y dichos contenedores se pondran unos encima de otros. Los contenedores de los botones alinearán en horizontal y esos ``alineadores horizontales'' deben ir ``alineados verticalmente'' unos encima de otros.
+
+Así, habrá un contenedor para los botones que irá en la parte superior y otro para el control de texto que irá en la parte inferior. Cuando añadamos los botones al contenedor podemos especificar el flag wxALIGN\_CENTER que centrará el botón horizontal y verticalmente dentro del contenedor, y si usamos el flag wxALL a la vez que especificamos un tamaño de borde podremos poner ese borde de distancia entre el botón y los controles que estén en todas partes (se podría poner distancia solo por la izquierda por ejemplo con wxLEFT).
+
+Otro concepto importante que se da al añadir un control a un contenedor es la proporción. Si especificamos una proporción distinta de 0 al añadir un control estamos permitiendo que ese control ocupe más espacio relativo dentro de un contenedor. Si por ejemplo se añaden 3 botones y uno de ellos se añade con proporcion 1, obtendrá más espacio para ``agrandarse'' que los demás.
+
+Si miramos la nueva implementación de ventana.cpp
+
+
+\begin{lstlisting}
+#include "ventana.h"
+
+Ventana::Ventana() :
+ wxFrame (NULL, wxID_ANY, "Ventana")
+{
+ /* Se crea el contenedor */
+ contenedor= new wxBoxSizer(wxVERTICAL);
+ 
+ /* Se crean los contenedores de los botones*/
+ contenedorBotones = new wxBoxSizer (wxVERTICAL);
+ /* Se crean los controles*/ 
+ boton1 = new wxButton (this, wxID_BOTON1, "Mensaje 1");
+ boton2 = new wxButton (this, wxID_BOTON2, "Mensaje 2");
+ texto = new wxTextCtrl(this, wxID_ANY, "Aqui va el texto",
+  wxDefaultPosition, wxSize (180,60), wxTE_MULTILINE);
+	
+ /*Se añaden los controles con 10 pixeles de borde por todos
+ los lados y alineados horizontal y verticalmente.
+ Los dos usan la misma proporción (0) por lo que 
+ conservan su proporcion dentro de contenedorBotones*/
+
+ contenedorBotones->Add(boton1,0, wxALL | wxALIGN_CENTER, 10);
+ contenedorBotones->Add(boton2,0, wxALL | wxALIGN_CENTER, 10);
+ 
+ /* Se añaden al contenedor principal la botonera y 
+ el control de texto. El control de texto puede expandirse
+ hacia los lados (ya que la gestión vertical la realiza
+ su contenedor) y además ocupa mayor proporcion que 
+ los botones */
+ contenedor->Add (contenedorBotones,0, wxALIGN_CENTER);
+ contenedor->Add (texto, 1, wxEXPAND);
+	
+ /* Y se establece el contenedor*/
+ this->SetSizer (contenedor);
+
+ /* El contenedor se ensancha hasta ocupar 
+ el área de la ventana */
+ contenedor->Fit (this);
+
+ /* Y la ventana regirá su tamaño mínimo por el de
+  este contenedor */
+ contenedor->SetSizeHints (this);
+}
+
+\end{lstlisting}

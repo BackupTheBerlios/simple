@@ -1,0 +1,26 @@
+\subsection {Diseño estructural}
+A continuación se muestra el diagrama de la arquitectura global de la aplicación:
+
+\includegraphics {figuras/png/Arquitectura.png}
+
+La arquitectura MVC permite un desacoplamiento entre los distintos objetos que componen el sistema, permitiendo minimizar el impacto de los cambios entre capas del software. Además, supone una arquitectura bien conocida, fácil de entender, con riesgos calculados y que facilita la implementación en un lenguaje dado, laportabilidad y las modificaciones.
+
+Además, la elección de una arquitectura MVC no solo fomenta el desarrollo modular del programa sino que también expone claramente dicha modularidad, facilitando así la comprensión del programa por parte de futuros desarrolladores. La estructura de dichos módulos se explicará en subsiguientes párrafos.
+
+El software se ha desarrollado como una aplicación de escritorio 
+monoproceso, pensada para ejecutarse en un entorno gráfico. No se debe confundir la arquitectura MVC con las clásicas aplicaciones Web de 3 capas donde existen 3 procesos distintos que se ejecutan en tres nodos distintos a saber: El navegador Web que muestra la página HTML, el servidor que atiende las peticiones HTML y de datos y el servidor de bases de datos que almacena y entrega los datos bajo petición del servidor Web. El programa también utiliza 3 capas, una de presentación, una de lógica de control y una de almacenamiento pero su propósito principal es la modularidad, y no la ejecución separada de los distintos procesos.
+
+A continuación se muestran los componentes principales de cada capa:
+
+Capa de Interfaz de usuario
+
+Capa de control
+
+Capa de modelo
+
+Debido a la simplicidad de su arquitectura el despliegue de la misma no debe suponer ningún problema, al haberse pensado la misma para construir un único programa ejecutable dependiente de algunas bibliotecas y que se ubicará mediante un instalador en el directorio seleccionado por el usuario. En el manual de uso se describirá más ampliamente el proceso de despliegue. Las distintas capas de esta arquitectura han presentado ciertos problemas a la hora de su desarrollo ya que algunos problemas no se conocían en las etapas iniciales, como por ejemplo la integración entre los distintos tipos de cadena de caracteres que ofrecen las distintas bibliotecas usadas al codificar.
+
+La integración de nuevos componentes 
+
+
+

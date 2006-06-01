@@ -1,0 +1,67 @@
+\documentclass{book}
+\usepackage [spanish] {babel}
+\usepackage [latin1] {inputenc}
+\usepackage [pdftex]{graphicx}
+\usepackage {listings}
+\usepackage {times}
+\begin {document}
+
+
+%PORTADA DEL PROYECTO
+\begin{titlepage}
+	
+\begin{center}
+
+%Logotipo de la Escuela
+\vfill
+			\LARGE\textbf{UNIVERSIDAD DE CASTILLA-LA MANCHA }
+
+						\vfill
+
+						ESCUELA SUPERIOR DE INFORMÁTICA
+
+						\vfill
+
+										INGENIERÍA 
+
+									EN INFORMÁTICA 
+
+						\vfill
+
+									PROYECTO FIN DE CARRERA
+
+\vfill
+
+SimProc: Un simulador gráfico de procesos secuenciales automatizados
+\vfill
+Óscar Gómez García
+\vfill
+\begin{flushright}
+\textbf{Septiembre, 2006}
+\end{flushright}
+\end{center}
+
+\end{titlepage}
+%Fin de la pagina de PORTADA
+
+
+%Indicamos al paquete listings que el lenguaje usado es C++
+\lstset{language=C++,
+	basicstyle=\small, 
+	showstringspaces=false,
+	frame=single}
+\tableofcontents
+\input {introduccion/introduccion.tex}
+\input {objetivos/objetivos.tex}
+\input {estadocuestion/estado-de-la-cuestion.tex}
+\input {desarrollo/desarrollo.tex}
+\input {resultados/resultados.tex}
+\input {propuestas/propuestas.tex}
+
+%A partir de aqui van los apéndices
+\appendix
+\input {anexowx/wxwidgets.tex}
+\cite {librolatex}
+
+\bibliography{bibliografia/bibliografia}\bibliographystyle{alpha}
+\end {document}

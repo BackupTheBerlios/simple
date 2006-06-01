@@ -1,0 +1,20 @@
+\section {Implementaciones de APIs para XML}
+
+A la hora de manipular documentos XML el W3C deseaba mantener todas las recomendaciones los más aisladas posible de ningún lenguaje de programación o compañía concreta por lo que decidió construir un estándar denominado DOM (Modelo de Objeto Documento).
+
+El modelo de objeto documento describe una forma clara de manipular ficheros XML de acuerdo a una serie de reglas bien definidas y que respetan los principios de la orientación a objetos. Así, un documento pasa a ser considerado un objeto con una serie de propiedades y métodos y para el cual se definen una serie de interfaces que permiten su manipulación.
+
+Por ejemplo, en las recomendaciones del W3C se indica que debe existir un objeto que representa un elemento nodo y que se llamará DOMNode. Además dicho objeto debe tener una serie de métodos como getChildNode() y que este método devuelve un DOMNode que será el nodo hijo del elemento XML con el que se esté tratando. Este elemento DOMNode podría implementarse en C++, Java,  Visual Basic o C\#, pero lo verdaderamente importante es que el W3C publica todos los interfaces y cualquier desarrollador puede construir herramientas que implemente el estándar DOM con lo que se consigue un doble objetivo:
+
+\begin {itemize}
+\item {Por un lado, todos los desarrolladores pueden aprender fácilmente a manejar nuevas bibliotecas que manipulen ficheros XML ya que conocen los mecanismos de funcionamientos, las clases y los métodos que ofrecen.}
+\item {Los creadores de bibliotecas pueden centrarse en construir aplicaciones eficientes al disponer de un análisis y un diseño claros.}
+\end {itemize}
+
+A continuación se describen con más detenimiento las principales APIs del W3C
+
+\input {estadocuestion/el-api-dom.tex}
+\input {estadocuestion/el-api-sax.tex}
+\input {estadocuestion/expat.tex}
+\input {estadocuestion/oracle.tex}
+\input {estadocuestion/xerces.tex}

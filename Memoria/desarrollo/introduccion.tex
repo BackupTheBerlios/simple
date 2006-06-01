@@ -1,0 +1,26 @@
+\subsection {Introducción}
+
+En este apartado se define el diseño del sistema en términos de paquetes, clases, interrelaciones y comportamiento. Se utilizarán diagramas UML para mostrar aspectos específicos a destacar en el diseño global del sistema como el diseño de la interfaz de usuario o el diseño estructural.
+
+Existen algunos detalles importantes que un desarrollador debería conocer a la hora de entender, modificar o ampliar el diseño sugerido:
+
+\begin {itemize}
+
+\item {La arquitectura global de la aplicación está basada en el patrón Modelo-Vista-Control. Este patrón muestra la solución más clásica y eficaz para el desarrollo de una aplicación interactiva separando claramente los componentes más elementales: Los datos que maneja la aplicación (el ``Modelo''), los mecanismos que implementan la lógica de control (el ``Controlador'' y el código de la interfaz de usuario (la ``Vista'').}
+\item {El Modelo no está desarrollado mediante un lenguaje de programación clásico, sino que consiste en la definición de un vocabulario XML que declara los componentes básicos necesarios para la automatización de un proceso, como por ejemplo relés, motores e interruptores.}
+\item {El vocabulario del Modelo se especifica en un documento XML que contiene una definición escrita en XML Schema y donde se define la sintaxis que debe tener un modelo de sistema automatizado. La comprensión de la sintaxis del Schema puede resultar difícil para un desarrollador que se aproxime a ella por primera vez por lo que se recomienda leer la especificación del World Wide Web Consortium para XML Schemas que se documenta en INSERTAR-----REFERENCIA----AQUI----- }
+\item {El Controlador ha sido escrito en C++ estándar de forma que existe una correspondencia estricta entre los elementos definidos en el esquema y las clases que implementan un sistema. Así para cada elemento atómico del esquema existe una clase que lo implementa.}
+\item {Mantener la correspondencia entre una implementación C++ y un documento XML que la represente es una tarea de gran complejidad. Por ello se ha utilizado Xerces, un framework escrito en C++ que implementa fielmente las recomendaciones del W3C para XML. Xerces posee implementaciones en C++ y Java, ademas de disponer de proyectos de implementación en lenguajes alternativos.En ¡¡INSERTAR REFERENCIA TUTORIAL WXWIDGETS AQUI!! se ilustra el uso de Xerces en un programa.}
+\item {La Vista se ha implementado utilizando WxWidgets, un conjunto de clases multiplataforma para la escritura de interfaces de usuario altamente portable y con un aspecto diferenciado para los distintos sistemas de escritorio. La utilización de WxWidgets también presenta numerosas dificultades para un no iniciado por lo que su uso se describe con mayor amplitud en INSERTAR AQUI REFERENCIA TUTORIAL WXWIDGETS!!}
+\item {La programación del análisis de ficheros XML se puede hacer desde cero o utilizando las implementaciones de las recomendaciones del W3C. Estas recomendaciones especifican dos grandes enfoques de la programación para XML, a saber: DOM y SAX. En este proyecto se ha utilizado la implementación DOM de Xerces escrita en C+++}
+
+\end {itemize}
+
+El diseño del software se ha centrado en la consecución de una serie de objetivos:
+\begin {itemize}
+\item {Corrección: se pretende que el diseño permita construir un programa que satisfaga los requisitos especificados.}
+\item {Inteligibilidad: el diseño no solamente es fácil de transformar en una implementación software sino que mediante el uso de patrones software debería ser fácilmente comprensible para distintas personas que pretenden modificar o ampliar el sistema.}
+\item {Modular: se ha intentado separar en capas los distintos aspectos concernientes a la implementación de forma que las modificaciones supongan un impacto mínimo, o al menos pequeño, en los distintos módulos.}
+\item {Extensible: el uso de estándares bien conocidos así como el aislamiento del código en distintas capas debe facilitar la ampliación del programa.}
+
+\end {itemize}

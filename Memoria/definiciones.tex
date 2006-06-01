@@ -1,0 +1,23 @@
+%En la normativa se define que el margen izquierdo debe
+%ser de 35 mm. Tener en cuenta que en LaTeX hay un comando
+%para definir la distancia del borde del papel respecto
+%a las notas al margen (que no se usan en los proyectos y
+%cuya longitud está en \evensidemargin y/o \oddsidemargin)
+%y hay otro comando distinto para indicar el margen
+%desde el borde de salida al cuerpo del texto, que es
+%lo que modificamos aqui
+
+\setlength\oddsidemargin{0cm}
+\setlength\marginparwidth{3.5cm}
+
+
+
+
+%El margen derecho debe ser 2cm. Como A4 mide 21 cm
+%de ancho y dado que ya hemos consumido 3.5cm por la
+%izquierda, la anchura del texto en las páginas debe
+%ser de 21-3.5-2=15.5
+\setlength\textwidth{15.5cm}
+
+%La sangría a principio de línea
+\setlength\parindent{1.5cm}

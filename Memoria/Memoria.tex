@@ -1,41 +1,61 @@
-\documentclass{book}
+\documentclass[a4paper, oneside, 12pt]{book}
 \usepackage [spanish] {babel}
 \usepackage [latin1] {inputenc}
 \usepackage [pdftex]{graphicx}
 \usepackage {listings}
 \usepackage {times}
+
+
+%Este archivo contiene las definiciones de los márgenes,
+%espaciados etc...
+\input{definiciones.tex}
+
 \begin {document}
 
 
-%PORTADA DEL PROYECTO
+%Falta por componer la portada del proyecto!!!
+
+
+%Primer página del proyecto
 \begin{titlepage}
 	
 \begin{center}
 
 %Logotipo de la Escuela
+\begin{figure}
+	\centering
+		\includegraphics[width=0.20\textwidth]{figuras/png/esi_flat.png}
+	\label{fig:esi_flat}
+\end{figure}
+
 \vfill
-			\LARGE\textbf{UNIVERSIDAD DE CASTILLA-LA MANCHA }
+			\Large\textbf{UNIVERSIDAD DE CASTILLA-LA MANCHA}
+
+						
+
+						\textbf{ESCUELA SUPERIOR DE INFORMÁTICA}
+
+													
 
 						\vfill
-
-						ESCUELA SUPERIOR DE INFORMÁTICA
-
-						\vfill
-
-										INGENIERÍA 
-
-									EN INFORMÁTICA 
-
+							DEPARTAMENTO DE INGENIERÍA ELÉCTRICA, ELECTRÓNICA
+							Y AUTOMÁTICA
 						\vfill
 
 									PROYECTO FIN DE CARRERA
 
+
+
+\textbf{SimProc: Un simulador gráfico de procesos secuenciales automatizados}
+\vfill
+\begin{flushleft}
+Autor: Óscar Gómez García
+
+Director: Jesús Salido Tercero
+\end{flushleft}
+
 \vfill
 
-SimProc: Un simulador gráfico de procesos secuenciales automatizados
-\vfill
-Óscar Gómez García
-\vfill
 \begin{flushright}
 \textbf{Septiembre, 2006}
 \end{flushright}
@@ -60,8 +80,10 @@ SimProc: Un simulador gráfico de procesos secuenciales automatizados
 
 %A partir de aqui van los apéndices
 \appendix
-\input {anexowx/wxwidgets.tex}
-\cite {librolatex}
+
+
+%\input {anexowx/wxwidgets.tex}
+
 
 \bibliography{bibliografia/bibliografia}\bibliographystyle{alpha}
 \end {document}

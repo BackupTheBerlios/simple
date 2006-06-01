@@ -1,0 +1,192 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}
+%\usepackage{times}
+\usepackage{graphicx}
+\begin {document}
+
+		
+\begin{titlepage}
+\begin{center}
+	\huge {Escuela Superior de Informática}	
+	\vfill
+	
+\begin{figure}[h]
+	\begin {center}
+		\includegraphics[scale=0.40]{../logos/esi_flat.png}
+	\end{center}
+
+	\label{fig:esi_flat}
+\end{figure}
+
+	\vfill
+	\Huge{SimProc: un simulador gráfico de procesos secuenciales automatizados}
+	\end{center}
+	\vfill
+	
+\begin{flushright}
+Alumno: ÓSCAR GÓMEZ GARCÍA
+
+Profesor: JESÚS SALIDO TERCERO
+\end{flushright}
+\end{titlepage}
+	
+
+
+
+\section {Motivación}
+Tanto en el mercado comercial, como en el mundo de las aplicaciones de código abierto y de software libre, existen multitud de productos para la simulación de sistemas de todo tipo. Estas herramientas en general se caracterizan por uno o varios de los siguientes rasgos:
+
+\begin{itemize}
+	\item {Estar orientadas a la construcción de modelos matemáticos.}
+	\item {Demasiada complejidad.}
+	\item {No son sencillas de usar.}
+	\item {Muy alto precio.}
+	\item {No son extensibles.}
+\end{itemize}
+
+El desarrollo de una herramienta totalmente basada en software libre podrá permitir la modificación, adaptación y ampliación de la misma sin necesidad de licencias de sistemas operativos, ni de compiladores ni de herramientas de apoyo.
+
+Por otra parte, existen multitud de vocabularios XML para las necesidades mas diversas que incluyen desde la descripción de vulnerabilidades en programas hasta la creación de documentos comerciales con validez internacional. Algunos de estos vocabularios pueden aplicarse a la descripción de procesos:
+
+\begin{description}
+	\item[IML (Instrument Markup Language)] {Lenguaje de\-sa\-rro\-lla\-do por la NASA para la descripción de elementos controlados por ordenador.}
+	\item [PSLX (Planification and Scheduling Language on XML) ]{Lenguaje pensado por y para la industria, está orientado principalmente a la planificación de los recursos como espacios
+	para stocks.}
+\end{description}
+
+A pesar de que existen otros lenguajes que cubren ligeramente los elementos necesarios para la automatización de un proceso sencillo ninguno de ellos cubre por completo las necesidades de descripción de procesos secuenciales. Estos procesos quedan descritos normalmente mediante documentos escritos en lenguaje natural imposibles de procesar en un programa de ordenador.
+
+\break
+
+\section{Objetivos}
+
+
+Los objetivos que este proyecto pretende cubrir son:
+\begin {itemize}
+
+\item {Describir en XML los elementos que componen un sistema automatizado y construir un vocabulario de uso común para procesos. Este proyecto se ceñirá solamente al ámbito de control de procesos discretos.}
+
+\item {Desarrollar un modelo de objetos en C++ que repliquen en un sistema software el funcionamiento de los elementos de automatización.}
+
+\item {Desarrollar una aplicación multiplataforma que permita modelar, representar y simular procesos de automatización discretos en un entorno gráfico y que permita la interacción por parte del usuario. Esta aplicación servirá como apoyo a la docencia de la asignatura ``Automatización Industrial'' perteneciente al 4º curso de la titulación de Ingeniería Informática. Esta aplicación deberá poder comunicarse en un futuro con kits de construcción de sistemas automatizados. Además, esta herramienta buscará la consecución de
+las ventajas de la simulación expuestas en \cite{sim}.
+
+\begin{itemize}
+	\item {Ayudar en el análisis, comprensión, diseño y control de sistemas.}
+	\item {Ahorro de costes al corregir y detectar errores antes de poner un sistema en producción.}
+	\item {La experimentación en entornos reales puede ser arriesgada y poco práctica.}
+	\item {Descubrimiento de interrelaciones y efectos laterales que podrían haber permanecido invisibles hasta el momento de la construcción.}
+	\item {Los modelos estrictamente matemáticos pueden ser difíciles de comprender para los no iniciados}
+\end{itemize}
+}
+
+
+
+\end {itemize}
+
+
+\section {Método y fases de trabajo}
+
+\begin {enumerate}
+\item {Investigación bibliográfica: Antes de empezar el desarrollo de la herramienta se pretende acotar el alcance de la misma partiendo del estudio de sistemas de automatización básicos. En este sentido \cite{libro-morris} supone un excelente punto de partida para el
+estudio de la Automatización Industrial y los componentes que intervienen en ella.}
+
+\item {Estudio y análisis de las herramientas de simulación existentes y su adecuación a la práctica docente y educativa.}
+
+\item {Análisis de las herramientas que proporciona XML y sus tecnologías relacionadas y como dichas tecnologías pueden ayudar a construir un lenguaje que describa sistemas de control de procesos discretos.}
+
+\item {Utilizando C++ se procederá al modelado de los elementos, descritos en la fase anterior.Estos elementos escritos en C++ permitirán:}
+
+\begin{itemize}
+	\item {Crear un modelo de objetos en tiempo de ejecución que se correspondan con los objetos descritos en XML. Esto permitirá manipular dinámicamente los objetos y sistemas que han sido descritos estáticamente.}
+	
+	\item {Guardar en un documento XML los objetos que componen un sistema automatizado que se esté simulando permitiendo así obtener una descripción a partir de un modelo en funcionamiento.}
+\end{itemize}
+
+\item {Construir un programa que permita de forma visual e intuitiva construir y simular modelos de procesos automatizados.}
+
+\end {enumerate}
+
+\section{Medios que se pretenden utilizar}
+A continuación se describen las herramientas y tecnologías que se usarán así como las razones que han justificado su elección.
+
+\begin{description}
+	\item[XML como formato de descripción de procesos.] 
+	{
+	El uso de XML se justifica debido a lo extendido de su uso, a su estandarización y aceptación por herramientas de todo tipo y a su inteligibilidad para las personas.En \cite{xml} se hace una amplia discusión de las ventajas de usar XML como lenguaje de descripción.
+	}
+	
+	\item[Xerces] 
+	{
+	Escrito en C++, Xerces (\cite{xerces})es un framework desarrollado como parte del proyecto Apache y que implementa los últimos estándares del World Wide Web Consortium. Proporciona todos los elementos necesarios para el procesado de XML . Además es software libre y su utilización no supone ningún obstáculo a la distribución del programa.
+	}
+	
+	\item[C++ como lenguaje de desarrollo básico] 
+	{
+	La razón de utilizar C++ frente a Java u otros lenguajes actuales se debe a la buena adaptación de C++ (como sucesor/ampliación de C) a la programación de sistemas y a su relativamente bajo nivel.Dentro de la multitud de lenguajes de programación que existen. \cite{libro-cpp} expone las ventajas de usar C++ sobre otros lenguajes.  	}
+	
+	\item[UML] 
+	{
+		Es el lenguaje de modelado más extendido en la actualidad. Permite documentar con claridad la estructura y el comportamiento de programas tanto a nivel interno (diseño e implementación) como a nivel externo (comportamiento). En \cite{UML} se puede encontrar la principal introducción a este lenguaje de modelado.
+	}
+	\item [GCC]
+	{
+	Compilador disponible en multitud de plataformas lo que facilitará la portabilidad de la herramienta construida. En \cite{gcc} se pueden ver las numerosas plataformas para las que
+	este compilador existe.
+	}
+	\item[Dev-CPP]
+	{
+	Es un entorno de desarrollo integrado que emplea GCC e incorpora herramientas para la depuración. En entornos Windows permite sustituir a herramientas comerciales sin excesivos esfuerzos de adaptación. Dev-CPP se puede encontrar en \cite{devcpp}.
+	} 
+	
+	\item[WxWidgets] 
+	{
+	Es un conjunto de clases C++ orientadas al desarrollo de aplicaciones multiplataforma que utilicen un interfaz gráfico de usuario. WxWidgets también es software libre y se puede obtener en \cite{wx}.
+	}
+	
+	\item[Sistema operativo] 
+	{
+	El sistema operativo sobre el que se basará la construcción del software puede ser independiente tanto cualquiera de los basados en la arquitectura Win32 como cualquiera de los entornos gráficos que existen para Linux (Gnome, Kde...), dados los medios elegidos y descritos anteriormente.
+	}
+	\item[Hardware de desarrollo] 
+	{
+	La máquina a utilizar será cualquiera basada en la plataforma Intel 80x86 debido a lo amplio de su disponibilidad.
+	}
+	\item[Gestión de la configuración] 
+	{
+	Se usará un repositorio perteneciente a Berlios (\texttt{http://www.berlios.de}), que ofrece repositorios CVS con mantenimiento gratuito a los desarrolladores europeos de software.
+	}
+	
+	\item[Pruebas del software] 
+	{
+	Para las pruebas se utilizarán  distintas herramientas dada la necesidad de abordar las pruebas del software desde distintas perspectivas. En concreto se usarán GCOV, GPROF y UNIT++.
+	
+	\begin{itemize}
+	\item {GCOV (ver \cite{gcov}) permitirá ejecutar pruebas de cobertura sobre el código y la comprobación de las distintas ramas de ejecución}
+	\item {GPROF se utilizará para las pruebas de rendimiento y análisis de las partes críticas del código.}
+	\item {UNIT++ (expuesto en \cite {upp}) permitirá crear pruebas de unidad. Cabe destacar que las pruebas de unidad popularizadas por \cite{xp} son una de las herramientas más utiles para la detección de errores.
+	}
+	\end{itemize}
+	}
+	
+	
+\end{description}
+
+
+%Es necesario modificar refname para que imprima ``Bibliografía''
+%En la clase article (la que usamos aqui) refname imprimiría referencias
+%\refname es un comando llamado por \bibliography
+
+\renewcommand*{\refname}{Bibliografía}
+
+
+%Para que la bibliografia salga en castellano hay que
+%instalar el paquete abstyles, y copiar el fichero
+%apreamble.tex al directorio actual. Este fichero esta
+%en texmf/doc/latex/abstyles. Además, en apreamble.tex
+%hay que comentar las lineas "iflanguage{english}" y 
+%iflanguage{german} para dejar que solo actúe spanish
+\bibliography{bibliografia}
+\bibliographystyle {aalpha}
+\end{document}
